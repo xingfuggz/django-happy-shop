@@ -45,6 +45,7 @@
                 </button>
             </header>
             <div class="card-content">
+                {% comment %} {{ form.error_list }} {% endcomment %}
                 <div class="address columns">
                     {% if address %}
                     {% for addr in address %}
@@ -61,8 +62,23 @@
                         </div>
                     </label>
                     {% endfor %}
-                    {% endif %}
+                    {% endif %} 
+                    <!-- 添加收货地址 -->
+                    <div class="column is-3">
+                        <div class="box is-border has-text-grey-light has-text-centered is-shadowless" 
+                            style="cursor: pointer;" @click="addAddressModal()">
+                            <div class="is-medium pt-5 pb-5">
+                                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M13 20H13.09A5.5 5.5 0 0 0 13.81 22H9A2 2 0 0 1 11 20V12H3.5L6 9.5L3.5 7H11V3L12 2L13 3V7H18L20.5 9.5L18 12H13M18 15V18H15V20H18V23H20V20H23V18H20V15Z" />
+                                </svg>
+                                <span>添加收货地址</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end -->
                 </div>
+                
+
             </div>
         </div>
 
@@ -166,6 +182,47 @@
         <input class="button is-primary is-pulled-right pl-6 pr-6" type="submit" value="提交订单">
         <div class="is-clearfix"></div>
     </form>
+    <!-- 收货地址弹窗 -->
+    <div class="modal" :class="{ 'is-active': active }">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">添加新地址</p>
+            <button class="delete" aria-label="close" @click="closeAddressModal()"></button>
+        </header>
+        <section class="modal-card-body">
+            <!-- Content ... -->
+            <b-field label="省份" :label-position="labelPosition">
+                <b-input v-model="province" required validation-message="不能为空!"></b-input>
+            </b-field>
+            <b-field label="城市" :label-position="labelPosition">
+                <b-input v-model="city" required validation-message="不能为空!"></b-input>
+            </b-field>
+            <b-field label="区域" :label-position="labelPosition">
+                <b-input v-model="district" required validation-message="不能为空!"></b-input>
+            </b-field>
+            <b-field label="详细地址" :label-position="labelPosition">
+                <b-input v-model="address" required validation-message="不能为空!"></b-input>
+            </b-field>
+            <b-field label="签收人" :label-position="labelPosition">
+                <b-input v-model="signer_name" required validation-message="不能为空!"></b-input>
+            </b-field>
+            <b-field label="手机号" :label-position="labelPosition">
+                <b-input v-model="signer_mobile" maxlength=11 required validation-message="不能为空!"></b-input>
+            </b-field>
+            <b-field label="邮箱" :label-position="labelPosition">
+                <b-input v-model="email" type="email" validation-message="请输入正确的邮箱格式！"></b-input>
+            </b-field>
+            <b-field :label-position="labelPosition">
+                <b-checkbox v-model="is_default">是否设为默认</b-checkbox>
+            </b-field>
+        </section>
+        <footer class="modal-card-foot">
+            <button class="button is-success" @click="saveAddressModal()">保存</button>
+            <button class="button" @click="closeAddressModal()">取消</button>
+        </footer>
+        </div>
+    </div>
     {% endif %}
 </div>
 
@@ -173,13 +230,70 @@
 
 
 {% block extrafoot %}{{ block.super }}
+<script src="{% static 'vue/common.js' %}"></script>
 <script>
     var buynow = new Vue({
         el: "#buynow",
         delimiters: ['[[', ']]'],
         data: {
             // radio: '',
-            labelPosition: 'on-border'
+            labelPosition: 'on-border',
+            // 添加收货地址
+            active: false,
+            // 表单数据绑定
+            province: '',
+            city: '',
+            district:'',
+            address:'',
+            signer_name:'',
+            signer_mobile: '',
+            email:'',
+            is_default:'',
+
+        },
+        methods: {
+            addAddressModal(){
+                this.active = true
+            },
+            closeAddressModal(){
+                // 关闭modal并清空输入框
+                this.active = false;
+            },
+            saveAddressModal(){
+                // 保存地址
+                let sendData = new URLSearchParams()
+                sendData.append('province', this.province);
+                sendData.append('city', this.city);
+                sendData.append('district', this.district);
+                sendData.append('address', this.address);
+                sendData.append('signer_name', this.signer_name);
+                sendData.append('signer_mobile', this.signer_mobile);
+                sendData.append('email', this.email);
+                sendData.append('is_default', this.is_default);
+                let url = "/users/create/address/";
+                axios.post(url, sendData, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': getCookie('csrftoken'),
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                    }
+                }).then(res => {
+                    // this.closeAddressModal()
+                    console.log(res.data)
+                    this.active = false;
+                    // window.location.reload();
+                    if (res.data.status == 200 && res.data.code == 'ok') {
+                        this.$buefy.toast.open({
+                            duration: 2000,
+                            message: res.data.message,
+                            type: 'is-success'
+                        });
+                        setTimeout("window.location.reload()", 2000)
+                    }
+                }).catch(err => {
+                    console.log(err)
+                })
+            },
         }
     })
 </script>

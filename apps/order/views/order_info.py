@@ -26,6 +26,8 @@ class DmallBuyNowView(HasLoginRequired, BaseView, CreateView):
     def form_valid(self, form):
         form.instance.owner = self.request.user
         order_sn = timezone.now().strftime('%Y%m%d%H%M%S') + '%09d' % self.request.user.id
+        # if form.cleaned_data.get('address'):
+        #     return HttpResponse({'message': '地址不能为空'})
         form.instance.order_sn = order_sn                       # 1. 生成订单号
         form.instance.total_amount = self.get_sum_price()       # 2. 保存商品总价
         form.instance.freight = self.get_add_freight()          # 3. 保存运费,后续逻辑再处理运费

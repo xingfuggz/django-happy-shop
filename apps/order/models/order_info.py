@@ -37,8 +37,8 @@ class DmallOrderInfo(BaseModel):
         blank=True, default="", max_length=100, verbose_name="订单备注", help_text="订单备注")
     freight = models.DecimalField(
         max_digits=10, decimal_places=2, verbose_name="运费")
-    address = models.ForeignKey(DmallAddress, null=True, blank=True,
-                                on_delete=models.PROTECT, verbose_name="收货地址", help_text="")
+    # 订单地址不能用关联关系，用户修改，订单地址也会跟随修改，必须用char类型保存，待改进...
+    address = models.ForeignKey(DmallAddress, on_delete=models.PROTECT, verbose_name="收货地址", help_text="")
     pay_time = models.DateTimeField(null=True,blank=True,verbose_name="支付时间",help_text="支付时间")
 
     class Meta:
