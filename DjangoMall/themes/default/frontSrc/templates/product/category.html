@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	分类列表 - DjangoMall商城系统
+{% endblock %}
+	
+{% block main %}
+<section class="section">
+	<div class="container" id="category-list">
+	{% for key, values in category_dict.items %}
+		<template>
+			<section>
+				<b-collapse 
+					class="card" 
+					animation="slide" 
+					aria-id="contentIdForA11y3">
+					<template #trigger="props">
+						<div
+							class="card-header"
+							role="button"
+							aria-controls="contentIdForA11y3">
+							<p class="card-header-title">
+								{{ key.name }}
+							</p>
+							<a class="card-header-icon">
+								<b-icon
+									:icon="props.open ? 'menu-down' : 'menu-up'">
+								</b-icon>
+							</a>
+						</div>
+					</template>
+		
+					<div class="card-content">
+						<div class="columns is-multiline">
+							{% for sub_cate in values %}
+							<div class="column is-2">
+								<div class=" has-text-centered">
+									<a class="box" href="#">
+										<img src="{{ MEDIA_URL }}{{ sub_cate.icon }}" width="96px" height="96px"
+											alt="{{ sub_cate.name }}">
+										<p class=" has-text-primary">{{ sub_cate.name }}</p>
+									</a>
+								</div>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+				</b-collapse>
+		
+			</section>
+		</template>
+	{% endfor %}
+
+	</div>
+</section>
+{% endblock %}
+
+{% block vuebefy %}{{ block.super }}
+
+<script>
+	var categoryList = new Vue({
+		el: "#category-list",
+
+	})
+</script>
+
+{% endblock %}
+
+

@@ -1,0 +1,311 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ product.title }}{% endblock %}
+
+{% block head %}
+<meta name="description" content="{{ product.desc }}">
+<meta name="keywords" content="{{ product.sub_title }}">
+{% endblock %}  
+
+{% block head_style %}
+<style>
+    [v-cloak] {
+        display: none !important;
+    }
+
+    .is-active .al img {
+        filter: grayscale(0%);
+    }
+    .al img {
+        filter: grayscale(100%);
+    }
+</style>
+<link rel="stylesheet" href="{% static 'product/css/product.css' %}"> 
+{% endblock %}  
+
+{% block main %}
+<section class="section" id="product-detail" v-cloak>
+    <div class="container">
+        <div class="columns">
+            <!-- 商品模块 -->
+            <div class="column is-10">
+                <div class="columns">
+                    <!-- 商品banner -->
+                    <div class="column is-4">
+                        <div class="box is-paddingless">
+                            <!-- 轮播图的原始数据 -->
+                            <div id="slider-image" style="display: none;">{{ slider_image }}</div>
+                            <!-- 轮播图的原始数据 end -->
+                            <template>
+                                <b-carousel :indicator-inside="false">
+                                    <b-carousel-item v-for="(item, i) in sliderimgs" :key="i">
+                                        <b-image class="image" :src="item"></b-image>
+                                    </b-carousel-item>
+                                    <template #indicators="props">
+                                        <b-image class="al image" :src="getImgUrl(sliderimgs[props.i])" :title="props.i"></b-image>
+                                    </template>
+                                </b-carousel>
+                            </template>
+                        </div>
+                    </div>
+                    <!-- 商品banner end-->
+                    
+                    <!-- 商品基本信息区块 -->
+                    <div class="column">
+                        <h1 class="title is-size-4">{{ product.title }}</h1>
+                        <h2 class="subtitle is-size-6">{{ product.sub_title }}</h2>
+
+                        <!-- 商品价格区块 -->
+                            <div class="money-wrapper has-background-primary">
+                                <div class="good-price">
+
+                                    <div class="is-pulled-left pl-5">
+                                        <nav class="level">
+                                            <div class="level-item has-text-left">
+                                              <div class="mt-1">
+                                                    <p class="pl-2 heading sell-price">
+                                                        原价：￥[[ market_price ]]</p>
+                                                    <p class="title has-text-white">￥[[ sell_price ]] </p>
+                                              </div>
+                                            </div>
+                                        </nav>
+                                    </div>
+
+                                    <div class="pr-5 is-pulled-right">
+                                        <nav class="level">
+                                            <div class="level-item has-text-centered">
+                                              <div class="pl-5 mt-3 sales-border">
+                                                <p class="is-size-5 has-text-white">[[ sales ]]</p>
+                                                <p class="heading">销量</p>
+                                              </div>
+                                            </div>
+                                        </nav>
+                                    </div>
+                                    <div class=" is-clearfix"></div>
+                                </div>
+
+                            </div>
+                        <!-- 商品价格区块 end-->
+
+                        <!-- 商品规格及数量 -->
+                        <div class="box is-radiusless">
+                            <!-- 数量 -->
+                            <div class="spec-sku mb-5">
+                                <!-- 规格 -->
+                                <div id="sku-data" style="display: none;">
+                                    <div id="specs"> {{ spec_json }}</div>
+                                    <div id="spec-sku">{{ spec_sku_json }}</div>
+                                    <div id="current-sku">{{ current_options }}</div>
+                                </div>
+                                
+                                
+                                <div v-for="(item, index) in productAttr" :key="index" style="line-height: 2.5em;">
+                                    <div class="is-size-14 is-pulled-left mr-4">[[ item.name ]]:</div>
+                                    <div class="acea-row list">
+                                        <label v-for="(itm, idx) in item.attr_values" :key="idx" class="mr-2">
+                                            <input v-model="attrSelected[index]" type="radio" :name="index" :value="itm" :checked="!idx" hidden />
+                                            <span class="pt-1 pb-1 pl-4 pr-4 attr is-size-14">[[ itm ]]</span>
+                                        </label>
+                                        <div class="is-clearfix"></div>
+                                    </div>
+                                    <div class="is-clearfix"></div>
+                                </div>
+                                <!-- 规格 end-->
+
+                                <!-- 商品数量操作 -->
+                                <template>
+                                    <div class="level mt-4 is-size-7">
+                                        <div class="level-left">
+                                            <label class="is-size-7">数量：</label>
+                                            <b-field class="mr-4">
+                                                <b-numberinput 
+                                                    controls-position="compact" 
+                                                    :max=stock min="1" 
+                                                    size="is-small"
+                                                    v-model="num">
+                                                </b-numberinput>
+                                            </b-field>
+                                            库存：[[ stock ]]箱
+                                        </div>
+                                    </div>
+                                     
+                                </template>
+                                <!-- 商品数量操作 end -->
+                            </div>
+                            <!-- 数量 end-->
+
+                            <div class="buttons mt-5">
+                                <b-button type="is-primary" :disabled="!stock">加入购物车</b-button>
+                                <b-button type="is-primary is-light" :disabled="!stock">立即购买</b-button>
+                            </div>
+
+                        </div>
+                        <!-- 商品规格及数量 end -->
+
+                        <!-- 商品详情 -->
+                        <div class="box">
+                            <template>
+                                <section>
+                                    <b-tabs class="block">
+                                        <b-tab-item label="商品详情">
+                                            {{ product.content|safe }}
+                                        </b-tab-item>
+                                        <b-tab-item label="商品评价">
+                                            商品评价
+                                        </b-tab-item>
+                                        <b-tab-item label="售后保障">
+                                            {{ product.after_services }}
+                                        </b-tab-item>
+                                    </b-tabs>
+                                </section>
+                            </template>
+                        </div>
+                        <!-- 商品详情 end-->
+                    </div>
+                    <!-- 商品基本信息区块 end -->
+
+                </div>
+
+               
+
+            </div>
+            <!-- 商品模块 end -->
+
+            <!-- 新品推荐模块 -->
+            <div class="column">
+                <div class="card">
+                    <header class="card-header">
+                        <h1 class="card-header-title is-centered">新品推荐</h1>
+                    </header>
+                    <div class="card-content">
+
+                        
+                        {% if product_news %}
+                        
+                        {% for product_dict in product_news %}
+                        {% for spu, sku in product_dict.items %}  
+                        <a href="{% url 'product:product_goods_detail' spu.id %}" class="mb-3">
+                            <figure class="image is-square">
+                                <img src="{{ MEDIA_URL }}{{ spu.main_picture }}" alt="{{ spu.title }}">
+                            </figure>
+                            <h1 class="pt-3 pb-1 has-text-weight-medium is-size-4 has-text-danger-dark is-family-primary">
+                                ¥{{ sku.sell_price }}</h1>
+                            <h2 class="is-family-secondary is-size-14">
+                                <a href="">{{ spu.title|truncatechars:10 }}...</a> 
+                            </h2>
+                            <div class="mt-2 foot">
+                                <div class=" is-pulled-left is-size-7 has-text-grey-light">{{ sku.sales }}人付款</div>
+                                <div class=" is-pulled-right is-size-7 has-text-grey-light">5.0分</div>
+                                <div class="is-clearfix"></div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                        {% endfor %}
+                        {% else %}
+                        <p> 暂无新品推荐！ </p>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+            <!-- 新品推荐模块 end -->
+
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+
+{% block vuebefy %}{{ block.super }}
+
+<script>
+// 轮播图
+var slider_image = JSON.parse(document.querySelector("#slider-image").innerHTML);
+
+// 规格选项
+var productAttr = JSON.parse(document.querySelector("#specs").innerHTML);
+
+// 规格对应的sku
+var productValue = JSON.parse(document.querySelector("#spec-sku").innerHTML);
+
+// 规格有sku的规格值
+if (document.querySelector("#current-sku").innerHTML !== 'None') {
+    var currentSku = JSON.parse(document.querySelector("#current-sku").innerHTML);
+}
+
+
+var product = new Vue({
+    el: "#product-detail",
+    // 修改Vue变量的读取语法，避免与django冲突
+    delimiters: ['[[', ']]'],
+    data: {
+        num: 1,
+        stock: 0,
+        sliderimgs: slider_image,
+        productAttr: productAttr,
+        productValue: productValue,
+        attrSelected: [],
+        attrValueSelected: null,
+        currentSku:currentSku,
+        sales: 0,
+        sell_price: 0,
+        market_price: 0
+    },
+    methods: {
+      getImgUrl(value) {
+          return `${value}`
+      }
+    },
+
+    created(){
+        // 处理单规格商品显示
+        if (this.productAttr.length == 0) {
+            let value = Object.values(this.productValue)[0]
+            this.stock = value.sku_stocks;
+            this.market_price = value.sku_market_price;
+            this.sell_price = value.sku_sell_price;
+            this.sales = value.sku_sales
+        }
+    },
+
+    watch: {
+        productAttr: {
+            immediate: true,
+            handler(attr) {
+                attr.forEach((value, index) => {
+                    // this.attrSelected[index] = value.attr_values[0];
+                    this.attrSelected[index] = currentSku[index];
+                });
+            }
+        },
+        
+        attrSelected: {
+            immediate: true,
+            handler(attr) {
+                if (attr.length) {
+                    let name = attr.join(),
+                    value = this.productValue[name];
+                    if (value) {
+                        this.attrValueSelected = value;
+                        this.stock = value.sku_stocks;
+                        this.market_price = value.sku_market_price;
+                        this.sell_price = value.sku_sell_price;
+                        this.sales = value.sku_sales
+                    } else {
+                        this.stock = 0;
+                    }
+                }
+            }
+        },
+
+
+    },
+})
+
+</script>
+
+{% endblock %}
+
+
+ 

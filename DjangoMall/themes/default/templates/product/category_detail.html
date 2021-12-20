@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ category }} - DJMall商城
+{% endblock %}
+    
+{% block main %}
+<section class="section">
+    <div class="container">
+        <div class="box">
+            <div class="sort">
+                <ul>
+                   {% if category.parent %}
+                    <li class="has-text-grey-light is-pulled-left">当前分类：</li>
+                    <li class="mr-4 is-pulled-left">
+                        <a class="{% if category.parent %}has-text-danger-dark{% endif %}"
+                            href="{% url 'product:category_detail' category.id %} ">{{ category }}</a>
+                    </li>
+                    {% else %}
+                        <li class="has-text-grey-light is-pulled-left">{{ category}}：</li>
+                        {% if category.djmallproductcategory_set.all %}
+                            {% for sub_cate in category.djmallproductcategory_set.all %}
+                                <li class="mr-4 is-pulled-left">
+                                    <a class=""
+                                        href="{% url 'product:category_detail' sub_cate.id %} ">{{ sub_cate }}</a>
+                                </li>
+                            {% endfor %}
+                        {% endif %}
+                            
+                        
+                   {% endif %}
+                    <div class="is-clearfix"></div>
+                </ul>
+                <hr class="mt-2 mb-2 is-marginless">
+                <ul>
+                    <li class="has-text-grey-light is-pulled-left">排序：</li>
+                    <li class="mr-4 is-pulled-left">
+                        <a class="{% if not sort_dict %} has-text-danger-dark {% endif %}"
+                            href="{% url 'product:category_detail' category.id %}">默认</a>
+                    </li>
+                    <li class="mr-4 is-pulled-left">
+                        <a 
+                            class="{% if sort_dict.djmallproductsku__sales == '-djmallproductsku__sales' %} has-text-danger-dark {% endif %}" 
+                            href="?djmallproductsku__sales=-djmallproductsku__sales&page={{ page_obj.number }}">
+                            销量
+                        </a>
+                    </li>
+                    <li class="mr-4 is-pulled-left">
+                        <a class="{% if sort_dict.djmallproductsku__sell_price == 'djmallproductsku__sell_price' %} has-text-danger-dark {% endif %}" 
+                            href="?djmallproductsku__sell_price=djmallproductsku__sell_price&page={{ page_obj.number }}">
+                            价格
+                        </a>
+                    </li>
+                    <div class="is-clearfix"></div>
+                </ul>
+            </div>
+        </div>
+
+        <div class="columns is-multiline"> 
+            {% for product in page_obj %}  
+                {% for spu, sku in product.items %} 
+                <div class="column is-3">
+                    <a href="{% url 'product:product_goods_detail' spu.id %}" class="box">
+                        <figure class="image is-square">
+                            <img src="{{ MEDIA_URL }}{{ spu.main_picture }}" alt="{{ spu.title }}">
+                        </figure>
+                        <h1 class="pt-3 pb-1 has-text-weight-medium is-size-4 has-text-danger-dark is-family-primary">
+                            ¥{{ sku.sell_price }}</h1>
+                        <h2 class="is-family-secondary is-size-14">
+                            {{ spu.title }}
+                        </h2>
+                        <div class="mt-2 foot">
+                            <div class=" is-pulled-left is-size-7 has-text-grey-light">{{ sku.sales }}人付款</div>
+                            <div class=" is-pulled-right is-size-7 has-text-grey-light">5.0分</div>
+                            <div class="is-clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+
+
+        <nav class="pagination" role="navigation" aria-label="pagination">
+            {% if page_obj.has_previous %}
+            <a class="pagination-previous is-disabled" href="?page={{ page_obj.previous_page_number }}" title="上一页">Previous</a>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+            <a class="pagination-next" href="?page={{ page_obj.next_page_number }}">Next page</a>
+            {% endif %}
+
+            <ul class="pagination-list">
+                {% for page in pages %}
+                    <li>
+                        <a class="pagination-link {% if page_obj.number == page %}is-current {% endif %}" aria-label="Goto page 2" aria-current="page" 
+                        href="?page={{ page }}&djmallproductsku__sell_price={{ sort_dict.djmallproductsku__sell_price }}&djmallproductsku__sales={{ sort_dict.djmallproductsku__sales }}">
+                            {{ page }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+</section>
+{% endblock %}
+    

@@ -1,0 +1,30 @@
+{
+  "name": "djangomall",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "css-build": "node-sass --omit-source-map-url bulma.sass css/mystyles.css",
+    "css-watch": "npm run css-build -- --watch",
+    "start": "npm run css-watch"
+  },
+  "author": "xingfu",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.27.7",
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-csso": "^4.0.1",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^5.0.0",
+    "gulp-uglify": "^3.0.2",
+    "node-sass": "^6.0.1",
+    "sass": "^1.44.0"
+  },
+  "dependencies": {
+    "buefy": "^0.9.13",
+    "bulma": "^0.9.3",
+    "vue": "^2.6.14"
+  }
+}

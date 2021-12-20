@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+{% load static %}
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{% block title %}My custom Bulma website{% endblock %}</title>
+    {% block head %}{% endblock %}  
+	<link rel="stylesheet" href="{% static 'base/css/base.css' %}">
+	<link rel="stylesheet" href="{% static 'product/css/index-min.css' %}"> 
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.9.55/css/materialdesignicons.min.css">
+    {% block head_style %}{% endblock %}  
+</head>
+
+<body>
+	<div class="head-top">
+		<div class="container">
+			<div class="level is-mobile">
+				<div class="level-left">
+					<a class="ml-3 mr-3 is-primary" href="">
+						<span class="icon"><i class="mdi mdi-star-plus-outline"></i></span>
+						收藏本站</a>
+					<span>欢迎光临本店！</span>
+					
+				</div>
+				<div class="level-right">
+					<a class="ml-3 mr-3 is-primary" href="">登录</a>
+					<a class="head-top-a" href="">注册</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class=" has-background-primary" id="nav">
+		{% include "component/nav.html" %}
+	</div>
+    {% block main %}{% endblock %}
+	{% block footer %}{% endblock %}
+	{% block extra_foot_style %}{% endblock %}
+
+	{% block vuebefy %}
+	<script src="https://unpkg.com/vue"></script>
+    <!-- Full bundle -->
+    <script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
+	{% endblock %}
+	
+	<script>
+		var nav = new Vue({
+			el: "#nav",
+		})
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<template>
+    <b-navbar wrapper-class="container" type="is-primary" shadow transparent spaced>
+        <template #brand>
+            <b-navbar-item href="/">
+                <img src="http://mall.lotdoc.cn/static/users/images/logo.png" 
+                    alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
+            </b-navbar-item>
+        </template>
+        <template #start>
+            <b-navbar-item href="/" {% if request.path_info == '/' %}active{% endif %}>
+                首页
+            </b-navbar-item>
+            <b-navbar-item href="{% url 'product:category_list' %}" 
+                {% if request.path_info == '/product/category_list/' %}active{% endif %}>
+                <b-icon
+                    pack="mdi"
+                    icon="format-list-text"
+                    size="is-small">
+                </b-icon>
+                <span>全部分类</span> 
+            </b-navbar-item>
+            {% for key, values in category_dict.items %}
+            {% if key.is_nav and not values %}
+            <b-navbar-item href="{% url 'product:category_detail' key.id %}">
+                {{ key.name }}
+            </b-navbar-item>
+            {% endif %}
+            {% if values and key.is_nav %}
+            <b-navbar-dropdown label="{{ key }}" hoverable collapsible>
+                {% for sub_cate in values  %}
+                {% if sub_cate.is_nav %}
+                <b-navbar-item href="{% url 'product:category_detail' sub_cate.id %}">
+                    {{ sub_cate }}
+                </b-navbar-item>
+                {% endif %}
+               
+                {% endfor %}
+            </b-navbar-dropdown>
+            {% endif %}
+            {% endfor %}
+            
+        </template>
+
+        <template #end>
+            <b-navbar-item tag="div">
+                <!-- <div class="buttons">
+                    <a class="button is-primary">
+                        <strong>Sign up</strong>
+                    </a>
+                    <a class="button is-light">
+                        Log in
+                    </a>
+                </div> -->
+                <b-field>
+                    <b-select placeholder="商品">
+                        <option>商品</option>
+                        <option>文章</option>
+                    </b-select>
+                    <b-input type="search" placeholder="Search"></b-input>
+                    <p class="control">
+                        <b-button type="is-danger" label="Search" />
+                    </p>
+                </b-field>
+            </b-navbar-item>
+        </template>
+    </b-navbar>
+</template>
+

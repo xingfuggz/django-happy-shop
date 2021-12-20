@@ -1,0 +1,145 @@
+{% extends 'admin/login.html' %}
+
+{% load i18n static %}
+
+<!-- head之间自定义内容区块 -->
+{% block extrahead %}{% endblock %}
+
+<!-- 覆盖掉默认的全局样式 -->
+{% block stylesheet %}{% endblock %}
+
+<!-- 覆盖掉登录页独有的样式 -->
+{% block extrastyle %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css?family=Questrial&display=swap" rel="stylesheet">
+    <!-- Bulma Version 0.9.0-->
+    <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
+    <link rel="stylesheet" type="text/css" href=" {% static 'dadmin/css/login.css' %}">
+    {{ form.media }}
+{% endblock %}
+
+<!-- 覆盖全局header -->
+{% block branding %}{% endblock %}
+
+{% block responsive %}
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+{% endblock %}
+
+<!-- 登录表单区块的钩子 -->
+{% block content %}
+<section class="hero is-success is-fullheight">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <div class="column is-4 is-offset-4">
+                <h3 class="title has-text-black">Login</h3>
+                <hr class="login-hr">
+                <p class="subtitle has-text-black">{{ site_header|default:_('Django administration') }}</p>
+                <div class="box">
+                    <figure class="avatar">
+                        <img src="https://portrait.gitee.com/uploads/avatars/namespace/2445/7336275_xingfugz_1633758573.png!avatar100">
+                    </figure>
+
+                    {% if form.errors and not form.non_field_errors %}
+                    <p class="errornote">
+                    {% if form.errors.items|length == 1 %}{% translate "Please correct the error below." %}{% else %}{% translate "Please correct the errors below." %}{% endif %}
+                    </p>
+                    {% endif %}
+
+                    {% if form.non_field_errors %}
+                    {% for error in form.non_field_errors %}
+                    <p class="errornote">
+                        {{ error }}
+                    </p>
+                    {% endfor %}
+                    {% endif %}
+
+                    {% if user.is_authenticated %}
+                    <p class="errornote">
+                    {% blocktranslate trimmed %}
+                        You are authenticated as {{ username }}, but are not authorized to
+                        access this page. Would you like to login to a different account?
+                    {% endblocktranslate %}
+                    </p>
+                    {% endif %}
+
+                    <form action="{{ app_path }}" method="post">{% csrf_token %}
+                        <div id="inpufields">
+                        <div class="field">
+                            <div class="control">
+                                {{ form.username.errors }}
+                                {# {{ form.username.label_tag }} #}
+                                {{ form.username }}
+                                <!-- <input class="input is-large" type="email" placeholder="Your Email" autofocus=""> -->
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                {{ form.password.errors }}
+                                {# {{ form.password.label_tag }} #}
+                                {{ form.password }}
+                                <input type="hidden" name="next" value="{{ next }}">
+                                <!-- <input class="input is-large" type="password" placeholder="Your Password"> -->
+                            </div>
+                        </div>
+                        
+                        <div class="field">
+                            <div class="control">
+                                {{ form.captcha.errors }}
+                                {# {{ form.username.label_tag }} #}
+                                {{ form.captcha }}
+                            </div>
+                        </div>
+
+                        </div>
+                        <!-- <div class="field">
+                            <label class="checkbox">
+                            <input type="checkbox">
+                            Remember me
+                            </label>
+                        </div> -->
+                        <button class="button is-block is-info is-large is-fullwidth" type="submit">
+                            Login 
+                            <i class="fa fa-sign-in" aria-hidden="true"></i>
+                        </button>
+                    </form>
+
+
+
+                </div>
+                <p class="has-text-grey">
+                    <a href="../">Sign Up</a> &nbsp;·&nbsp;
+                    <a href="../">Forgot Password</a> &nbsp;·&nbsp;
+                    <a href="../">Need Help?</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    var inpufields = document.querySelector('#inpufields').getElementsByTagName('input')
+    for (var i=0; i<=inpufields.length; i++){
+        if (inpufields[i]) {
+            inpufields[i].setAttribute('class', 'input is-large')
+            if (inpufields[i].getAttribute('name') === 'username'){
+                inpufields[i].setAttribute('placeholder', '请输入用户名')
+            }else if (inpufields[i].getAttribute('name') === 'password'){
+                inpufields[i].setAttribute('placeholder', '请输入密码')
+            }         
+        }     
+    }
+
+    // 点击更换验证码
+    $('img.captcha').attr("title", "点击更换验证码")
+    $('img.captcha').click(function(){
+        $.getJSON('/captcha/refresh/', function(json){
+            $('img.captcha').attr("src", json.image_url);
+            $('#id_captcha_0').val(json.key);
+        });
+        return false;
+    })
+</script>
+
+{% endblock %}
