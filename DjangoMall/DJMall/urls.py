@@ -29,7 +29,6 @@ urlpatterns = [
     path('captcha/', include('captcha.urls')),
     path('product/', include('product.urls')),
     path('', IndexTemplateView.as_view(), name="index")
-    # path('news/', include('news.urls'))
 ]
 
 

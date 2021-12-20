@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     # 我们自己的应用
     'dadmin.apps.DadminConfig',
     'product.apps.ProductConfig',
-    'news.apps.NewsConfig', 
+    'users.apps.UsersConfig',
     'captcha'
 ]
 
