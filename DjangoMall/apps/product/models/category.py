@@ -21,7 +21,8 @@ class DJMallProductCategory(DJMallBaseModel):
         upload_to="product/category/icon/", 
         blank=True,
         null=True,
-        max_length=200)
+        max_length=200,
+        help_text="大小为 96px * 96px")
     pc_img = models.ImageField(
         "首页楼层背景", 
         upload_to="product/category/pc/img/", 

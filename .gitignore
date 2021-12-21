@@ -9,6 +9,7 @@ __pycache__/
 # Distribution / packaging
 .vscode
 # frontSrc/
+db/
 node_modules/
 media/
 env/

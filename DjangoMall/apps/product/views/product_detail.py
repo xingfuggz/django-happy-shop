@@ -25,7 +25,11 @@ class ProductDetailView(DJMallBaseView, DetailView):
         return context
 
     def get_product_dict(self):
+        """商品的所有数据
 
+        Returns:
+            [dict]: [返回类型为一个字典数据]
+        """
         product_dict = {}
         # 1. 处理当前spu的数据，并包装包product_dict中
         spu_queryset = DJMallProductSPU.objects.filter(id=self.get_object().id)

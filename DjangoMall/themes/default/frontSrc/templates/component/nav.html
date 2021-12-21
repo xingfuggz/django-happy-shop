@@ -26,7 +26,7 @@
             </b-navbar-item>
             {% endif %}
             {% if values and key.is_nav %}
-            <b-navbar-dropdown label="{{ key }}" hoverable collapsible>
+            <b-navbar-dropdown label="{{ key }}" hoverable>
                 {% for sub_cate in values  %}
                 {% if sub_cate.is_nav %}
                 <b-navbar-item href="{% url 'product:category_detail' sub_cate.id %}">

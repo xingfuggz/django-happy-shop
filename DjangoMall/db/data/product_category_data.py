@@ -1,50 +1,108 @@
 category_data = [
-    {
-        'name': '精品肉类',
+    {   
+        'id': 1,
+        'name': '新鲜水果',
         'is_nav': True,
+        'desc': '应时而采，新鲜特供',
+        'pc_img': 'product/category/pc/img/5982d8c6N279ff1cf.png',
         'sub_category': [
             {
-                'name': '牛肉',
+                'id': 2,
+                'name': '热销水果',
                 'is_nav': True,
-                'icon': 'https://img14.360buyimg.com/n0/jfs/t1/173461/36/979/169667/60617e8dEd8de7b68/7335fab4b6c5ce26.jpg'
+                'icon': 'product/category/icon/4.png'
             },
             {
-                'name': '羊肉',
+                'id': 3,
+                'name': '时令水果',
                 'is_nav': True,
-                'icon': 'http://img14.360buyimg.com/n5/s54x54_jfs/t1/173461/19/9198/78147/609b957fEd0ad86c8/7335fab4b6c5ce26.jpg'
+                'icon': 'product/category/icon/8.png'
 
             },
             {
-                'name': '猪肉',
+                'id': 4,
+                'name': '热带水果',
                 'is_nav': True,
-                'icon': 'http://img14.360buyimg.com/n5/s54x54_jfs/t1/112673/33/3969/164755/5eaa9eaaE7dbe9d2b/3f1cb3257f5c08cd.jpg'
+                'icon': 'product/category/icon/5.png'
             },
             {
-                'name': '禽类',
+                'id': 5,
+                'name': '地标水果',
                 'is_nav': True,
-                'icon': 'http://img14.360buyimg.com/n5/s54x54_jfs/t1/149782/16/13045/84046/5fa0f5f8Ebf30566d/45b0f34c0b20578b.jpg'
+                'icon': 'product/category/icon/3.png'
             }
         ]
     },
     {
-        'name': '生鲜食品',
+        'id': 6,
+        'name': '海鲜水产',
         'is_nav': True,
+        'desc': '新鲜海货，即时享受',
+        'pc_img': 'product/category/pc/img/59886313N1622b0f9.png',
         'sub_category': [
             {
-                'name': '菌菇类',
+                'id': 7,
+                'name': '鱼类',
                 'is_nav': True,
-                'icon': 'https://img13.360buyimg.com/n7/jfs/t1/189318/38/13368/241000/60f10244E8dd36e03/54800024163f3443.jpg'
+                'icon': 'product/category/icon/6.png'
             },
             {
-                'name': '茄果类',
+                'id': 8,
+                'name': '虾类',
                 'is_nav': True,
-                'icon': 'http://img14.360buyimg.com/n5/s54x54_jfs/t1/108352/18/9153/77189/5e71e8b1E7bb9f7e6/1d419e75c42eabdd.jpg'
+                'icon': 'product/category/icon/%E8%99%BE%E6%B5%B7%E9%B2%9C.png'
             },
             {
-                'name': '根茎类',
+                'id': 9,
+                'name': '贝类',
                 'is_nav': True,
-                'icon': 'https://img14.360buyimg.com/n0/jfs/t1/197982/40/5071/233113/61277110Ee8676878/149db6fd8b32797b.jpg',
+                'icon': 'product/category/icon/80826.png',
+            },
+            {
+                'id': 10,
+                'name': '蟹类',
+                'is_nav': True,
+                'icon': 'product/category/icon/80941.png',
             }
+        ]
+    },
+    {
+        'id': 11,
+        'name': '精选肉类',
+        'desc': '肉香四溢，大快朵颐',
+        'is_nav': True,
+        'pc_img': 'product/category/pc/img/59886595Nc9fc959b.png',
+        'sub_category': [
+            {
+                'id': 12,
+                'name': '猪肉',
+                'is_nav': True,
+                'icon': 'product/category/icon/%E8%82%89.png'
+            },
+            {
+                'id': 13,
+                'name': '牛肉',
+                'is_nav': True,
+                'icon': 'product/category/icon/3349.png'
+            },
+            {
+                'id': 14,
+                'name': '羊肉',
+                'is_nav': True,
+                'icon': 'product/category/icon/18.png'
+            },
+            {
+                'id': 15,
+                'name': '鸡肉',
+                'is_nav': True,
+                'icon': 'product/category/icon/632.png'
+            },
+            {
+                'id': 16,
+                'name': '鸭肉',
+                'is_nav': True,
+                'icon': 'product/category/icon/75824.png'
+            },    
         ]
     }
 ]
