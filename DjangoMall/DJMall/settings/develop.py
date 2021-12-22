@@ -1,5 +1,5 @@
 from .base import *
-
+from config.cache import dummy
 
 ALLOWED_HOSTS = []
 
@@ -19,3 +19,6 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = BASE_DIR / 'media'
 STATIC_ROOT = BASE_DIR / 'static'
+
+
+CACHES = dummy

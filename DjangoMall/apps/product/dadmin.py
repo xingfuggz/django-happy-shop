@@ -16,6 +16,7 @@ class DJMallProductCategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'parent', 'is_nav', 'sort', 'add_date')
     list_filter = ('name',)
     search_fields = ('name',)
+    search_help_text = "请输入分类名称搜索",
     list_editable = ('sort', 'is_nav')
     # list_select_related的值应是布尔值、列表或元组。默认值是 False。减少关联关系查询数据库！
     list_select_related = ('parent',)

@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 from ._private import create_category
-from db.data.product_category_data import category_data
+from product.management.demodb.category_db import category_data
 
 
 class Command(BaseCommand):

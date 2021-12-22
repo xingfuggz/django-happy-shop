@@ -9,8 +9,8 @@ __pycache__/
 # Distribution / packaging
 .vscode
 # frontSrc/
-db/
-demodb/
+# db/
+# demodb/
 node_modules/
 media/
 env/

@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+{% block title %}{{ title }} | {{ sub_title }}{% endblock %}
+
+{% block head_style %}
+<link rel="stylesheet" href="{% static 'users/css/login.css' %}">
+{{ form.media }}
+{% endblock %}
+
+{% block main %}
+<section class="login-bg" id="{% block id %}login{% endblock %}">
+    <div class="container pt-6 pb-6">
+        <div class="columns">
+            <div class="column">
+            </div>
+            <div class="column is-4">
+                <div class="box pt-5 pb-6">
+                    <h1 class="has-text-centered is-size-5">
+                        {% block formname %}
+                        账号登录
+                        {% endblock %} </h1>
+                    <div class="dropdown-divider mb-5"></div>
+                    {% block form %}
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="field">
+                            <div class="control">
+                                {{ form.username.errors }}
+                                {{ form.username }}
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                {{ form.password.errors }}
+                                {{ form.password }}
+                                <input type="hidden" name="next" value="{{ next }}">
+                            </div>
+                        </div>
+                        <div class="field mb-5">
+                            <div class="control">
+                                {{ form.captcha.errors }}
+                                {{ form.captcha }}
+                            </div>
+                        </div>
+                        <button class="button is-block is-primary is-fullwidth" type="submit">
+                            登录 
+                            <i class="mdi mdi-login" aria-hidden="true"></i>
+                        </button>
+                    </form>
+                    {% endblock %}
+                </div>
+            </div>
+            <div class="column is-1"></div>
+        </div>
+
+    </div>
+</section>
+{% endblock %}
+
+{% block vuebefy %}{{ block.super }}
+<script>
+    var login = new Vue({
+        el: "#login",
+        data: {
+            labelPosition: 'on-border'
+        },
+        created(){
+            this.InputFields();
+            let captcha = document.querySelector('.captcha');
+            captcha.setAttribute('title', '点击更换验证码');
+            captcha.setAttribute('v-on:click', 'getCaptchaCode');
+        },
+        methods: {
+            InputFields(){
+                var inpufields = document.querySelector('#login').getElementsByTagName('input');
+                for (var i=0; i<=inpufields.length; i++){
+                    if (inpufields[i]) {
+                        inpufields[i].setAttribute('class', 'input')
+                        if (inpufields[i].getAttribute('name') === 'username'){
+                            inpufields[i].setAttribute('placeholder', '请输入用户名或邮箱')
+                        }else if (inpufields[i].getAttribute('name') === 'password'){
+                            inpufields[i].setAttribute('placeholder', '请输入密码')
+                        }else if (inpufields[i].getAttribute('name') === 'email'){
+                            inpufields[i].setAttribute('placeholder', '请输入邮箱号')
+                        }                      
+                    }     
+                }
+            },
+            // 点击更换验证码
+            getCaptchaCode(){
+                $.getJSON('/captcha/refresh/', function(json){
+                    $('img.captcha').attr("src", json.image_url);
+                    $('#id_captcha_0').val(json.key);
+                });
+                return false;
+            },
+        }
+    });
+    
+</script>
+{% endblock %}

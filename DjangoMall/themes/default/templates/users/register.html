@@ -1,0 +1,50 @@
+{% extends "users/login.html" %}
+
+{% block title %}
+  用户注册
+{% endblock %}
+
+{% block formname %}
+  用户注册
+{% endblock %}
+
+{% block id %}register{% endblock %}
+
+{% block form %}
+  <form action="" method="post">
+    {% csrf_token %}
+    <b-field label="邮箱" :label-position="labelPosition">
+        <b-input type="email" maxlength="30"></b-input>
+    </b-field>
+    <b-field label="验证码..." :label-position="labelPosition" grouped>
+        <b-input placeholder="请输入验证码" name="code" type="text" expanded></b-input>
+        <p class="control">
+            <b-button class="button is-primary is-light">点击获取</b-button>
+        </p>
+    </b-field>
+    <b-field label="密码" class="mt-5"
+            :label-position="labelPosition">
+        <b-input type="password" name="password" maxlength="30"></b-input>
+    </b-field>
+    <b-field label="再次输入密码"
+            :label-position="labelPosition">
+        <b-input type="password" name="password1" maxlength="30"></b-input>
+    </b-field>
+    <div class="buttons">
+        <b-button type="is-primary" expanded>立即注册</b-button>
+    </div>
+  </form>
+{% endblock %}
+
+{% block vuebefy %}
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
+<script>
+    var register = new Vue({
+        el: "#register",
+        data: {
+            labelPosition: 'on-border'
+        },
+    })
+</script>
+{% endblock %}

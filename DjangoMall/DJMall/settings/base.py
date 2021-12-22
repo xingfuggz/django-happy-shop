@@ -137,3 +137,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # 默认使用的用户
 AUTH_USER_MODEL = 'users.DJMallUser'
+
+# 自定义验证后端，可以通过邮箱和用户名登录
+AUTHENTICATION_BACKENDS = (
+    'users.views.DJMallAuthBackend',
+)
