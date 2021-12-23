@@ -1,7 +1,12 @@
 {% extends "users/login.html" %}
+{% load static %}
 
 {% block title %}
   用户注册
+{% endblock %}
+
+{% block head_style %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 {% endblock %}
 
 {% block formname %}
@@ -11,39 +16,93 @@
 {% block id %}register{% endblock %}
 
 {% block form %}
-  <form action="" method="post">
-    {% csrf_token %}
     <b-field label="邮箱" :label-position="labelPosition">
-        <b-input type="email" maxlength="30"></b-input>
+        <b-input type="email" maxlength="30" v-model="email"></b-input>
     </b-field>
+    [[ email ]]
     <b-field label="验证码..." :label-position="labelPosition" grouped>
-        <b-input placeholder="请输入验证码" name="code" type="text" expanded></b-input>
+        <b-input placeholder="请输入验证码" v-model="code" type="text" expanded></b-input>
         <p class="control">
-            <b-button class="button is-primary is-light">点击获取</b-button>
+            <b-button 
+                class="button is-primary is-light"
+                :disabled="isdisabled"
+                @click="getEmailCode">
+                [[ text ]]
+            </b-button>
         </p>
     </b-field>
     <b-field label="密码" class="mt-5"
             :label-position="labelPosition">
-        <b-input type="password" name="password" maxlength="30"></b-input>
+        <b-input type="password" name="password" v-model="password" maxlength="30"></b-input>
     </b-field>
     <b-field label="再次输入密码"
             :label-position="labelPosition">
-        <b-input type="password" name="password1" maxlength="30"></b-input>
+        <b-input type="password" name="password1" v-model="password1" maxlength="30"></b-input>
     </b-field>
+    <input type="hidden" v-model="send_type">
     <div class="buttons">
         <b-button type="is-primary" expanded>立即注册</b-button>
     </div>
-  </form>
 {% endblock %}
 
 {% block vuebefy %}
 <script src="https://unpkg.com/vue"></script>
 <script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
+<script src="{% static 'base/js/request.js' %}"></script>
 <script>
     var register = new Vue({
         el: "#register",
+        // 修改Vue变量的读取语法，避免与django冲突
+        delimiters: ['[[', ']]'],
         data: {
-            labelPosition: 'on-border'
+            labelPosition: 'on-border',
+            text: "获取验证码",
+            isdisabled: false,
+            email: '',
+            code: '',
+            send_type: 'ZC',
+            password: '',
+            password1: ''
+        },
+        methods: {
+            getEmailCode(){
+                let sendData = new URLSearchParams();
+                sendData.append('code', this.code);
+                sendData.append('email', this.email);
+                sendData.append('send_type', 'ZC');
+                request({
+                    url: '/users/email/code/',
+                    method: 'post',
+                    data: sendData
+                }).then(res => {
+                    if (res.status == 200) {
+                        this.sendCode();
+                        this.$buefy.toast.open({
+                            message: '发送成功！',
+                            type: 'is-success'
+                        })
+                    }
+                })
+            },
+
+            // 倒计时60s
+            sendCode() {
+                if (this.isdisabled) return;
+                this.isdisabled = true;
+                let n = 60;
+                this.text = "剩余 " + n + "s";
+                const run = setInterval(() => {
+                    n = n - 1;
+                    if (n < 0) {
+                        clearInterval(run);
+                    }
+                    this.text = "剩余 " + n + "s";
+                    if (this.text < "剩余 " + 0 + "s") {
+                        this.isdisabled = false;
+                        this.text = "重新获取";
+                    }
+                }, 1000);
+            }
         },
     })
 </script>

@@ -6,4 +6,5 @@ app_name = 'users'
 urlpatterns = [
     path("login/", views.DJMallLoginView.as_view(), name="login"),
     path("register/", views.DJMallRegisterView.as_view(), name="register"),
+    path("email/code/", views.DJMallEmailVerifyRecordCreateView.as_view(), name="email_code")
 ]

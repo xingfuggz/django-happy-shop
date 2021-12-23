@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_style %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+{% endblock %}
+
+{% block main %}
+<div id="code">
+
+    <button @click="getEmailCode">tijiao</button>
+</div>
+<!-- <form action="" method="post" id="code">
+    {% csrf_token %}
+    <b-field label="code">
+        <b-input v-model="code"></b-input>
+    </b-field>
+    <b-field label="Email">
+            <b-input type="email"
+                v-model="email"
+                maxlength="30">
+            </b-input>
+    </b-field>
+    <b-field label="code">
+        <b-input v-model="send_type"></b-input>
+    </b-field>
+    
+</form> -->
+
+{% endblock %}
+
+{% block vuebefy %}{{ block.super }}
+<script src="{% static 'base/js/request.js' %}"></script>
+
+<script>
+    var code = new Vue({
+        el: '#code',
+        data: {
+            email: '785174092@qq.com',
+            code: 'abc2',
+            send_type: 'ZC'
+        },
+        methods: {
+            getEmailCode(){
+                let sendData = new URLSearchParams();
+                sendData.append('code', this.code);
+                sendData.append('email', this.email);
+                sendData.append('send_type', this.send_type);
+                request({
+                    url:'/users/email/code/',
+                    method: 'post',
+                    data: sendData
+                }).then(res => {
+                    console.log(res)
+                }).catch(err => {
+                    console.log(err)
+                })
+            }
+        }
+
+    })
+</script>
+
+{% endblock %}
