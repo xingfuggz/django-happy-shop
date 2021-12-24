@@ -174,8 +174,10 @@ class ProductSPUDetailView(BaseView, DetailView):
             spec_dict['spec_index'] = index
             spec_dict['spec_name'] = spec.name
             spec_dict['spec_options'] = [ option.value for option in spec.options.all()]
+            print(spec_dict['spec_options'])
             spec_json.append(spec_dict)
 
+        print(spec_json)
         # 转换保存为json数据
         spec_json = json.dumps(spec_json, ensure_ascii=False)
         
@@ -248,6 +250,9 @@ class ProductSPUDetailViewJson(View):
                     'sku_stock': temp_sku.stock
                 }
             context['productValue'] = spec_sku_dict   # 规格的字典数据，Js中的object对象，主要方便前端匹配
+            # import json
+            # context = json.dumps(context, ensure_ascii=False)
+            # print(json.dumps(context, ensure_ascii=False))
         else:
             return JsonResponse({'code': 10010, 'message': '该商品不存在！'})
         return JsonResponse(context)
