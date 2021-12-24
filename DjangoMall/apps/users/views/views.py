@@ -47,6 +47,3 @@ class DJMallRegisterView(DJMallBaseView, CreateView):
     form_class = DJMallRegisterForm
     success_url = "/users/login/"
     
-    def form_valid(self, form):
-        form.save()
-        return JsonResponse({'message': 'ceshi'})

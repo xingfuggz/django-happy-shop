@@ -42,12 +42,6 @@ class DJMallRegisterForm(forms.ModelForm):
             if intervals_time > timedelta(hours=0, minutes=5, seconds=0):
                 raise forms.ValidationError('该验证码已过期！')
         else:
-            raise forms.ValidationError('验证码不存在！')
-        
-            
+            raise forms.ValidationError('无效验证码！')
         return self.cleaned_data['code']
     
-    def clean(self):
-        data = super().clean()
-        print(data)
-        return super().clean()

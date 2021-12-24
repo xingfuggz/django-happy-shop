@@ -5,13 +5,11 @@
   用户注册
 {% endblock %}
 
-{% block head_style %}
+{% block head_style %}{{ block.super }}
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 {% endblock %}
 
-{% block formname %}
-  用户注册
-{% endblock %}
+{% block formname %}用户注册{% endblock %}
 
 {% block id %}register{% endblock %}
 
@@ -20,16 +18,18 @@
     {% csrf_token %}
     
     {% if form.errors %}
-    <b-message type="is-danger" has-icon auto-close duration=4000 >
-        {{ form.username.errors }}
-        {{ form.code.errors }}
-        {{ form.password1.errors }}
-    </b-message>
+    <template>
+        <b-message type="is-danger" has-icon auto-close :duration="duration" >
+            {{ form.username.errors }}
+            {{ form.code.errors }}
+            {{ form.password1.errors }}
+        </b-message>
+    </template>
     {% endif %}
     <b-field label="邮箱" :label-position="labelPosition">
-        <b-input type="email" maxlength="30" v-model="email" name="username"></b-input>
+        <b-input type="email" maxlength="30" v-model="email" name="username" placeholder="请输入邮箱"></b-input>
     </b-field>
-    <b-field label="验证码..." :label-position="labelPosition" grouped>
+    <b-field label="验证码" :label-position="labelPosition" grouped>
         <b-input placeholder="请输入验证码" v-model="code" name="code" maxlength="4" type="text" expanded></b-input>
         <p class="control">
             <b-button 
@@ -42,11 +42,11 @@
     </b-field>
     <b-field label="密码" class="mt-5"
             :label-position="labelPosition">
-        <b-input type="password" name="password" v-model="password" maxlength="30"></b-input>
+        <b-input type="password" name="password" v-model="password" maxlength="30" placeholder="请输入密码"></b-input>
     </b-field>
     <b-field label="再次输入密码"
             :label-position="labelPosition">
-        <b-input type="password" name="password1" v-model="password1" maxlength="30"></b-input>
+        <b-input type="password" name="password1" v-model="password1" maxlength="30" placeholder="请再次输入密码"></b-input>
     </b-field>
     <input type="hidden" v-model="send_type" name="send_type">
     <div class="buttons">
@@ -69,6 +69,7 @@
             labelPosition: 'on-border',
             text: "获取验证码",
             isdisabled: false,
+            duration: 5000,
             email: '',
             code: '',
             send_type: 'ZC',

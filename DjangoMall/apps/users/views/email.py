@@ -31,7 +31,7 @@ class DJMallEmailVerifyRecordCreateView(JsonableResponseMixin, CreateView):
         
         # 发送邮件
         send_email(subject="DJMall商城注册验证码，请查收！", message=f'您的注册邮箱验证码是：{code},5分钟内有效！', to_emial=[email])
-        return JsonResponse({'code': 200, 'message': '验证码已发送请查收！'})
+        return JsonResponse({'code': 200, 'message': '验证码已发送，请登录邮箱查收！'})
     
     def get_email_code(self):
         # 查询数据库最新的code
