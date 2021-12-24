@@ -1,13 +1,16 @@
 from django.db.models import Q
+from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.views import LoginView, LogoutView
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, CreateView
 from django.contrib.auth import get_user_model
+from django.views.generic.base import View
 # Create your views here.
 from DJMall.utils.views import DJMallBaseView
 from dadmin.forms import DJMallAuthenticationForm
 from users.forms import DJMallRegisterForm
+from users.models import email
 
 User = get_user_model()
 
@@ -38,16 +41,12 @@ class DJMallLoginView(DJMallBaseView, LoginView):
     }
     
 
-class DJMallRegisterView(DJMallBaseView, TemplateView):
+class DJMallRegisterView(DJMallBaseView, CreateView):
     # 注册视图
     template_name = 'users/register.html'
+    form_class = DJMallRegisterForm
+    success_url = "/users/login/"
     
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['form'] = DJMallRegisterForm()
-        return context
-    
-    def post(self, request, *args, **kwargs):
-        return self.get(request, *args, **kwargs)
-
-
+    def form_valid(self, form):
+        form.save()
+        return JsonResponse({'message': 'ceshi'})

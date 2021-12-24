@@ -8,7 +8,7 @@ from .models import DJMallEmailVerifyRecord
 class DJMallEmailVerifyRecordAdmin(admin.ModelAdmin):
     '''Admin View for '''
 
-    list_display = ('id', 'code')
+    list_display = ('id', 'code', 'add_date')
     # list_filter = ('',)
     # inlines = [
     #     Inline,

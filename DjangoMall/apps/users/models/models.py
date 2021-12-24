@@ -6,11 +6,10 @@ from django.contrib.auth.models import AbstractUser
 
 class DJMallUser(AbstractUser):
     """ 用户模型 """
-    phone = models.CharField("手机号", max_length=50)
+    phone = models.CharField("手机号", max_length=50, blank=True, default='')
 
     REQUIRED_FIELDS = ['email']
 
     class Meta(AbstractUser.Meta):
         swappable = 'AUTH_USER_MODEL'
-
     

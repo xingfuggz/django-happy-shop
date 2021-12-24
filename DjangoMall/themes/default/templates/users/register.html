@@ -16,12 +16,21 @@
 {% block id %}register{% endblock %}
 
 {% block form %}
+<form action="" method="post">
+    {% csrf_token %}
+    
+    {% if form.errors %}
+    <b-message type="is-danger" has-icon auto-close duration=4000 >
+        {{ form.username.errors }}
+        {{ form.code.errors }}
+        {{ form.password1.errors }}
+    </b-message>
+    {% endif %}
     <b-field label="邮箱" :label-position="labelPosition">
-        <b-input type="email" maxlength="30" v-model="email"></b-input>
+        <b-input type="email" maxlength="30" v-model="email" name="username"></b-input>
     </b-field>
-    [[ email ]]
     <b-field label="验证码..." :label-position="labelPosition" grouped>
-        <b-input placeholder="请输入验证码" v-model="code" type="text" expanded></b-input>
+        <b-input placeholder="请输入验证码" v-model="code" name="code" maxlength="4" type="text" expanded></b-input>
         <p class="control">
             <b-button 
                 class="button is-primary is-light"
@@ -39,10 +48,12 @@
             :label-position="labelPosition">
         <b-input type="password" name="password1" v-model="password1" maxlength="30"></b-input>
     </b-field>
-    <input type="hidden" v-model="send_type">
+    <input type="hidden" v-model="send_type" name="send_type">
     <div class="buttons">
-        <b-button type="is-primary" expanded>立即注册</b-button>
+        <!-- <b-button type="is-primary" @click="getRegister" type="submit" expanded>立即注册</b-button> -->
+        <input type="submit" class="button is-primary is-fullwidth" value="立即注册" @click="getRegister">
     </div>
+</form>
 {% endblock %}
 
 {% block vuebefy %}
@@ -62,12 +73,13 @@
             code: '',
             send_type: 'ZC',
             password: '',
-            password1: ''
+            password1: '',
+            message:''
         },
         methods: {
             getEmailCode(){
                 let sendData = new URLSearchParams();
-                sendData.append('code', this.code);
+                // sendData.append('code', 'abcd');
                 sendData.append('email', this.email);
                 sendData.append('send_type', 'ZC');
                 request({
@@ -75,14 +87,32 @@
                     method: 'post',
                     data: sendData
                 }).then(res => {
-                    if (res.status == 200) {
-                        this.sendCode();
+                    console.log(res);
+                    if (res.status == 200 && res.data.code == 412) {
+                        // this.sendCode();
+                        this.message = res.data.message
                         this.$buefy.toast.open({
-                            message: '发送成功！',
+                            message: this.message,
+                            type: 'is-danger'
+                        })
+                    } else if (res.status == 200 && res.data.code == 200) {
+                        this.sendCode();
+                        this.message = res.data.message
+                        this.$buefy.toast.open({
+                            message: this.message,
                             type: 'is-success'
                         })
                     }
                 })
+            },
+
+            getRegister(){
+                if (!this.email || !this.code || !this.password || !this.password1 ) {
+                    this.$buefy.toast.open({
+                        message: '全为必填项，不允许为空！',
+                        type: 'is-danger'
+                    })
+                }
             },
 
             // 倒计时60s
