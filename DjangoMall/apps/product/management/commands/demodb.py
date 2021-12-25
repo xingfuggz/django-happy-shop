@@ -1,6 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
 from ._private import create_category
-from product.management.demodb.category_db import category_data
 
 
 class Command(BaseCommand):
@@ -17,5 +16,5 @@ class Command(BaseCommand):
     
     def handle(self, *args, **options):
         if options['category']:
-            create_category(category_data)
+            create_category()
             self.stdout.write(self.style.SUCCESS('只导入分类数据成功！'))

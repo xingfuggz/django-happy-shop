@@ -65,7 +65,7 @@ class ProductDetailView(DJMallBaseView, DetailView):
                 'spu_id': temp_sku.spu.id,
                 'sku_id': temp_sku.id,
                 'sku_sell_price': '%.2f' % temp_sku.sell_price,
-                'sku_image': f'/media/{temp_sku.main_picture}',
+                'sku_image': f'/{temp_sku.main_picture}',
                 'sku_bar_code': temp_sku.bar_code,
                 'sku_market_price': '%.2f' % temp_sku.market_price,
                 'sku_cost_price': '%.2f' % temp_sku.cost_price,

@@ -45,9 +45,9 @@
 					</template>
 		
 					<div class="card-content">
-						<div class="columns is-multiline">
+						<div class="columns is-multiline is-mobile">
 							{% for sub_cate in values %}
-							<div class="column is-2">
+							<div class="column is-2-desktop is-6-mobile">
 								<div class="has-text-centered">
 									<a class="box" href="#">
 										<img class="cate-icon" src="{{ MEDIA_URL }}{{ sub_cate.icon }}" alt="{{ sub_cate.name }}">

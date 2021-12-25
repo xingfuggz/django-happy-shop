@@ -23,11 +23,8 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))         # 配置apps目录
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-l9&59hy+lk+y89_p*us!npj+)bbnag!e!#6u$kmmo!c)76o$-d'
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# 部署的时候将该项改为False,他会自动切换配置文件
 DEBUG = True
-
-# ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -43,6 +40,7 @@ INSTALLED_APPS = [
     'dadmin.apps.DadminConfig',
     'product.apps.ProductConfig',
     'users.apps.UsersConfig',
+    'personal.apps.PersonalConfig',
     'captcha'
 ]
 
@@ -79,17 +77,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'DJMall.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 
 # Password validation

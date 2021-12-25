@@ -1,6 +1,8 @@
 from product.models import DJMallProductCategory
+from product.management.demodb import category_data
 
-def create_category(category_data):
+
+def create_category():
     for data_dict in category_data:
         cate_obj = DJMallProductCategory()
         cate_obj.id = data_dict.get('id')
