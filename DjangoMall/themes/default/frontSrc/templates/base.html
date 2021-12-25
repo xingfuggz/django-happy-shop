@@ -10,30 +10,19 @@
 	<link rel="stylesheet" href="{% static 'base/css/base.css' %}">
 	<link rel="stylesheet" href="{% static 'product/css/index-min.css' %}"> 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.9.55/css/materialdesignicons.min.css">
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     {% block head_style %}{% endblock %}
 </head>
 
 <body>
-	<div class="head-top">
-		<div class="container">
-			<div class="level is-mobile">
-				<div class="level-left">
-					<a class="ml-3 mr-3 is-primary" href="">
-						<span class="icon"><i class="mdi mdi-star-plus-outline"></i></span>
-						收藏本站</a>
-					<span>欢迎光临本店！</span>
-					
-				</div>
-				<div class="level-right">
-					<a class="ml-3 mr-3 is-primary" href="">登录</a>
-					<a class="head-top-a" href="">注册</a>
-				</div>
-			</div>
-		</div>
-	</div>
 
-	<div class=" has-background-primary" id="nav">
-		{% include "component/nav.html" %}
+	<div id="nav">
+		<div class="has-background-white has-shadow is-size-14">
+			{% include "component/head_top.html" %}
+		</div>
+		<div class="has-background-primary" >
+			{% include "component/nav.html" %}
+		</div>
 	</div>
     {% block main %}{% endblock %}
 	{% block footer %}{% endblock %}
@@ -48,6 +37,27 @@
 	<script>
 		var nav = new Vue({
 			el: "#nav",
+			data: {
+				navigation: 'home'
+			},
+			methods: {
+				// 退出登录确认弹窗
+				logout() {
+					this.$buefy.dialog.confirm({
+						message: '你确定要退出吗？',
+						cancelText: '取消',
+						confirmText: '确认',
+						onConfirm: () => {
+							axios.get('/users/logout/').then(() => {
+								console.log('ceshi')
+								this.$buefy.toast.open('退出成功!')
+								setTimeout("window.location.reload()", 2000)
+								// window.location.href = '/users/login/';
+							})
+						}
+					})
+				},
+			}
 		})
 	</script>
 

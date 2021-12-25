@@ -5,12 +5,11 @@ from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import TemplateView, CreateView
 from django.contrib.auth import get_user_model
-from django.views.generic.base import View
+
 # Create your views here.
 from DJMall.utils.views import DJMallBaseView
-from dadmin.forms import DJMallAuthenticationForm
+from users.forms import DJMallLoginAuthenticationForm
 from users.forms import DJMallRegisterForm
-from users.models import email
 
 User = get_user_model()
 
@@ -32,7 +31,7 @@ class DJMallAuthBackend(ModelBackend):
 
 class DJMallLoginView(DJMallBaseView, LoginView):
     # 登录页面
-    form_class = DJMallAuthenticationForm
+    form_class = DJMallLoginAuthenticationForm
     template_name = 'users/login.html'
     next_page = '/'
     extra_context = {
@@ -46,4 +45,9 @@ class DJMallRegisterView(DJMallBaseView, CreateView):
     template_name = 'users/register.html'
     form_class = DJMallRegisterForm
     success_url = "/users/login/"
-    
+
+
+class DJMallLogoutView(LogoutView):
+    # 退出登录
+    template_name = 'users/logout.html'
+    redirect_authenticated_user = True

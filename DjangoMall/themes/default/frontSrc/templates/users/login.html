@@ -23,24 +23,33 @@
                     {% block form %}
                     <form action="" method="post">
                         {% csrf_token %}
-                        <div class="field">
-                            <div class="control">
-                                {{ form.username.errors }}
-                                {{ form.username }}
-                            </div>
-                        </div>
-                        <div class="field">
-                            <div class="control">
-                                {{ form.password.errors }}
-                                {{ form.password }}
-                                <input type="hidden" name="next" value="{{ next }}">
-                            </div>
-                        </div>
-                        <div class="field mb-5">
-                            <div class="control">
+                        <template>
+                            <b-field label="用户名" :label-position="labelPosition" class="mt-5">
+                                <b-input name="username" placeholder="请输入用户名或邮箱"> </b-input>
+                                {% if form.username.errors %}
+                                <template #message>
+                                    {{ form.username.errors }}
+                                </template>
+                                {% endif %}
+                            </b-field>
+                            <b-field label="密码"
+                                :label-position="labelPosition" class="mt-5">
+                                <b-input type="password" maxlength="30" name="password" placeholder="请输入密码"></b-input>
+                                {% if form.password.errors %}
+                                <template #message>
+                                    {{ form.password.errors }}
+                                </template>
+                                {% endif %}
+                            </b-field>
+                           
+                            <input type="hidden" name="next" value="{{ next }}">
+                        </template>
+
+                        <div class="field mb-4">
+                            <p class="control is-expanded">
                                 {{ form.captcha.errors }}
                                 {{ form.captcha }}
-                            </div>
+                            </p>
                         </div>
                         <button class="button is-block is-primary is-fullwidth" type="submit">
                             登录 
@@ -61,6 +70,8 @@
 <script>
     var login = new Vue({
         el: "#login",
+        // 修改Vue变量的读取语法，避免与django冲突
+        delimiters: ['[[', ']]'],
         data: {
             labelPosition: 'on-border'
         },
@@ -80,8 +91,8 @@
                             inpufields[i].setAttribute('placeholder', '请输入用户名或邮箱')
                         }else if (inpufields[i].getAttribute('name') === 'password'){
                             inpufields[i].setAttribute('placeholder', '请输入密码')
-                        }else if (inpufields[i].getAttribute('name') === 'email'){
-                            inpufields[i].setAttribute('placeholder', '请输入邮箱号')
+                        }else if (inpufields[i].getAttribute('name') === 'captcha_1'){
+                            inpufields[i].setAttribute('placeholder', '请输入验证码')
                         }                      
                     }     
                 }

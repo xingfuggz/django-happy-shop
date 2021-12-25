@@ -1,0 +1,73 @@
+<template>
+    <nav class="navbar container">
+        <div class="navbar-brand">
+            <a class="navbar-item">
+                <b-icon size="is-small" pack="mdi" icon="star-plus-outline"></b-icon>
+                <span>收藏本站</span> 
+            </a>
+            <span class="navbar-item">欢迎光临本店！</span>
+        </div>
+
+        <div class="navbar-menu">
+            <div class="navbar-end">
+                {% if request.user.is_authenticated %}
+                    <b-dropdown
+                        v-model="navigation"
+                        position="is-bottom-left"
+                        append-to-body
+                        aria-role="menu">
+                        <template #trigger>
+                            <a
+                                class="navbar-item"
+                                role="button">
+                                <span>{{ request.user.username }}</span>
+                                <b-icon icon="menu-down"></b-icon>
+                            </a>
+                        </template>
+                        <b-dropdown-item custom aria-role="menuitem">
+                            欢迎来到 <b>DJMall商城！</b>
+                        </b-dropdown-item>
+                        <hr class="dropdown-divider">
+                        <b-dropdown-item has-link aria-role="menuitem">
+                            <a href="https://google.com" target="_blank">
+                                <b-icon icon="link"></b-icon>
+                                Google (link)
+                            </a>
+                        </b-dropdown-item>
+                        <b-dropdown-item value="home" aria-role="menuitem">
+                            <b-icon icon="home"></b-icon>
+                            Home
+                        </b-dropdown-item>
+                        <b-dropdown-item value="products" aria-role="menuitem">
+                            <b-icon icon="cart"></b-icon>
+                            Products
+                        </b-dropdown-item>
+                        <b-dropdown-item value="blog" disabled aria-role="menuitem">
+                            <b-icon icon="book-open"></b-icon>
+                            Blog
+                        </b-dropdown-item>
+                        <hr class="dropdown-divider" aria-role="menuitem">
+                        <b-dropdown-item value="settings">
+                            <b-icon icon="settings"></b-icon>
+                            Settings
+                        </b-dropdown-item>
+                        <b-dropdown-item value="logout" @click="logout" aria-role="menuitem">
+                            <b-icon icon="logout"></b-icon>
+                            Logout
+                        </b-dropdown-item>
+                    </b-dropdown>
+                {% else %}
+                <a href="{% url 'users:register' %}" class="navbar-item">
+                    <span>注册</span> 
+                    <!-- <b-icon size="is-small" pack="mdi" icon="account-plus-outline"></b-icon> -->
+                </a>
+                <a href="{% url 'users:login' %}" class="navbar-item">
+                    <span>登录</span> 
+                    <b-icon size="is-small" pack="mdi" icon="login-variant"></b-icon>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        
+    </nav>
+</template>

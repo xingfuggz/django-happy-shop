@@ -3,6 +3,9 @@ from django import forms
 from django.core.exceptions import NON_FIELD_ERRORS
 from django.contrib.auth import get_user_model
 from django.utils import timezone
+from django.contrib.auth.forms import AuthenticationForm
+from captcha.fields import CaptchaField, CaptchaTextInput
+
 from users.models import DJMallUser, DJMallEmailVerifyRecord
 
 
@@ -45,3 +48,14 @@ class DJMallRegisterForm(forms.ModelForm):
             raise forms.ValidationError('无效验证码！')
         return self.cleaned_data['code']
     
+
+class DJMallLoginCaptchaTextInput(CaptchaTextInput):
+    # 登录表单组件样式重写
+    template_name = "users/login_captcha.html"
+
+
+class DJMallLoginAuthenticationForm(AuthenticationForm):
+    captcha = CaptchaField(widget=DJMallLoginCaptchaTextInput(attrs={'placeholder': '请输入验证码'}))
+
+    class Media:
+        js = ['admin/js/vendor/jquery/jquery.js',]
