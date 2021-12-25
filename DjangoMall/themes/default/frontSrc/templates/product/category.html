@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load breadcrumb %}
 
 {% block title %}
 	分类列表 - DjangoMall商城系统
@@ -11,6 +12,10 @@
 		height: 96px !important;
 	}
 </style>
+{% endblock %}
+
+{% block breadcrumb %}
+    {% get_breadcrumb request %}
 {% endblock %}
 	
 {% block main %}

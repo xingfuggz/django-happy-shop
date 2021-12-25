@@ -19,7 +19,6 @@ class DJMallBaseView:
         for category in category_queryset:    
             if category and category.parent is None:
                 category_dict[category] = category.djmallproductcategory_set.all()
-        
         return category_dict
 
 

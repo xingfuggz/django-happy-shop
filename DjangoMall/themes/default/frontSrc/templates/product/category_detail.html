@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
+{% load breadcrumb %}
 
 {% block title %}
     {{ category }} - DJMall商城
 {% endblock %}
-    
+
+{% block breadcrumb %}
+    {% get_breadcrumb request category %}
+{% endblock %}
+
 {% block main %}
 <section class="section">
     <div class="container">

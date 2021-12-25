@@ -1,13 +1,13 @@
 {% extends "users/login.html" %}
 {% load static %}
 
-{% block title %}
-  用户注册
-{% endblock %}
+{% block title %}用户注册{% endblock %}
 
 {% block head_style %}{{ block.super }}
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 {% endblock %}
+
+{% block hero %}{% endblock %}
 
 {% block formname %}用户注册{% endblock %}
 
@@ -40,7 +40,7 @@
             </b-button>
         </p>
     </b-field>
-    <b-field label="密码" class="mt-5"
+    <b-field label="密码"
             :label-position="labelPosition">
         <b-input type="password" name="password" v-model="password" maxlength="30" placeholder="请输入密码"></b-input>
     </b-field>

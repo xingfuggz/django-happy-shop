@@ -51,19 +51,20 @@
                             <b-icon icon="settings"></b-icon>
                             Settings
                         </b-dropdown-item>
-                        <b-dropdown-item value="logout" @click="logout" aria-role="menuitem">
-                            <b-icon icon="logout"></b-icon>
-                            Logout
+                        <b-dropdown-item  @click="logout">
+                            <b-icon icon="logout" size="is-small"></b-icon>
+                            退出
                         </b-dropdown-item>
                     </b-dropdown>
                 {% else %}
                 <a href="{% url 'users:register' %}" class="navbar-item">
                     <span>注册</span> 
                     <!-- <b-icon size="is-small" pack="mdi" icon="account-plus-outline"></b-icon> -->
-                </a>
+                </a> 
+                <span class="navbar-item p-0">|</span>
                 <a href="{% url 'users:login' %}" class="navbar-item">
                     <span>登录</span> 
-                    <b-icon size="is-small" pack="mdi" icon="login-variant"></b-icon>
+                    <!-- <b-icon size="is-small" pack="mdi" icon="login-variant"></b-icon> -->
                 </a>
                 {% endif %}
             </div>
