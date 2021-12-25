@@ -18,12 +18,11 @@ def get_breadcrumb(request, cate=None, product=None):
             <li><a href="/product/category/{}/"><span>{}</span></a></li>
             <li><a href="/product/category/{}/"><span>{}</span></a></li>
         '''
-        if product.id:
+        if product is not None and product.id:
             h += '<li><a href="/product/goods/{}/detail/"><span>{}</span></a></li>'
             breadcrumb = format_html(h, cate.parent.id, cate.parent.name, 
             cate.id, cate.name, product.id, product.title)
         else:
-            
             breadcrumb = format_html(h, cate.parent.id, cate.parent.name, cate.id, cate.name)
     elif cate is not None and cate.parent == 'None':
         h = '''
