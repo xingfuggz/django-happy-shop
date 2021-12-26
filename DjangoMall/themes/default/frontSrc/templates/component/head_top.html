@@ -20,7 +20,7 @@
                             <a
                                 class="navbar-item"
                                 role="button">
-                                <span>{{ request.user.username }}</span>
+                                <span>[[ name ]]</span>
                                 <b-icon icon="menu-down"></b-icon>
                             </a>
                         </template>
@@ -29,16 +29,12 @@
                         </b-dropdown-item>
                         <hr class="dropdown-divider">
                         <b-dropdown-item has-link aria-role="menuitem">
-                            <a href="https://google.com" target="_blank">
-                                <b-icon icon="link"></b-icon>
-                                Google (link)
+                            <a href="{% url 'personal:home' %}" target="_blank">
+                                <b-icon icon="home" size="is-small"></b-icon>
+                                个人中心
                             </a>
                         </b-dropdown-item>
-                        <b-dropdown-item value="home" aria-role="menuitem">
-                            <b-icon icon="home"></b-icon>
-                            Home
-                        </b-dropdown-item>
-                        <b-dropdown-item value="products" aria-role="menuitem">
+                        <!-- <b-dropdown-item value="products" aria-role="menuitem">
                             <b-icon icon="cart"></b-icon>
                             Products
                         </b-dropdown-item>
@@ -50,7 +46,7 @@
                         <b-dropdown-item value="settings">
                             <b-icon icon="settings"></b-icon>
                             Settings
-                        </b-dropdown-item>
+                        </b-dropdown-item> -->
                         <b-dropdown-item  @click="logout">
                             <b-icon icon="logout" size="is-small"></b-icon>
                             退出

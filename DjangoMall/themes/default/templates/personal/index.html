@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+{% load static breadcrumb %}
+
+{% block title %}用户中心{% endblock %}
+
+{% block head_style %}
+    <style>
+        [v-cloak] {
+            display: none !important;
+        }
+    </style>
+{% endblock %}
+
+{% block breadcrumb %}
+  {% get_breadcrumb request %}
+{% endblock %}
+
+{% block main %}
+<div class="container mt-4 mb-4" id="personal" v-cloak>
+    <div class="columns">
+        <div class="column">
+            {% include "personal/menus.html" %}
+        </div>
+        <div class="column is-9">
+            <div class="box">
+                {% block menmber %}
+                <div class="columns is-mobile" style="border-bottom: #ededed solid 1px; padding-bottom: 1rem">
+                    <div class="column is-narrow">
+                        <figure class="image is-96x96">
+                            {% if user.avatar %}
+                                <img class="is-rounded" src="{{ MEDIA_URL }}{{ user.userinfo.avatar }}">
+                                {% else %}
+                                <img class="is-rounded" src=" {% static 'base/images/avatar.png' %}">
+                            {% endif %}
+                        </figure>
+                    </div>
+                    <div class="column is-narrow">
+                        <div style="padding-top: 1.5rem;">
+                            <h1 class="title is-size-4">{{ user.username }}</h1>
+                            {% if user.userinfo.signature %}
+                                <p class="subtitle is-size-6">{{ user.userinfo.signature }}</p>
+                                {% else %}
+                                <p class="subtitle is-size-6">暂未设置个性签名</p>
+                            {% endif %} 
+                        </div>
+                    </div>
+                    <div class="column is-narrow-mobile">
+                        <a class=" button is-light is-pulled-right" href="" style="margin-top: 1.8rem">修改信息</a>
+                    </div>
+                </div>    
+                
+                <div class="columns" style="padding:1rem 0; ">
+                    <div class="column is-2">
+                        <p>个人信息</p>  
+                    </div>
+                    <div class="column">
+                        <div class="columns is-mobile" style="border-bottom: #ededed solid 1px">
+                            <div class="column is-2">
+                               <span class=" has-text-grey-light">用户名</span> 
+                            </div>
+                            <div class="column is-narrow">
+                                <span class="has-text-black-ter">[[ name ]]</span>
+                            </div>
+                            <div class="column has-text-right">
+                                <a class="is-size-7"  @click="isCardModalActive = true">修改</a>
+                                {% include "personal/update_username.html" %}
+                            </div>
+                            
+                                    
+                        </div>
+                        <div class="columns is-mobile" style="border-bottom: #ededed solid 1px">
+                            <div class="column is-2">
+                               <span class=" has-text-grey-light">手机</span> 
+                            </div>
+                            <div class="column is-narrow">
+                                <span class=" has-text-black-ter">{{ user.phone }}</span>
+                            </div>
+                            
+                        </div>
+                        <div class="columns is-mobile" style="border-bottom: #ededed solid 1px">
+                            <div class="column is-2">
+                               <span class=" has-text-grey-light">邮箱</span> 
+                            </div>
+                            <div class="column is-narrow">
+                                <span class=" has-text-black-ter">[[ email ]]</span>
+                            </div>
+                            <div class="column has-text-right">
+                                <a class="is-size-7"  @click="isEmailModalActive = true">修改</a>
+                                {% include "personal/update_email.html" %}
+                            </div>
+                            
+                        </div>
+
+                        <div class="columns is-mobile" style="border-bottom: #ededed solid 1px">
+                            <div class="column is-2">
+                               <span class=" has-text-grey-light">地址</span> 
+                            </div>
+                            <div class="column is-narrow">
+                                {% if user.userinfo %}
+                                <span class=" has-text-black-ter">{{ user.userinfo.default_address }}</span>
+                                {% else %}
+                                <span class=" has-text-black-ter">暂未添加地址</span>
+                                {% endif %}
+                               
+                            </div>
+                             
+                        </div>
+                    </div>
+                </div>
+
+                <div class="columns" style="padding:1rem 0; ">
+                    <div class="column is-2">
+                        <p>个人简介</p>  
+                    </div>
+                    <div class="column">
+                        <div class="content">
+                            {% if user.userinfo.desc %}
+                            {{ user.userinfo.desc}}
+                            {% else %}
+                            暂未设置
+                            {% endif %}
+                           
+                        </div>
+                    </div>
+                </div>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block vuebefy %}{{ block.super }}
+<script src="{% static 'base/js/request.js' %}"></script>
+<script>
+    var user_id = '{{ user.id }}';
+    var name = '{{ user.username }}';
+    var email = '{{ user.email }}';
+    var personal = new Vue({
+        el: '#personal',
+        // 修改Vue变量的读取语法，避免与django冲突
+        delimiters: ['[[', ']]'],
+        data: {
+            labelPosition: 'on-border',
+            isActive: true,
+            isCardModalActive: false,
+            isEmailModalActive: false,
+            name: name,
+            email:email,
+            code: '',
+            text: "获取验证码",
+            isdisabled: false,
+            user_id: user_id
+        },
+        methods: {
+            getUserEmailCode(){
+                let sendData = new URLSearchParams();
+                // sendData.append('code', 'abcd');
+                sendData.append('email', this.email);
+                sendData.append('send_type', 'ZC');
+                request({
+                    url: '/users/email/code/',
+                    method: 'post',
+                    data: sendData
+                }).then(res => {
+                    if (res.status == 200 && res.data.code == 412) {
+                        // this.sendCode();
+                        this.message = res.data.message
+                        this.$buefy.toast.open({
+                            message: this.message,
+                            type: 'is-danger'
+                        })
+                    } else if (res.status == 200 && res.data.code == 200) {
+                        this.sendCode();
+                        this.message = res.data.message
+                        this.$buefy.toast.open({
+                            message: this.message,
+                            type: 'is-success'
+                        })
+                    }
+                }).catch(err => {
+                    console.log(err)
+                })
+            },
+            
+            getUpdateEmail(){
+                let sendData = new URLSearchParams();
+                // sendData.append('code', 'abcd');
+                sendData.append('email', this.email);
+                sendData.append('code', this.code);
+
+                request({
+                    url: '/personal/email/'+this.user_id+'/update/',
+                    method: 'post',
+                    data: sendData
+                }).then(res => {
+                    let data = res.data;
+                    if (res.status == 200 && /class="errorlist"/.test(data)) {
+                        data = data.match(/<ul class="errorlist"><li>(\S*?)<\/li><\/ul>/)[1];
+                        this.message = data;
+                        this.$buefy.toast.open({
+                            message: this.message,
+                            type: 'is-danger'
+                        })
+                    }
+                })
+            },
+            // 倒计时60s
+            sendCode() {
+                if (this.isdisabled) return;
+                this.isdisabled = true;
+                let n = 60;
+                this.text = "剩余 " + n + "s";
+                const run = setInterval(() => {
+                    n = n - 1;
+                    if (n < 0) {
+                        clearInterval(run);
+                    }
+                    this.text = "剩余 " + n + "s";
+                    if (this.text < "剩余 " + 0 + "s") {
+                        this.isdisabled = false;
+                        this.text = "重新获取";
+                    }
+                }, 1000);
+            }
+        }
+    })
+</script>
+{% endblock %}

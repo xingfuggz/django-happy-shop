@@ -88,7 +88,6 @@
                     method: 'post',
                     data: sendData
                 }).then(res => {
-                    console.log(res);
                     if (res.status == 200 && res.data.code == 412) {
                         // this.sendCode();
                         this.message = res.data.message

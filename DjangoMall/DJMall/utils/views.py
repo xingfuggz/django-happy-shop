@@ -10,6 +10,7 @@ class DJMallBaseView:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['category_dict'] = dict(self.get_category_dict())
+        context['user'] = self.request.user
         return context
     
     def get_category_dict(self):

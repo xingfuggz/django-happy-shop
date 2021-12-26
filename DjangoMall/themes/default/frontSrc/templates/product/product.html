@@ -255,25 +255,11 @@ var product = new Vue({
         market_price: 0,
         // 轮播图
         gallery: false,
-        al: {
-            hasGrayscale: true,
-            itemsToShow: 2,
-            breakpoints: {
-            768: {
-                hasGrayscale: false,
-                itemsToShow: 2
-            },
-            960: {
-                hasGrayscale: true,
-                    itemsToShow: 2
-                }
-            }
-        },
     },
     methods: {
-      getImgUrl(value) {
-          return `${value}`
-      }
+        getImgUrl(value) {
+            return `${value}`
+        }
     },
 
     created(){
@@ -317,8 +303,6 @@ var product = new Vue({
                 }
             }
         },
-
-
     },
 })
 

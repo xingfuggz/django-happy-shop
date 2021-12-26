@@ -1,0 +1,26 @@
+<b-modal v-model="isEmailModalActive" :width="400" scroll="keep">
+    <div class="box has-text-left">
+        <form action="{% url 'personal:update_email' user.id %}" method="post">
+            {% csrf_token %}
+            {{ form  }}
+            <h1 class="mb-5 has-text-weight-bold">修改邮箱</h1>
+            <b-field label="邮箱" :label-position="labelPosition">
+                <b-input type="email" maxlength="30" v-model="email" name="email" placeholder="请输入邮箱"></b-input>
+            </b-field>
+            <b-field label="验证码" :label-position="labelPosition" grouped>
+                <b-input placeholder="请输入验证码" v-model="code" name="code" maxlength="4" type="text" expanded></b-input>
+                <p class="control">
+                    <b-button 
+                        class="button is-primary is-light"
+                        :disabled="isdisabled"
+                        @click="getUserEmailCode">
+                        [[ text ]]
+                    </b-button>
+                </p>
+            </b-field>
+            <!-- <input class="button is-primary is-fullwidth" type="submit" value="提交"></input> -->
+            <b-button type="is-primary" @click="getUpdateEmail" expanded>立即修改</b-button>
+
+        </form>
+    </div> 
+</b-modal>

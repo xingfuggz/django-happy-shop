@@ -50,7 +50,27 @@ function generateUUID() {
         return (c=='x' ? r : (r&0x3|0x8)).toString(16);
     });
     return uuid;
-}
+};
+
+
+// 倒计时60s
+function getSendCode(isdisabled, text) {
+    if (isdisabled) return;
+    isdisabled = true;
+    let n = 60;
+    text = "剩余 " + n + "s";
+    const run = setInterval(() => {
+        n = n - 1;
+        if (n < 0) {
+            clearInterval(run);
+        }
+        text = "剩余 " + n + "s";
+        if (text < "剩余 " + 0 + "s") {
+            isdisabled = false;
+            text = "重新获取";
+        }
+    }, 1000);
+};
 
 // axios发送请求
 function request(config) {

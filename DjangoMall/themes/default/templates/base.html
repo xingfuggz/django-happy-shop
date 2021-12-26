@@ -71,9 +71,13 @@
 	{% endblock %}
 	
 	<script>
+		var username = '{{ user.username }}';
 		var nav = new Vue({
 			el: "#nav",
+			// 修改Vue变量的读取语法，避免与django冲突
+        	delimiters: ['[[', ']]'],
 			data: {
+				name: username,
 				navigation: 'home'
 			},
 			methods: {

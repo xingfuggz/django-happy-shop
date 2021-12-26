@@ -2,7 +2,7 @@ from django.db.models import Q
 from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.contrib.auth.backends import ModelBackend
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LoginView, LogoutView, redirect_to_login
 from django.views.generic import TemplateView, CreateView
 from django.contrib.auth import get_user_model
 
@@ -33,12 +33,17 @@ class DJMallLoginView(DJMallBaseView, LoginView):
     # 登录页面
     form_class = DJMallLoginAuthenticationForm
     template_name = 'users/login.html'
-    next_page = '/'
+    success_url = '/'
     extra_context = {
         'title': '登录',
         'sub_title': 'DJMall商城系统！'
     }
     
+    def get_success_url(self) -> str:
+        if self.request.GET['redirect_to']:
+            self.success_url = self.request.GET['redirect_to']
+            return self.success_url
+        return super().get_success_url()
 
 class DJMallRegisterView(DJMallBaseView, CreateView):
     # 注册视图
