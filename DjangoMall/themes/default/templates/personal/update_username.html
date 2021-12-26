@@ -2,7 +2,9 @@
     <div class="box has-text-left">
         <form action="{% url 'personal:update_username' user.id %}" method="post">
             {% csrf_token %}
-            <b-field label="修改用户名">
+            {{ form.username.errors }}
+            <h1 class="mb-5 has-text-weight-bold">修改用户名</h1>
+            <b-field label="用户名" :label-position="labelPosition">
                 <b-input v-model="name" name="username" placeholder="修改用户名"></b-input>
             </b-field>
             <input class="button is-primary is-fullwidth" type="submit" value="提交"></input>

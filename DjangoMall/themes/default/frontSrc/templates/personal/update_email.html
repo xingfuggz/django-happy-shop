@@ -2,7 +2,8 @@
     <div class="box has-text-left">
         <form action="{% url 'personal:update_email' user.id %}" method="post">
             {% csrf_token %}
-            {{ form  }}
+            {{ form.email.errors  }}
+            {{ form.code.errors  }}
             <h1 class="mb-5 has-text-weight-bold">修改邮箱</h1>
             <b-field label="邮箱" :label-position="labelPosition">
                 <b-input type="email" maxlength="30" v-model="email" name="email" placeholder="请输入邮箱"></b-input>
