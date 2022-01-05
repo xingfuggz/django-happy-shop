@@ -194,14 +194,24 @@
                     method: 'post',
                     data: sendData
                 }).then(res => {
+                    
                     let data = res.data;
-                    if (res.status == 200 && /class="errorlist"/.test(data)) {
-                        data = data.match(/<ul class="errorlist"><li>(\S*?)<\/li><\/ul>/)[1];
-                        this.message = data;
+                    let resdata = data.match(/<ul class="errorlist"><li>(\S*?)<\/li><\/ul>/);
+                    // resdata不存在返回值为null
+                    if (res.status == 200 && resdata && /class="errorlist"/.test(resdata[1])) {
+                        this.message = resdata[1];
                         this.$buefy.toast.open({
                             message: this.message,
                             type: 'is-danger'
                         })
+                    } else {
+                        // 成功提示
+                        this.$buefy.toast.open({
+                            message: '修改成功！',
+                            type: 'is-success'
+                        });
+                        // 关闭弹窗
+                        this.isEmailModalActive = false;
                     }
                 })
             },

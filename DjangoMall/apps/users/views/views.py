@@ -40,10 +40,11 @@ class DJMallLoginView(DJMallBaseView, LoginView):
     }
     
     def get_success_url(self) -> str:
-        if self.request.GET['redirect_to']:
+        if self.request.GET.get('redirect_to'):
             self.success_url = self.request.GET['redirect_to']
             return self.success_url
-        return super().get_success_url()
+        else:
+            return '/'
 
 class DJMallRegisterView(DJMallBaseView, CreateView):
     # 注册视图
