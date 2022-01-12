@@ -5,8 +5,9 @@ from django.contrib.auth import get_user_model
 from django.utils import timezone
 from django.contrib.auth.forms import AuthenticationForm
 from captcha.fields import CaptchaField, CaptchaTextInput
-
 from users.models import DJMallUser, DJMallEmailVerifyRecord
+from .models import DJMallFavorite
+
 
 
 class DJMallRegisterForm(forms.ModelForm):
@@ -55,7 +56,17 @@ class DJMallLoginCaptchaTextInput(CaptchaTextInput):
 
 
 class DJMallLoginAuthenticationForm(AuthenticationForm):
+    # 登录表单
     captcha = CaptchaField(widget=DJMallLoginCaptchaTextInput(attrs={'placeholder': '请输入验证码'}))
 
     class Media:
         js = ['admin/js/vendor/jquery/jquery.js',]
+        
+
+class DJMallFavoriteForm(forms.ModelForm):
+    # 收藏表单
+    class Meta:
+        model = DJMallFavorite
+        fields = ['object_id',]
+        
+        

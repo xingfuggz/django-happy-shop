@@ -1,19 +1,26 @@
 import json
 from django.core import serializers
+from django.http.response import JsonResponse
 from django.views.generic import DetailView
+from django.views.generic.edit import FormMixin
+from django.urls import reverse
+from django.http import HttpResponseForbidden
 from DJMall.utils.views import DJMallBaseView
 from product.models import category
 from product.models.product import (
     DJMallProductSKU, DJMallProductSPU, DJMallProductCarouse, 
     DJMallProductSPUSpec, DJMallProductSPUSpecOption)
+from users.forms import DJMallFavoriteForm
+from users.models import DJMallFavorite
 
 
-class ProductDetailView(DJMallBaseView, DetailView):
+class ProductDetailView(DJMallBaseView, FormMixin, DetailView):
     """ 商品详情 """
     template_name = "product/product.html"
     queryset = DJMallProductSPU.objects.filter(is_del=False)
     context_object_name = 'product'
     pk_url_kwarg = 'product_id'
+    form_class = DJMallFavoriteForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -22,7 +29,11 @@ class ProductDetailView(DJMallBaseView, DetailView):
         context['spec_sku_json'] = self.get_sku_json()
         context['current_options'] = self.get_current_sku()
         context['product_news'] = self.get_product_news()
+        context['has_fav'] = self.has_fav()
         return context
+    
+    def get_success_url(self):
+        return reverse('product:product_goods_detail', kwargs={'product_id': self.object.pk})
 
     def get_product_dict(self):
         """商品的所有数据
@@ -113,4 +124,35 @@ class ProductDetailView(DJMallBaseView, DetailView):
             prduct_dict[spu] = spu.djmallproductsku_set.first()
             product_list.append(prduct_dict)
         return product_list
-        
+    
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            # return HttpResponseForbidden()
+            return JsonResponse({'code': 'err', 'message': '未登录，请登录后操作！'})
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        # Here, we would record the user's interest using the message
+        # passed in form.cleaned_data['message']
+        object_id = self.request.POST.get('object_id')  # 获取要收藏的对象
+        t = DJMallFavorite(content_object=self.get_object(), object_id=object_id, owner=self.request.user)
+        t.save()
+        # return super().form_valid(form)
+        return JsonResponse({'code':'ok' ,'message': '收藏成功'}) 
+    
+    def has_fav(self):
+        # 判断该商品是否已经收藏
+        if self.request.user.is_authenticated:
+            from django.contrib.contenttypes.models import ContentType
+            content_type = ContentType.objects.get_for_model(DJMallProductSPU)
+            t = DJMallFavorite.objects.filter(
+                content_type=content_type, object_id=self.get_object().id, owner=self.request.user)
+            if t:
+                return True
+            else:
+                return False

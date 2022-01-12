@@ -1,0 +1,14 @@
+<!-- <form action="" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="object_id" value="{{ product.id }}">
+    {% if has_fav %}
+        <a class=" button is-danger is-small"  @click="getFav">已收藏</a>
+        {% else %}
+        <input class=" button is-danger is-small" type="submit" value="提交" @click="getFav">
+    {% endif %}
+</form> -->
+
+<a class="button is-danger is-small"  @click="getFav">
+    <span class="icon"> <i class="mdi mdi-star-shooting-outline"></i></span>
+    <span>[[ favText ]]</span> 
+</a>

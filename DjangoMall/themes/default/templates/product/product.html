@@ -53,6 +53,7 @@
                                 </b-carousel>
                             </template>
                         </div>
+                        {% include 'product/fav.html' %}
                     </div>
                     <!-- 商品banner end-->
                     
@@ -220,7 +221,7 @@
 
 
 {% block vuebefy %}{{ block.super }}
-
+<script src="{% static 'base/js/request.js' %}"></script>
 <script>
 // 轮播图
 var slider_image = JSON.parse(document.querySelector("#slider-image").innerHTML);
@@ -236,6 +237,12 @@ if (document.querySelector("#current-sku").innerHTML !== 'None') {
     var currentSku = JSON.parse(document.querySelector("#current-sku").innerHTML);
 }
 
+// product_id
+var product_id = '{{ product.id }}';
+
+// has_fav
+var has_fav = '{{ has_fav }}';
+console.log(has_fav)
 
 var product = new Vue({
     el: "#product-detail",
@@ -253,12 +260,45 @@ var product = new Vue({
         sales: 0,
         sell_price: 0,
         market_price: 0,
+        product_id: product_id,
+        has_fav: has_fav,
+        favText: '收藏',
         // 轮播图
         gallery: false,
     },
     methods: {
         getImgUrl(value) {
             return `${value}`
+        },
+        getFav(){
+            // alert('该商品已收藏，无需重复操作！')
+            if (has_fav == 'True') {
+                this.$buefy.toast.open({
+                    message: '该商品已收藏，无需重复收藏！',
+                    type: 'is-danger'
+                })
+                return;
+            }
+            let sendData = new URLSearchParams();
+            sendData.append('object_id', this.product_id);
+            request({
+                url: '/product/goods/'+ this.product_id+'/detail/',
+                method: 'post',
+                data: sendData
+            }).then(res => {
+                if (res.data.code == 'err'){
+                    this.$buefy.toast.open({
+                        message: res.data.message,
+                        type: 'is-danger'
+                    });
+                } else if (res.data.code == 'ok'){
+                    this.$buefy.toast.open({
+                        message: res.data.message,
+                        type: 'is-success'
+                    });
+                    this.favText = "已收藏";
+                }
+            })
         }
     },
 
@@ -270,6 +310,11 @@ var product = new Vue({
             this.market_price = value.sku_market_price;
             this.sell_price = value.sku_sell_price;
             this.sales = value.sku_sales
+        };
+
+        // 是否已经收藏
+        if (has_fav == 'True') {
+            this.favText = "已收藏";
         }
     },
 
