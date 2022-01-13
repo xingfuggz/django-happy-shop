@@ -1,0 +1,20 @@
+<nav class="pagination is-small" role="navigation" aria-label="pagination">
+    {% if page_obj.has_previous %}
+    <a class="pagination-previous is-disabled" href="?page={{ page_obj.previous_page_number }}" title="上一页">Previous</a>
+    {% endif %}
+
+    {% if page_obj.has_next %}
+    <a class="pagination-next" href="?page={{ page_obj.next_page_number }}">Next page</a>
+    {% endif %}
+
+    <ul class="pagination-list">
+        {% for page in pages %}
+            <li>
+                <a class="pagination-link {% if page_obj.number == page %}is-current {% endif %}" aria-label="Goto page 2" aria-current="page" 
+                href="?page={{ page }}">
+                    {{ page }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</nav>

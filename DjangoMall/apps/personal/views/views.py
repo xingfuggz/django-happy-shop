@@ -1,4 +1,3 @@
-from django.db.models import fields
 from django.shortcuts import render
 from django.views.generic import TemplateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin

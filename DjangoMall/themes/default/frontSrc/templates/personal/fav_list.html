@@ -1,0 +1,36 @@
+{% extends "personal/index.html" %}
+
+{% block title %}我的收藏 {% endblock %}
+
+{% block menmber %}
+<div class="tabs">
+    <ul>
+      <li class="is-active"><a>我的收藏</a></li>
+    </ul>
+</div>
+{% for fav in page_obj %}
+    <article class="media pl-1 pr-1">
+        <figure class="media-left">
+          <p class="image is-96x96">
+            <img src="{{ MEDIA_URL }}{{ fav.content_object.main_picture }}">
+          </p>
+        </figure>
+        <div class="media-content">
+          <div class="content1">
+            <h1 class="is-size-5 pt-2">
+                <a href="{% url 'product:product_goods_detail' fav.object_id %}"> {{ fav.content_object.title }}</a>
+            </h1>
+            <p class=" has-text-grey-light mt-2">{{ fav.content_object.sub_title }}</p>
+          </div>
+        </div>
+        <div class="media-right">
+            <button class="delete" title="删除收藏"></button>
+        </div>
+    </article>
+<div class="dropdown-divider"></div>
+  
+{% endfor %}
+<div class="mt-5">
+{% include "component/page.html" %}
+</div>
+{% endblock %}

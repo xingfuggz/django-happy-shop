@@ -128,8 +128,10 @@ class ProductDetailView(DJMallBaseView, FormMixin, DetailView):
     def post(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             # return HttpResponseForbidden()
-            # print(request.path_info) 
-            return JsonResponse({'code': 'err', 'message': '未登录，请登录后操作！', 'redirect_to': request.path_info})
+            return JsonResponse({
+                'code': 'err', 'message': '未登录，请登录后操作！', 
+                'redirect_to': request.path_info
+            })
         self.object = self.get_object()
         form = self.get_form()
         if form.is_valid():
