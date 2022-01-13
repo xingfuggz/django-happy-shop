@@ -28,17 +28,21 @@
                     <div class="column is-narrow">
                         <figure class="image is-96x96">
                             {% if user.avatar %}
-                                <img class="is-rounded" src="{{ MEDIA_URL }}{{ user.userinfo.avatar }}">
+                                <img class="is-rounded" src="{{ MEDIA_URL }}{{ user.avatar }}">
                                 {% else %}
                                 <img class="is-rounded" src=" {% static 'base/images/avatar.png' %}">
                             {% endif %}
                         </figure>
                     </div>
                     <div class="column is-narrow">
-                        <div style="padding-top: 1.5rem;">
+                        <div class="pt-5">
+                            {% if user.nickename %}
+                            <h1 class="title is-size-4">{{ user.nickename }}</h1>
+                            {% else %}
                             <h1 class="title is-size-4">{{ user.username }}</h1>
-                            {% if user.userinfo.signature %}
-                                <p class="subtitle is-size-6">{{ user.userinfo.signature }}</p>
+                            {% endif %}
+                            {% if user.signa %}
+                                <p class="subtitle is-size-6">{{ user.signa }}</p>
                                 {% else %}
                                 <p class="subtitle is-size-6">暂未设置个性签名</p>
                             {% endif %} 
@@ -96,8 +100,8 @@
                                <span class=" has-text-grey-light">地址</span> 
                             </div>
                             <div class="column is-narrow">
-                                {% if user.userinfo %}
-                                <span class=" has-text-black-ter">{{ user.userinfo.default_address }}</span>
+                                {% if user.address %}
+                                <span class=" has-text-black-ter">{{ user.address }}</span>
                                 {% else %}
                                 <span class=" has-text-black-ter">暂未添加地址</span>
                                 {% endif %}
@@ -114,8 +118,8 @@
                     </div>
                     <div class="column">
                         <div class="content">
-                            {% if user.userinfo.desc %}
-                            {{ user.userinfo.desc}}
+                            {% if user.desc %}
+                            {{ user.desc}}
                             {% else %}
                             暂未设置
                             {% endif %}

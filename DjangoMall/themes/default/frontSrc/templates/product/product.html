@@ -267,6 +267,9 @@ var product = new Vue({
         gallery: false,
     },
     methods: {
+        getHref(res){
+            window.location.href = '/users/login/?redirect_to='+ res.data.redirect_to
+        },
         getImgUrl(value) {
             return `${value}`
         },
@@ -291,6 +294,9 @@ var product = new Vue({
                         message: res.data.message,
                         type: 'is-danger'
                     });
+                    
+                    setInterval(this.getHref(res), 5000)
+                   
                 } else if (res.data.code == 'ok'){
                     this.$buefy.toast.open({
                         message: res.data.message,

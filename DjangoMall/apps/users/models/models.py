@@ -11,9 +11,10 @@ class DJMallUser(AbstractUser):
     phone = models.CharField("手机号", max_length=50, blank=True, default="")
     address = models.CharField("默认收货地址", max_length=50, blank=True, default="")
     desc = models.CharField("个人简介", max_length=200, blank=True, default="")
+    avatar = models.ImageField("头像", upload_to='users/avatar/',
+                               height_field=None, width_field=None, max_length=200, blank=True, null=True)
 
     REQUIRED_FIELDS = ['email']
 
     class Meta(AbstractUser.Meta):
         swappable = 'AUTH_USER_MODEL'
-    
