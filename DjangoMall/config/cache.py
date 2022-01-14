@@ -24,7 +24,8 @@ dummy = {
 redis = {
     'default': {
         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://username:password@127.0.0.1:6379',
+        'LOCATION': 'redis://8.131.237.47:6379',
+        # 'LOCATION': 'redis://root:sxggz0306@8.131.237.47:6379',
     }
 }
 #----------------------------------------------------------------------------------------#

@@ -24,7 +24,7 @@
           </div>
         </div>
         <div class="media-right">
-            <button class="delete" title="删除收藏"></button>
+            <a class="delete" href="{% url 'personal:fav_delete' fav.id %}">删除收藏</a>
         </div>
     </article>
 <div class="dropdown-divider"></div>

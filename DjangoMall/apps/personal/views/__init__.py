@@ -1,2 +1,2 @@
 from .views import DJMallUserPersonalView, DJMallUserUpdateView, DJMallUserUpdateEmailView
-from .actions import DJMallFavoriteListView
+from .actions import DJMallFavoriteListView, DJMallFavoriteDeleteView

@@ -1,0 +1,13 @@
+{% extends "personal/index.html" %}
+
+{% block menmber %}
+<form method="post">{% csrf_token %}
+    <p class='mb-2'>你是否确认删除收藏的商品 </p>
+    <p>"<span class="has-text-danger">{{ object }}</span>"?</p>
+    {{ form }}
+    <div class="mt-2">
+        <input class="button is-primary is-small" type="submit" value="确认">
+        <a href="{% url 'personal:fav_list' %}" class=" button is-light is-small">取消</a>
+    </div>
+</form>
+{% endblock %}

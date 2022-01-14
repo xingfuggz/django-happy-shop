@@ -8,4 +8,5 @@ urlpatterns = [
     path("username/<int:pk>/update/", views.DJMallUserUpdateView.as_view(), name="update_username"),
     path("email/<int:pk>/update/", views.DJMallUserUpdateEmailView.as_view(), name="update_email"),
     path('fav_list/', views.DJMallFavoriteListView.as_view(), name='fav_list'),
+    path("fav_delete/<int:pk>/", views.DJMallFavoriteDeleteView.as_view(), name="fav_delete")
 ]

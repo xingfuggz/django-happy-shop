@@ -1,5 +1,5 @@
 from .base import *
-from config.cache import dummy
+from config.cache import dummy, redis
 
 ALLOWED_HOSTS = ['*']
 
