@@ -13,7 +13,6 @@
     [v-cloak] {
         display: none !important;
     }
-
     .is-active .al img {
         filter: grayscale(0%);
     }
@@ -61,7 +60,6 @@
                     <div class="column">
                         <h1 class="title is-size-4">{{ product.title }}</h1>
                         <h2 class="subtitle is-size-6">{{ product.sub_title }}</h2>
-
                         <!-- 商品价格区块 -->
                             <div class="money-wrapper has-background-primary">
                                 <div class="good-price">
@@ -105,7 +103,6 @@
                                     <div id="current-sku">{{ current_options }}</div>
                                 </div>
                                 
-                                
                                 <div v-for="(item, index) in productAttr" :key="index" style="line-height: 2.5em;">
                                     <div class="is-size-14 is-pulled-left mr-4">[[ item.name ]]:</div>
                                     <div class="acea-row list">
@@ -142,7 +139,7 @@
                             <!-- 数量 end-->
 
                             <div class="buttons mt-5">
-                                <b-button type="is-primary" :disabled="!stock">加入购物车</b-button>
+                                <b-button type="is-primary" :disabled="!stock" @click="addShopingCart">加入购物车</b-button>
                                 <b-button type="is-primary is-light" :disabled="!stock">立即购买</b-button>
                             </div>
 
@@ -170,11 +167,7 @@
                         <!-- 商品详情 end-->
                     </div>
                     <!-- 商品基本信息区块 end -->
-
                 </div>
-
-               
-
             </div>
             <!-- 商品模块 end -->
 
@@ -208,12 +201,10 @@
                         {% else %}
                         <p> 暂无新品推荐！ </p>
                         {% endif %}
-
                     </div>
                 </div>
             </div>
             <!-- 新品推荐模块 end -->
-
         </div>
     </div>
 </section>
@@ -242,7 +233,6 @@ var product_id = '{{ product.id }}';
 
 // has_fav
 var has_fav = '{{ has_fav }}';
-console.log(has_fav)
 
 var product = new Vue({
     el: "#product-detail",
@@ -250,6 +240,7 @@ var product = new Vue({
     delimiters: ['[[', ']]'],
     data: {
         num: 1,
+        sku_id: '',
         stock: 0,
         sliderimgs: slider_image,
         productAttr: productAttr,
@@ -267,14 +258,16 @@ var product = new Vue({
         gallery: false,
     },
     methods: {
+        // 跳转连接
         getHref(res){
-            window.location.href = '/users/login/?redirect_to='+ res.data.redirect_to
+            window.location.href = '/users/login/?redirect_to=' + res.data.redirect_to
         },
+        // 轮播图
         getImgUrl(value) {
             return `${value}`
         },
+        // 收藏
         getFav(){
-            // alert('该商品已收藏，无需重复操作！')
             if (has_fav == 'True') {
                 this.$buefy.toast.open({
                     message: '该商品已收藏，无需重复收藏！',
@@ -304,6 +297,26 @@ var product = new Vue({
                     });
                     this.favText = "已收藏";
                 }
+            })
+        },
+
+        // 加入购物车
+        addShopingCart(){
+            // console.log(this.sku_id)
+            let sendData = new URLSearchParams();
+            sendData.append('sku_id', this.sku_id);
+            sendData.append('num', this.num);
+            request({
+                url: '/product/cart/',
+                method: 'post',
+                data: sendData
+            }).then(res => {
+                // console.log(res)
+                this.$buefy.toast.open({
+                    message: res.data.message,
+                    type: 'is-success'
+                });
+                this.stock = res.data.stocks;
             })
         }
     },
@@ -342,12 +355,14 @@ var product = new Vue({
                     let name = attr.join(),
                     value = this.productValue[name];
                     if (value) {
+                        // console.log(value)
                         this.attrValueSelected = value;
                         this.stock = value.sku_stocks;
                         this.market_price = value.sku_market_price;
                         this.sell_price = value.sku_sell_price;
                         this.sales = value.sku_sales;
-                        this.sliderimgs[0] = value.sku_image
+                        this.sliderimgs[0] = value.sku_image;
+                        this.sku_id = value.sku_id
                     } else {
                         this.stock = 0;
                     }

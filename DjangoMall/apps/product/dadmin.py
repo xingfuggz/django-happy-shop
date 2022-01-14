@@ -3,7 +3,7 @@ from django.contrib import admin
 from apps.dadmin.admin import admin_site
 from product.models import (
     DJMallProductCategory, DJMallProductBrand, DJMallProductSPU,
-    DJMallProductSPUSpec, DJMallProductSPUSpecOption,)
+    DJMallProductSPUSpec, DJMallProductSPUSpecOption, DJMallShopingCart)
 from .inline_admin import (
     DJMallProductCarouseInlineAdmin, DJMallProductSKUInlineAdmin, 
     DJMallProductSPUSpecOptionInlineAdmin)
@@ -99,3 +99,5 @@ class DJMallProductSPUSpecOptionAdmin(admin.ModelAdmin):
     list_filter = ('value',)
     search_fields = ('value',)
     exclude = ('is_del',)
+    
+admin_site.register(DJMallShopingCart)
