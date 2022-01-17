@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}
+  购物车
+{% endblock %}
+
+{% block breadcrumb %}
+<li class="is-active"><a href=""><span>购物车</span></a></li>
+{% endblock %}
+
+{% block main %}
+<section class="section" id="cart">
+    <div id="data" style="display: none;">{{ carts }}</div>
+    <div class="container">
+        <div class="box">
+            
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block vuebefy %}{{ block.super }}
+    <script>
+        const data = JSON.parse(document.querySelector('#data').innerHTML);
+        
+        var cart = new Vue({
+            el: '#cart',
+            // 修改Vue变量的读取语法，避免与django冲突
+            delimiters: ['[[', ']]'],
+            data: {
+                
+            }
+        })
+    </script>
+{% endblock %}

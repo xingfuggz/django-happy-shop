@@ -311,12 +311,19 @@ var product = new Vue({
                 method: 'post',
                 data: sendData
             }).then(res => {
-                // console.log(res)
-                this.$buefy.toast.open({
-                    message: res.data.message,
-                    type: 'is-success'
-                });
-                this.stock = res.data.stocks;
+                let url = res.request.responseURL;
+                if (url.indexOf('/users/login/') !== -1){
+                    this.$buefy.toast.open({
+                        message: "未登录，请登录后操作！",
+                        type: 'is-danger'
+                    });
+                } else {
+                    this.$buefy.toast.open({
+                        message: res.data.message,
+                        type: 'is-success'
+                    });
+                    this.stock = res.data.stocks;
+                }
             })
         }
     },

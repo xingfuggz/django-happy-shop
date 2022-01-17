@@ -1,1 +1,136 @@
-product cart
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  购物车
+{% endblock %}
+
+{% block breadcrumb %}
+<li class="is-active"><a href=""><span>购物车</span></a></li>
+{% endblock %}
+
+{% block main %}
+<style>
+    .table td{
+        vertical-align: middle;
+    }
+</style>
+<section class="section" id="cart">
+    <div id="data" style="display: none;">{{ carts }}</div>
+    <div class="container">
+        <div class="box">
+            
+
+            <template>
+                <section>
+                    <b-table
+                        :data="data"
+                        ref="table"
+                        hoverable
+                        :checked-rows.sync="checkedRows"
+                        :checkbox-position="checkboxPosition"
+                        checkable>
+                        <b-table-column field="id" label="ID" width="40" v-slot="props">
+                            [[ props.row.id ]]
+                        </b-table-column>
+
+                        <b-table-column field="sku__main_picture" width="128" label="Image" v-slot="props">
+                            <img :src="props.row.sku__main_picture" class="image is-96x96">
+                        </b-table-column>
+
+                        <b-table-column field="sku__spu__title" label="Title" v-slot="props">
+                            [[ props.row.sku__spu__title ]]
+                        </b-table-column>
+                        
+                        <b-table-column field="num" label="Num" v-slot="props">
+                            <b-numberinput 
+                                controls-position="compact" 
+                                v-model="props.row.num"
+                                size="is-small"
+                                type="is-light"
+                                min="1"
+                                :max="props.row.sku__stocks">
+                            </b-numberinput>
+                        </b-table-column>
+            
+                        <b-table-column field="sku__sell_price" label="SellPrice" v-slot="props" width="40">
+                            <span class=" is-size-5 has-text-grey">¥</span> [[ props.row.sku__sell_price ]]
+                        </b-table-column>
+            
+                        <b-table-column label="TotalPrice" field="sku_total_price" v-slot="props">
+                            <span class=" is-size-5 has-text-grey">¥</span> [[ props.row.sku_total_price ]]
+                        </b-table-column>
+                        <b-table-column label="Del" field="sku_total_price" v-slot="props">
+                            <button class=" delete">删除</button>
+                        </b-table-column>
+                        <template #bottom-left>
+                            <b>Total checked</b>: [[ checkedRows.length  ]]
+                            [[ totalPrice | numFilter]]
+                        </template>
+                       
+                    </b-table>
+            
+                </section>
+            </template>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block vuebefy %}{{ block.super }}
+    <script>
+        const carts = JSON.parse(document.querySelector('#data').innerHTML);
+        var cart = new Vue({
+            el: '#cart',
+            // 修改Vue变量的读取语法，避免与django冲突
+            delimiters: ['[[', ']]'],
+            data: {
+                data: carts,
+                checkboxPosition: 'left',
+                checkedRows: [],
+                totalPrice: 0
+            },
+            filters: {
+                numFilter (value) {
+                    let realVal = ''
+                    if (!isNaN(value) && value!== '') {
+                        // 截取当前数据到小数点后两位
+                        realVal = parseFloat(value).toFixed(2)
+                    } else {
+                        realVal = '-'
+                    }
+                    return realVal
+                }
+            },
+            created(){
+                // 默认的总价
+                this.data.forEach(element => {
+                    this.totalPrice += Number(element.num) * parseFloat(element.sku__sell_price)
+                });
+                this.checkedRows = this.data
+            },
+            watch: {
+                // 监听选中数据变化
+                checkedRows: {
+                    handler: function(val, oldval){
+                        this.totalPrice = 0;
+                        val.forEach(element => {
+                            element.sku_total_price = (element.num * parseFloat(element.sku__sell_price)).toFixed(2)
+                            this.totalPrice += element.num * parseFloat(element.sku__sell_price)
+                        });
+                    },
+                    deep: true
+                },
+                // 监听data数据变化
+                data: {
+                    handler: function(val, oldval){
+                        val.forEach(element => {
+                            element.sku_total_price = (element.num * parseFloat(element.sku__sell_price)).toFixed(2)
+                        });
+                    },
+                    deep: true
+                },
+            },
+            
+        })
+    </script>
+{% endblock %}
