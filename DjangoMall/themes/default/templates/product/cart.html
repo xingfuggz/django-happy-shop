@@ -18,8 +18,11 @@
     <div id="data" style="display: none;">{{ carts }}</div>
     <div class="container">
         <div class="box">
-            
-
+            <div class="tabs">
+                <ul>
+                  <li class="is-active"><a>我的购物车</a></li>
+                </ul>
+            </div>
             <template>
                 <section>
                     <b-table
@@ -29,19 +32,17 @@
                         :checked-rows.sync="checkedRows"
                         :checkbox-position="checkboxPosition"
                         checkable>
-                        <b-table-column field="id" label="ID" width="40" v-slot="props">
-                            [[ props.row.id ]]
+                        <b-table-column field="index" label="序号" width="60" v-slot="props">
+                            [[ props.row.index ]]
                         </b-table-column>
-
-                        <b-table-column field="sku__main_picture" width="128" label="Image" v-slot="props">
+                        <b-table-column field="sku__main_picture" width="128" label="商品" centered v-slot="props">
                             <img :src="props.row.sku__main_picture" class="image is-96x96">
                         </b-table-column>
-
-                        <b-table-column field="sku__spu__title" label="Title" v-slot="props">
-                            [[ props.row.sku__spu__title ]]
+                        <b-table-column field="sku__spu__title" label="" v-slot="props">
+                            <a>[[ props.row.sku__spu__title ]] </a> 
+                            <p class="has-text-grey mt-2">规格：[[ props.row.sku_options ]]</p>
                         </b-table-column>
-                        
-                        <b-table-column field="num" label="Num" v-slot="props">
+                        <b-table-column field="num" label="数量" v-slot="props">
                             <b-numberinput 
                                 controls-position="compact" 
                                 v-model="props.row.num"
@@ -51,24 +52,29 @@
                                 :max="props.row.sku__stocks">
                             </b-numberinput>
                         </b-table-column>
-            
-                        <b-table-column field="sku__sell_price" label="SellPrice" v-slot="props" width="40">
+                        <b-table-column field="sku__sell_price" label="单价" v-slot="props" width="100">
                             <span class=" is-size-5 has-text-grey">¥</span> [[ props.row.sku__sell_price ]]
                         </b-table-column>
             
-                        <b-table-column label="TotalPrice" field="sku_total_price" v-slot="props">
-                            <span class=" is-size-5 has-text-grey">¥</span> [[ props.row.sku_total_price ]]
+                        <b-table-column label="小计" field="sku_total_price" width="100" v-slot="props">
+                            <span class="is-size-5 has-text-grey">¥</span> [[ props.row.sku_total_price ]]
                         </b-table-column>
-                        <b-table-column label="Del" field="sku_total_price" v-slot="props">
-                            <button class=" delete">删除</button>
+                        <b-table-column label="操作" field="sku_total_price" v-slot="props">
+                            <button class="delete" @click="delCart">删除</button>
                         </b-table-column>
-                        <template #bottom-left>
-                            <b>Total checked</b>: [[ checkedRows.length  ]]
-                            [[ totalPrice | numFilter]]
-                        </template>
-                       
                     </b-table>
-            
+                    <div class="box has-text-right has-background-light is-shadowless is-radiusless" >
+                        <div class="level">
+                            <div class="level-left"></div>
+                            <div class="level-right">
+                                <div class="level-item">
+                                    已选 <span class="is-size-3 has-text-danger-dark" style="position: relative; top:-5px">&nbsp;[[ checkedRows.length ]]&nbsp;</span> 件商品，
+                                    合计，不含运费：<span class="is-size-3 has-text-danger-dark" style="position: relative; top:-5px">¥[[ totalPrice|numFilter]]</span>
+                                    <button class=" button is-danger ml-4 is-medium">去结算</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </section>
             </template>
         </div>
@@ -77,6 +83,7 @@
 {% endblock %}
 
 {% block vuebefy %}{{ block.super }}
+<script src="{% static 'base/js/request.js' %}"></script>
     <script>
         const carts = JSON.parse(document.querySelector('#data').innerHTML);
         var cart = new Vue({
@@ -130,7 +137,26 @@
                     deep: true
                 },
             },
-            
+            methods: {
+                // 购物车删除
+                delCart(){
+                    this.data.forEach((element, i, arr) => {
+                        arr.splice(i, 1);
+                        if (typeof(this.data[i]) !== 'undefined'){
+                            this.data[i].index -= 1; 
+                        };
+                        let sendData = new URLSearchParams();
+                        sendData.append('pk', element.id);
+                        request({
+                            url: '/product/cart/del/' + element.id +'/',
+                            method: 'post',
+                            data: sendData
+                        }).then(res => {
+                            console.log(res)
+                        })            
+                    });
+                }
+            }
         })
     </script>
 {% endblock %}
