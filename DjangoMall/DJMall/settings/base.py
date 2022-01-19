@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'product.apps.ProductConfig',
     'users.apps.UsersConfig',
     'personal.apps.PersonalConfig',
+    'order.apps.OrderConfig',
     'captcha'
 ]
 

@@ -2,7 +2,7 @@
 from django.contrib import admin
 from apps.dadmin.admin import admin_site
 
-from .models import DJMallEmailVerifyRecord, DJMallFavorite
+from .models import DJMallEmailVerifyRecord, DJMallFavorite, DJMallAddress
 
 @admin.register(DJMallEmailVerifyRecord, site=admin_site)
 class DJMallEmailVerifyRecordAdmin(admin.ModelAdmin):
@@ -12,3 +12,4 @@ class DJMallEmailVerifyRecordAdmin(admin.ModelAdmin):
     
 
 admin_site.register(DJMallFavorite)
+admin_site.register(DJMallAddress)

@@ -1,8 +1,8 @@
-from django.views.generic import ListView, DeleteView
+from django.views.generic import ListView, DeleteView, CreateView
 from django.urls import reverse_lazy
 from DJMall.utils.views import DJMallBaseView
 from .views import DJMallLoginRequiredMixin
-from users.models import DJMallFavorite
+from users.models import DJMallFavorite, DJMallAddress
 
 
 class DJMallFavoriteListView(DJMallLoginRequiredMixin, DJMallBaseView, ListView):
@@ -28,3 +28,29 @@ class DJMallFavoriteDeleteView(DJMallLoginRequiredMixin, DJMallBaseView, DeleteV
     
     def get_queryset(self):
         return DJMallFavorite.objects.filter(owner=self.request.user)
+
+
+class DJMallAddressListView(DJMallLoginRequiredMixin, DJMallBaseView, ListView):
+    """地址列表
+
+    Args:
+        DJMallLoginRequiredMixin ([type]): [登录权限验证]
+        DJMallBaseView ([type]): [全局继承基类]
+        ListView ([type]): [列表类视图]
+
+    Returns:
+        [type]: [description]
+    """
+    template_name = "personal/list_address.html"
+    context_object_name = "address_list"
+        
+    def get_queryset(self):
+        return DJMallAddress.objects.filter(owner=self.request.user)
+
+
+class DJMallAddressCreateView(DJMallLoginRequiredMixin, DJMallBaseView, CreateView):
+    template_name = "personal/create_address.html"
+    success_url = reverse_lazy('personal:address_list')
+    
+    def get_queryset(self):
+        return DJMallAddress.objects.filter(owner=self.request.user)

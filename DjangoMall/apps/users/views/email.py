@@ -22,6 +22,7 @@ class DJMallEmailVerifyRecordCreateView(JsonableResponseMixin, CreateView):
         # 验证邮箱是否已经被注册
         if self.verify_email(email).exists():
             return JsonResponse({'code': 412, 'message': '该邮箱已被注册，请更换邮箱！'})
+        
         # 验证发送频率
         intervals_time = timezone.now() - timedelta(hours=0, minutes=1, seconds=0)
         if DJMallEmailVerifyRecord.objects.filter(add_date__gt=intervals_time, email=email):

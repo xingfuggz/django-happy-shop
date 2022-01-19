@@ -1,7 +1,7 @@
 from django.forms import forms
 from django.http import JsonResponse
 from django.views.generic import TemplateView
-from product.models import DJMallProductCategory
+from product.models import DJMallProductCategory, DJMallShopingCart
 
 
 class DJMallBaseView:
@@ -10,7 +10,9 @@ class DJMallBaseView:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['category_dict'] = dict(self.get_category_dict())
-        context['user'] = self.request.user
+        if self.request.user.is_authenticated:
+            context['user'] = self.request.user
+            context['cart_count'] = DJMallShopingCart.get_cart_count(self.request.user)
         return context
     
     def get_category_dict(self):
@@ -21,7 +23,7 @@ class DJMallBaseView:
             if category and category.parent is None:
                 category_dict[category] = category.djmallproductcategory_set.all()
         return category_dict
-
+        
 
 class JsonableResponseMixin:
     """

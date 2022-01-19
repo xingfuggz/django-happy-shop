@@ -211,7 +211,7 @@
 {% endblock %}
 
 
-{% block vuebefy %}{{ block.super }}
+{% block vue_script %}
 <script src="{% static 'base/js/request.js' %}"></script>
 <script>
 // 轮播图
@@ -233,7 +233,6 @@ var product_id = '{{ product.id }}';
 
 // has_fav
 var has_fav = '{{ has_fav }}';
-
 var product = new Vue({
     el: "#product-detail",
     // 修改Vue变量的读取语法，避免与django冲突
@@ -256,6 +255,7 @@ var product = new Vue({
         favText: '收藏',
         // 轮播图
         gallery: false,
+        cartNum: nav.cartNum
     },
     methods: {
         // 跳转连接
@@ -323,12 +323,15 @@ var product = new Vue({
                         type: 'is-success'
                     });
                     this.stock = res.data.stocks;
+                    // 更新购物车数量
+                    nav.cartNum = res.data.cart_num;
                 }
             })
         }
     },
 
     created(){
+        // console.log(nav.data)
         // 处理单规格商品显示
         if (this.productAttr.length == 0) {
             let value = Object.values(this.productValue)[0]
@@ -342,6 +345,9 @@ var product = new Vue({
         if (has_fav == 'True') {
             this.favText = "已收藏";
         }
+    },
+    mounted() {
+        console.log(this.cartNum)
     },
 
     watch: {

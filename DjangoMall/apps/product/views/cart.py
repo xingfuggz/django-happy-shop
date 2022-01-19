@@ -1,14 +1,11 @@
 import json
 from decimal import Decimal
-from re import S, template
 from django.db import IntegrityError
 from django.db.models import F
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, DeleteView
-from django.core.cache import cache
-from django.utils.safestring import mark_safe
 from DJMall.utils.views import DJMallBaseView
 from product.models import DJMallShopingCart, DJMallProductSKU
 from personal.views import DJMallLoginRequiredMixin
@@ -23,6 +20,7 @@ class DJMallShopingCartView(DJMallLoginRequiredMixin, DJMallBaseView, TemplateVi
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['carts'] = self.get_carts()
+        DJMallShopingCart.get_cart_count(self.request.user)
         return context
     
     def get_carts(self):
@@ -45,14 +43,16 @@ class DJMallShopingCartView(DJMallLoginRequiredMixin, DJMallBaseView, TemplateVi
         sku_id = request.POST.get('sku_id')
         sku = DJMallProductSKU.objects.get(id=int(sku_id))
         num = request.POST.get('num')
+        cart_num = DJMallShopingCart.get_cart_count(request.user)
         try:
             DJMallShopingCart.objects.create(owner=request.user, sku=sku, num=int(num))
+            cart_num += 1
             self.del_stock(sku, num)
-            return JsonResponse({'code': 'ok', 'message': '已加入购物车！','stocks': sku.stocks})
+            return JsonResponse({'code': 'ok', 'message': '已加入购物车！','stocks': sku.stocks, 'cart_num': cart_num})
         except IntegrityError:
             self.del_stock(sku, num)
             DJMallShopingCart.objects.filter(owner=request.user, sku=sku).update(num=F('num') + int(num))
-            return JsonResponse({'code': 'ok', 'message': '该商品已在购物车，数量已增加！','stocks': sku.stocks})
+            return JsonResponse({'code': 'ok', 'message': '该商品已在购物车，数量已增加！','stocks': sku.stocks, 'cart_num': cart_num})
         # return render(request, 'product/cart.html', {})
         
     def del_stock(self, sku, num, time=DEL_STOCK_TIMING):

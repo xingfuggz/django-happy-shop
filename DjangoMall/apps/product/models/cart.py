@@ -5,6 +5,15 @@ from product.models import DJMallProductSKU
 
 User = get_user_model()
 
+'''
+@file            :apps/product/models/cart.py
+@Description     :购物车相关视图
+@Date            :2022/01/19 16:48:08
+@Author          :幸福关中 && 轻编程
+@version         :v1.0
+@EMAIL           :1158920674@qq.com
+@WX              :mfhoudan
+'''
 
 class DJMallShopingCart(DJMallBaseModel):
     # 购物车数据模型
@@ -21,4 +30,9 @@ class DJMallShopingCart(DJMallBaseModel):
         
     def __str__(self):
         return f'{self.owner}{self.sku}'
+    
+    @classmethod
+    def get_cart_count(cls, user):
+        # 购物车数量
+        return cls.objects.filter(owner=user).count()
     

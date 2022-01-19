@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+  支付页面
+{% endblock %}
+
+{% block breadcrumb %}
+<li class="is-active"><a href=""><span>支付页</span></a></li>
+{% endblock %}
+
+{% block main %}
+<div class=" section">
+    <section class="container">
+        <div class="card is-shadowless">
+            <header class="card-header">
+                <p class="card-header-title">
+                    支付方式
+                </p>
+                <button class="card-header-icon" aria-label="more options">
+                    <span class="icon">
+                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                    </span>
+                </button>
+            </header>
+            <div class="card-content">
+                <div>
+                    {% for key, value in pay_method.items %}
+                    <label class="mr-3 radio" {% if key != 2 %}disabled{% endif %}>
+                        <input type="radio" name="pay_method" id="pay_method_{{ key }}" value="{{ key }}"  {% if key != 2 %}disabled{% endif %}  {% if pay_default == key %}checked{% endif %}>
+                        {{ value }}
+                    </label>
+                    {% endfor %}
+                </div>
+        
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

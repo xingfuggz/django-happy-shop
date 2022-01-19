@@ -29,6 +29,7 @@ urlpatterns = [
     path('product/', include('product.urls')),
     path('users/', include('users.urls')),
     path('personal/', include('personal.urls')),
+    path("order/", include('order.urls')),
     # path('accounts/', include('django.contrib.auth.urls')),
     path('', IndexTemplateView.as_view(), name="index")
 ]

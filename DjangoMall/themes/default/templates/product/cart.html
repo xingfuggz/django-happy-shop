@@ -82,7 +82,8 @@
 </section>
 {% endblock %}
 
-{% block vuebefy %}{{ block.super }}
+
+{% block vue_script %}
 <script src="{% static 'base/js/request.js' %}"></script>
     <script>
         const carts = JSON.parse(document.querySelector('#data').innerHTML);
@@ -140,21 +141,30 @@
             methods: {
                 // 购物车删除
                 delCart(){
-                    this.data.forEach((element, i, arr) => {
-                        arr.splice(i, 1);
-                        if (typeof(this.data[i]) !== 'undefined'){
-                            this.data[i].index -= 1; 
-                        };
-                        let sendData = new URLSearchParams();
-                        sendData.append('pk', element.id);
-                        request({
-                            url: '/product/cart/del/' + element.id +'/',
-                            method: 'post',
-                            data: sendData
-                        }).then(res => {
-                            console.log(res)
-                        })            
-                    });
+                    this.$buefy.dialog.confirm({
+                        message: '是否确认删除？',
+                        cancelText: '取消',
+                        confirmText: '确认',
+                        onConfirm: () => {
+                            this.data.forEach((element, i, arr) => {
+                                arr.splice(i, 1);
+                                if (typeof(this.data[i]) !== 'undefined'){
+                                    this.data[i].index -= 1; 
+                                };
+                                let sendData = new URLSearchParams();
+                                sendData.append('pk', element.id);
+                                request({
+                                    url: '/product/cart/del/' + element.id +'/',
+                                    method: 'post',
+                                    data: sendData
+                                }).then(res => {
+                                    // 购物车数量操作
+                                    nav.cartNum -= 1;
+                                    console.log(res)
+                                })            
+                            });
+                        }
+                    })
                 }
             }
         })
