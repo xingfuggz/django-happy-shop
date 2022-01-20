@@ -13,7 +13,7 @@ class DJMallUser(AbstractUser):
     # address = models.CharField("默认收货地址", max_length=50, blank=True, default="")
     address = models.ForeignKey(
         'DJMallAddress', 
-        on_delete=models.CASCADE, 
+        on_delete=models.SET_NULL, 
         blank=True, 
         null=True, 
         verbose_name="默认收货地址")
@@ -38,7 +38,7 @@ class DJMallAddress(DJMallBaseModel):
     phone = models.CharField("手机号", max_length=11)
     email = models.EmailField("邮箱", blank=True, default="", max_length=50)
     address = models.CharField(max_length=150, verbose_name="详细地址")
-    is_default = models.BooleanField(default=False, verbose_name="是否设为默认收货地址")
+    is_default = models.BooleanField(default=False, verbose_name="设为默认")
     
     class Meta:
         verbose_name = "收货地址"

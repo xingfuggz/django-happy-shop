@@ -12,7 +12,6 @@
 					</a>
 				</div>
 			</template>
-
 			<div class="card-content">
 				<template>
 					<b-menu accordion>
@@ -21,7 +20,6 @@
 								href="{% url 'personal:home' %}"
 								{% if request.path_info == '/personal/home/' %}active{% endif %}>
 							</b-menu-item>
-					
 							<b-menu-item icon="basket-plus-outline " tag="a" label="我的订单"
 								href="{% url 'personal:home' %}">
 							</b-menu-item>
@@ -30,14 +28,14 @@
 								{% if request.path_info == '/personal/fav_list/' %}active{% endif %}>
 							</b-menu-item>
 							<b-menu-item icon="map-marker-outline" tag="a" label="我的地址"
-								href="{% url 'personal:home' %}">
+								href="{% url 'personal:address_list' %}"
+								{% if request.path_info == "/personal/address/list/" %}active{% endif %}>
 							</b-menu-item>
 						</b-menu-list>
 					</b-menu>
 				</template>
 			</div>
 		</b-collapse>
-
 	</section>
 	<section>
 		<b-collapse class="card is-radiusless" animation="slide" aria-id="contentIdForA11y3">

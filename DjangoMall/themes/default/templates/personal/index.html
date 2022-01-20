@@ -16,7 +16,7 @@
 {% endblock %}
 
 {% block main %}
-<div class="container mt-4 mb-4" id="personal" v-cloak>
+<div class="container mt-4 mb-4" id="{% block main_id %}personal{% endblock %}" v-cloak>
     <div class="columns">
         <div class="column">
             {% include "personal/menus.html" %}
@@ -236,6 +236,20 @@
                         this.text = "重新获取";
                     }
                 }, 1000);
+            },
+
+            // 设为默认
+            getDefault(id){
+                let sendData = new URLSearchParams();
+                sendData.append('is_default', 1)
+                request({
+                    url: '/personal/address/update/'+id+'/default/',
+                    method: 'put',
+                    data: sendData
+                }).then(res => {
+                    console.log(res)
+                    window.location.reload()
+                })
             }
         }
     })

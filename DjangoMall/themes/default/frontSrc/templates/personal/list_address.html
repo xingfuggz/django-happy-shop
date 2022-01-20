@@ -1,0 +1,56 @@
+{% extends "personal/index.html" %}
+{% load static %}
+{% block title %}我的地址 {% endblock %}
+
+{% block menmber %}
+<div class="tabs">
+    <ul>
+      <li class="is-active"><a>我的地址</a></li>
+    </ul>
+</div>
+
+<div class="columns is-multiline">
+{% if address_list %}
+    {% for addr in address_list %}
+    <div class="column is-6" >
+        <div class="box is-shadowless" style="border: solid 1px rgb(236, 235, 235);">
+            {% if addr.is_default %}
+            <span class="tag is-primary">默认</span>
+            {% endif %}
+            {{ addr.name }}{{ addr.phone }}
+            <p class="has-text-grey-dark is-size-7 mt-1">
+                {{ addr.address }}
+            </p>
+            <nav class="level is-size-7 mt-4 is-mobile">
+                <div class="level-left"></div>
+                <div class="level-right">
+                    {% if not addr.is_default %}
+                    <div class="level-item">
+                        <a @click="getDefault({{ addr.id }})">设为默认</a> 
+                    </div>
+                    {% endif %}
+                    <div class="level-item">
+                        <a href="{% url 'personal:address_update' addr.id %}">修改</a> 
+                    </div>
+                    <div class="level-item">
+                        <a href="{% url 'personal:address_delete' addr.id %}">删除</a> 
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    {% endfor %}
+{% endif %}
+    <div class="column is-6">
+        <a class="box has-text-grey-light has-text-centered is-shadowless" 
+            style="cursor: pointer; border: solid 1px rgb(236, 235, 235);" href="{% url 'personal:address_create' %}">
+            <div class="is-medium pt-5 pb-5">
+                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M13 20H13.09A5.5 5.5 0 0 0 13.81 22H9A2 2 0 0 1 11 20V12H3.5L6 9.5L3.5 7H11V3L12 2L13 3V7H18L20.5 9.5L18 12H13M18 15V18H15V20H18V23H20V20H23V18H20V15Z" />
+                </svg>
+                <span>添加新地址</span>
+            </div>
+        </a>
+    </div>
+</div>
+{% endblock %}

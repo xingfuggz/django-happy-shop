@@ -11,4 +11,7 @@ urlpatterns = [
     path("fav_delete/<int:pk>/", views.DJMallFavoriteDeleteView.as_view(), name="fav_delete"),
     path("address/list/", views.DJMallAddressListView.as_view(), name="address_list"),
     path("address/create/", views.DJMallAddressCreateView.as_view(), name="address_create"),
+    path("address/update/<int:pk>/", views.DJMallAddressUpdateView.as_view(), name="address_update"),
+    path("address/delete/<int:pk>/", views.DJMallAddressDeleteView.as_view(), name="address_delete"),
+    path("address/update/<int:pk>/default/", views.DJMallAddressDefaultUpdateView.as_view(), name="address_default_update"),
 ]

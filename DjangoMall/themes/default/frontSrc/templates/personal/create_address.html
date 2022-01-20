@@ -1,0 +1,49 @@
+{% extends "personal/index.html" %}
+
+{% block title %}添加收货地址 {% endblock %}
+
+{% block menmber %}
+<div class="tabs">
+    <ul>
+        <li class="is-active"><a>添加收货地址</a></li>
+    </ul>
+</div>
+<form action="" method="post">
+    {% csrf_token %}    
+    {% for field in form %}
+    <div class="field is-horizontal">
+        
+        <div class="field-label is-normal">
+            {{ field.label_tag }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <p class="control">
+                {% if field.widget_type == 'checkbox' %}
+                    <label class="checkbox mt-2 is-medium">
+                        <input type="checkbox" name="{{ field.html_name }}" id="{{ field.id_for_label }}">
+                    </label>
+                  {% else %}
+                  <input type="text" class="input" 
+                        name="{{ field.html_name }}" 
+                        maxlength="{{ field.field.max_length }}" 
+                        required="required" 
+                        id="{{ field.id_for_label }}"
+                        placeholder="{{ field.label }}">
+                {% endif %}
+                </p>
+                {% if field.help_text %}
+                    <p class="help">{{ field.help_text|safe }}</p>
+                {% endif %}
+                {% if field.errors %}
+                    <p class="help has-text-danger is-size-7">{{ field.errors }}</p>
+                {% endif %}
+              </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <input class=" button is-primary is-pulled-right" type="submit" value="保存">
+    <div class=" is-clearfix"></div>
+</form>
+{% endblock %}

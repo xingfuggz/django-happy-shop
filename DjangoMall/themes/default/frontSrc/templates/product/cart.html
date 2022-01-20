@@ -70,7 +70,7 @@
                                 <div class="level-item">
                                     已选 <span class="is-size-3 has-text-danger-dark" style="position: relative; top:-5px">&nbsp;[[ checkedRows.length ]]&nbsp;</span> 件商品，
                                     合计，不含运费：<span class="is-size-3 has-text-danger-dark" style="position: relative; top:-5px">¥[[ totalPrice|numFilter]]</span>
-                                    <button class=" button is-danger ml-4 is-medium">去结算</button>
+                                    <button class="button is-danger ml-4 is-medium" @click="getPay">去结算</button>
                                 </div>
                             </div>
                         </div>
@@ -165,7 +165,17 @@
                             });
                         }
                     })
+                },
+                // 去支付
+                getPay(){
+                    // 将购物车选中的数据存储在客户端的localStorage中
+                    // 有篡改数据风险，这种方式貌似不安全
+                    // 应该将数据存到redis中
+                    rows = JSON.stringify(this.checkedRows)
+                    window.localStorage.setItem(nav.userId, rows)
+                    window.location.href = '/order/pay/?type=cart'
                 }
+            
             }
         })
     </script>
