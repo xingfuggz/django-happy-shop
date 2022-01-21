@@ -15,6 +15,9 @@
 {% block main %}
 <div class="section" id="pay">
     <section class="container">
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="type" value="{{ type }}">
         <!-- 支付方式 -->
         <div class="card is-shadowless">
             <header class="card-header">
@@ -41,7 +44,6 @@
         <!-- 支付方式 end-->
 
         <!-- 收货地址 -->
-
         <div class="card mt-3 is-shadowless">
             <header class="card-header">
                 <p class="card-header-title">
@@ -83,11 +85,11 @@
                 </div>
             </div>
         </div>
-        
         <!-- 收货地址 end -->
 
         <!-- 订单商品信息 -->
-        <div class="box is-shadowless has-background-white mt-4">
+        <div class="box is-shadowless has-background-white mt-4" v-if="cartJson.length">
+            <div id="cartJson" v-show='show'>{{ carts }}</div>
             <h1 class="is-size-5 mb-2">订单信息:</h1>
             <div class="box is-shadowless border mt-3">
                 <div class="level" v-for="(item, index) in cartJson" :key="index">
@@ -114,6 +116,7 @@
                 </div>
             </div>
         </div>
+        <div class="box is-shadowless has-background-white mt-4" v-else>未查询到任何商品信息，请前往选购商品！</div>
         <!-- 订单商品信息 end -->
         <div class="box has-text-right is-shadowless">
             <div class="columns">
@@ -143,7 +146,18 @@
                 </div>
             </div>
         </div>
-    </div>
+        <b-field label="订单备注" :label-position="labelPosition">
+            <b-input 
+                maxlength="200" 
+                type="textarea" 
+                placeholder="有特殊要求，请务必备注说明!" 
+                name="order_mark" 
+                id="id_order_mark">
+            </b-input>
+        </b-field>
+        <input class="button is-primary is-pulled-right pl-6 pr-6" type="submit" value="立即支付">
+        <div class="is-clearfix"></div>
+    </form>
     </section>
 </div>
 
@@ -151,14 +165,20 @@
 
 {% block vue_script %}
 <script>
-    var cartJson = JSON.parse(window.localStorage.getItem(nav.userId));
+    var cartJson = JSON.parse(document.querySelector('#cartJson').innerHTML);
+    // console.log(cartJson)
+    var type = '{{ type }}';
+
     var pay = new Vue({
         el: '#pay',
         // 修改Vue变量的读取语法，避免与django冲突
         delimiters: ['[[', ']]'],
         data: {
+            labelPosition: 'on-border',
             cartJson: cartJson,
-            freight: 3
+            freight: 0,
+            show: false,
+            type: type
         },
         filters: {
             numFilter (value) {
@@ -181,11 +201,9 @@
                 }) 
                 return total;
             },
-
             // 总价
             toTal: function(){
-                console.log(this.totalPrice)
-                return (this.totalPrice + this.freight).toFixed(2)
+                return (this.totalPrice + this.freight).toFixed(2);
             }
             
         }

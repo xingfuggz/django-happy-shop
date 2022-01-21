@@ -169,13 +169,19 @@
                 // 去支付
                 getPay(){
                     // 将购物车选中的数据存储在客户端的localStorage中
-                    // 有篡改数据风险，这种方式貌似不安全
-                    // 应该将数据存到redis中
                     rows = JSON.stringify(this.checkedRows)
-                    window.localStorage.setItem(nav.userId, rows)
-                    window.location.href = '/order/pay/?type=cart'
+                    let sendData = new URLSearchParams();
+                    sendData.append('carts', rows);
+                    sendData.append('type', 'cache');  // 缓存标识
+                    request({
+                        url: '/order/pay/',
+                        method: 'post',
+                        data: sendData
+                    }).then(res => {
+                        console.log(res)
+                        window.location.href = '/order/pay/?type=cart';
+                    })
                 }
-            
             }
         })
     </script>

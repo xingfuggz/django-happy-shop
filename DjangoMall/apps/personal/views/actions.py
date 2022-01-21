@@ -142,6 +142,3 @@ class DJMallAddressDeleteView(DJMallLoginRequiredMixin, DJMallBaseView, DeleteVi
     def get_queryset(self):
         return DJMallAddress.objects.filter(owner=self.request.user)
     
-    def form_valid(self, form):
-        print('ceshi')
-        return super().form_valid(form)

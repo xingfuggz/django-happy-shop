@@ -21,7 +21,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 STATIC_ROOT = BASE_DIR / 'static'
 
 # 虚拟缓存
-CACHES = dummy
+# CACHES = dummy
 
 EMAIL_HOST = 'smtp.qq.com'   # 用于发送电子邮件的主机。
 EMAIL_HOST_USER = "1158920674@qq.com"    # 自己的邮箱地址

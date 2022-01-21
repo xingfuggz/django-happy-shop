@@ -2,6 +2,9 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from DJMall.utils.models import DJMallBaseModel
 from product.models import DJMallProductSKU
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class DJMallOrderInfo(DJMallBaseModel):
@@ -21,11 +24,11 @@ class DJMallOrderInfo(DJMallBaseModel):
         COMPLETE = 5, _('已完成')
         CANCELLED = 6, _('已取消')
 
+    owner = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name="用户")
     order_sn = models.CharField(
         blank=True, default="",
         unique=True, max_length=32,
         verbose_name="订单号", help_text="订单号")
-
     trade_sn = models.CharField(
         blank=True, null=True,
         unique=True, max_length=64,
