@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  订单页面
+{% endblock %}
+
+{% block breadcrumb %}
+<li class="is-active"><a href=""><span>支付页</span></a></li>
+{% endblock %}
+
+
+{% block main %}
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <!-- {{ product_form.as_p }} -->
+    <input type="submit" value="提交">
+</form>
+{% endblock %}

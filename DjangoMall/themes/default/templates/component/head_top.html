@@ -52,7 +52,7 @@
                 {% endif %}
                 <a href="{% url 'product:cart' %}" class="navbar-item has-background-light pl-4 pr-4">
                     <span class="icon is-small"><i class="mdi mdi-cart-minus"></i></span>
-                    <span class="pl-2">购物车([[ cartNum ]])</span> 
+                    <span class="pl-2">购物车(<span v-if='cartNum'>[[ cartNum ]]</span> <i v-else>0</i>)</span> 
                 </a>
             </div>
         </div>    

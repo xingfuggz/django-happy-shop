@@ -93,7 +93,6 @@
 						confirmText: '确认',
 						onConfirm: () => {
 							axios.get('/users/logout/').then(() => {
-								console.log('ceshi')
 								this.$buefy.toast.open('退出成功!')
 								setTimeout("window.location.reload()", 2000)
 								// window.location.href = '/users/login/';

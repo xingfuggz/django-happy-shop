@@ -15,7 +15,7 @@
 {% block main %}
 <div class="section" id="pay">
     <section class="container">
-    <form action="" method="post">
+    <form id="form" action="" method="post" @submit="checkForm">
         {% csrf_token %}
         <input type="hidden" name="type" value="{{ type }}">
         <!-- 支付方式 -->
@@ -206,6 +206,21 @@
                 return (this.totalPrice + this.freight).toFixed(2);
             }
             
+        },
+
+        methods: {
+            // getPay(){
+            //     console.log('ceshi')
+            // }
+            // 提交测试
+            checkForm: function (e) {
+                // 进行验证 验证通过就返回 true
+                if(clickValidate("form")){
+                    console.log('ceshi')
+                    return true;
+                };
+                    e.preventDefault();
+            },
         }
         
     })

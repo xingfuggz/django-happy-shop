@@ -1,6 +1,7 @@
 import json
 from decimal import Decimal
-from xmlrpc.client import Boolean
+from django.db.models import F
+from django.forms import ValidationError
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.core.cache import cache
@@ -8,10 +9,12 @@ from django.utils import timezone
 from django.views.generic import TemplateView
 from personal.views import DJMallLoginRequiredMixin
 from DJMall.utils.views import DJMallBaseView
+from config.conf import DEL_STOCK_TIMING
+
 # Create your views here.
 from users.models import DJMallAddress
 from product.models import DJMallProductSKU
-from .models import DJMallOrderInfo, DJMallOrderProduct
+from order.models import DJMallOrderInfo, DJMallOrderProduct
 
 
 class DJMallPayView(DJMallLoginRequiredMixin, DJMallBaseView, TemplateView):
@@ -53,24 +56,28 @@ class DJMallPayView(DJMallLoginRequiredMixin, DJMallBaseView, TemplateView):
             total_amount = self.get_sku_total_price(json.loads(self.get_carts()))
             # 订单号
             order_sn = self.get_order_sn()
-            order = DJMallOrderInfo.objects.create(
-                owner=request.user,
-                order_sn=order_sn,
-                pay_method=pay_method,
-                total_amount=total_amount,
-                address = address,
-                order_mark = order_mark,
-                freight = 0
-            )
             for cart in json.loads(self.get_carts()):
                 sku = DJMallProductSKU.objects.get(id=int(cart.get('sku__id')))
-                DJMallOrderProduct.objects.create(
-                    order = order,
-                    sku = sku,
-                    count = int(cart.get('num')),
-                    price = Decimal(cart.get('sku__sell_price'))
-                )
-            
+                if sku.stocks > int(cart.get('num')):  # 减库存
+                    self.del_stock(sku, int(cart.get('num')))
+                    order = DJMallOrderInfo.objects.create(
+                        owner=request.user,
+                        order_sn=order_sn,
+                        pay_method=pay_method,
+                        total_amount=total_amount,
+                        address=address,
+                        order_mark=order_mark,
+                        freight=0
+                    )
+                    DJMallOrderProduct.objects.create(
+                        order = order,
+                        sku = sku,
+                        count = int(cart.get('num')),
+                        price = Decimal(cart.get('sku__sell_price'))
+                    )
+                else:
+                    return JsonResponse({'code': 'err', 'message': f'{sku}的库存不足！'})
+                
         return JsonResponse({'message': 'ceshi'})
     
     def get_carts(self):
@@ -109,3 +116,13 @@ class DJMallPayView(DJMallLoginRequiredMixin, DJMallBaseView, TemplateView):
         cart = self.request.GET.get('type')
         if cart:
             return cart
+        
+    def del_stock(self, sku, num, time=DEL_STOCK_TIMING):
+        # 减库存操作
+        # time为0时加购减库存
+        if time:
+            sku.stocks = F('stocks') - int(num)
+            sku.save()
+            
+                
+                
