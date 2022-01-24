@@ -9,7 +9,6 @@ from users.models import DJMallUser, DJMallEmailVerifyRecord
 from .models import DJMallFavorite
 
 
-
 class DJMallRegisterForm(forms.ModelForm):
     # 注册表单
     password1 = forms.CharField(label="再次输入密码", max_length=32, required=True)

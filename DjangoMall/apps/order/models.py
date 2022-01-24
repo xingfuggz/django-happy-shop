@@ -67,8 +67,8 @@ class DJMallOrderInfo(DJMallBaseModel):
 
 class DJMallOrderProduct(DJMallBaseModel):
     """订单商品"""
-    order = models.ForeignKey(DJMallOrderInfo,on_delete = models.CASCADE,verbose_name="订单")
-    sku = models.ForeignKey(DJMallProductSKU,on_delete = models.PROTECT,blank=True, null=True,verbose_name="订单商品")
+    order = models.ForeignKey(DJMallOrderInfo, on_delete = models.CASCADE, verbose_name="订单")
+    sku = models.ForeignKey(DJMallProductSKU, on_delete = models.PROTECT, blank=True, null=True, verbose_name="订单商品")
     count = models.IntegerField(default=1, verbose_name="数量")
     price = models.DecimalField('单价', max_digits=5, decimal_places=2)
     is_commented = models.BooleanField(default=False,verbose_name="是否已评价")

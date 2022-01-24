@@ -13,11 +13,12 @@ admin_site.register(DJMallOrderProduct)
 class DJMallOrderInfoAdmin(admin.ModelAdmin):
     '''Admin View for DJMallOrderInfo'''
 
-    list_display = ('order_sn', 'get_product_sku', 'pay_status', 'pay_method', 'total_amount',  'freight', 'pay_time', )
+    list_display = ('order_sn', 'get_product_sku', 'pay_status', 
+                    'pay_method', 'total_amount', 'freight', 'pay_time', )
     list_filter = ('pay_status', 'pay_method')
     list_editable = ('pay_status',)
     readonly_fields = ('get_product_sku',)
-    
+   
     @admin.display(description='订单商品')
     def get_product_sku(self, obj):
         product_queryset = obj.djmallorderproduct_set.all()
@@ -33,7 +34,6 @@ class DJMallOrderInfoAdmin(admin.ModelAdmin):
             options = [op[0] for op in list(product.sku.options.values_list('value'))]
             options = ','.join(options)
             product_list.append(f'<div style="color:red; margin-bottom: 15px;">规格：{options}</div>')
-            # print(options)
             product_list.append('<div style="clear:both"></div>')
             
         return mark_safe(''.join(product_list))

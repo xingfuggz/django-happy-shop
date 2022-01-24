@@ -125,5 +125,4 @@ class DJMallPayView(DJMallLoginRequiredMixin, DJMallBaseView, TemplateView):
             sku.stocks = F('stocks') - int(num)
             sku.save()
             
-                
-                
+                                
