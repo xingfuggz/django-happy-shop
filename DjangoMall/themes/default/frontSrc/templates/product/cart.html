@@ -31,6 +31,7 @@
                         hoverable
                         :checked-rows.sync="checkedRows"
                         :checkbox-position="checkboxPosition"
+                        :is-row-checkable="(row) => row.sku__stocks > row.num"
                         checkable>
                         <b-table-column field="index" label="序号" width="60" v-slot="props">
                             [[ props.row.index ]]
@@ -43,14 +44,19 @@
                             <p class="has-text-grey mt-2">规格：[[ props.row.sku_options ]]</p>
                         </b-table-column>
                         <b-table-column field="num" label="数量" v-slot="props">
+                            <b-field label="">
                             <b-numberinput 
                                 controls-position="compact" 
                                 v-model="props.row.num"
                                 size="is-small"
                                 type="is-light"
+                                :editable='editable'
                                 min="1"
+                                message='ceshi'                       
                                 :max="props.row.sku__stocks">
                             </b-numberinput>
+                        </b-field>
+                            <span class="is-size-7 has-text-danger" v-if="!props.row.sku__stocks">库存不足,无法支付！</span>
                         </b-table-column>
                         <b-table-column field="sku__sell_price" label="单价" v-slot="props" width="100">
                             <span class=" is-size-5 has-text-grey">¥</span> [[ props.row.sku__sell_price ]]
@@ -95,7 +101,8 @@
                 data: carts,
                 checkboxPosition: 'left',
                 checkedRows: [],
-                totalPrice: 0
+                totalPrice: 0,
+                editable: false
             },
             filters: {
                 numFilter (value) {
@@ -111,10 +118,13 @@
             },
             created(){
                 // 默认的总价
-                this.data.forEach(element => {
-                    this.totalPrice += Number(element.num) * parseFloat(element.sku__sell_price)
+                this.data.forEach((element, i, arr) => {
+                    this.totalPrice += Number(element.num) * parseFloat(element.sku__sell_price);
+                    // 有库存的商品默认选中
+                    if(element.sku__stocks > element.num){
+                        this.checkedRows.push(arr[i])
+                    }
                 });
-                this.checkedRows = this.data
             },
             watch: {
                 // 监听选中数据变化

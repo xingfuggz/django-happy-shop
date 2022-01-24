@@ -7,25 +7,27 @@ from users.models import DJMallAddress
 
 class DJMallOrderInfoForm(ModelForm):
     # 订单表单
-    # address = forms.ModelMultipleChoiceField(queryset=None, widget=forms.Select)
+    # address_data = forms.ModelMultipleChoiceField(queryset=None, widget=forms.Select)
     
     def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
         super().__init__(*args, **kwargs)
-        # print(self)
-        # self.fields['address'].queryset = DJMallAddress.objects.all()
+        # self.fields['address_data'].queryset = DJMallAddress.objects.filter(owner=user)
+        # print()
     
     class Meta:
         model = DJMallOrderInfo
-        fields = ['owner', 'pay_method', 'order_mark', 'address',]
+        fields = ['pay_method', 'order_mark', 'address',]
 
     
 class DJMallOrderProductForm(ModelForm):
     
     # sku = forms.ModelMultipleChoiceField(queryset=None, widget=forms.Select)
     
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.fields['sku'].queryset = DJMallOrderProduct.objects.all()
+    def __init__(self, *args, **kwargs):
+        # print(kwargs)
+        super().__init__(*args, **kwargs)
+        # self.fields['sku'].queryset = D.objects.all()
     
     # 订单商品表单
     class Meta:

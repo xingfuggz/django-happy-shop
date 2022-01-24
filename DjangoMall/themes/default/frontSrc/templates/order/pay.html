@@ -14,8 +14,9 @@
 
 {% block main %}
 <div class="section" id="pay">
-    <section class="container">
-    <form id="form" action="" method="post" @submit="checkForm">
+    <section class="container">  
+        
+    <form id="form" action="" method="post">
         {% csrf_token %}
         <input type="hidden" name="type" value="{{ type }}">
         <!-- 支付方式 -->
@@ -57,7 +58,7 @@
                     {% for addr in address_list %}
                     <div class="column is-6">
                         <label class="address">
-                            <input type="radio" name="address" id="address_{{ addr.id }}" value="{{ addr.id }}" {% if addr.is_default %}checked{% endif %} hidden>
+                            <input type="radio" name="address" id="address_{{ addr.id }}" value="{{ addr.address }}" {% if addr.is_default %}checked{% endif %} hidden>
                             <div class="box attr is-shadowless border">
                                 {% if addr.is_default %}
                                 <span class="tag is-primary">默认</span>
@@ -209,18 +210,9 @@
         },
 
         methods: {
-            // getPay(){
-            //     console.log('ceshi')
-            // }
-            // 提交测试
-            checkForm: function (e) {
-                // 进行验证 验证通过就返回 true
-                if(clickValidate("form")){
-                    console.log('ceshi')
-                    return true;
-                };
-                    e.preventDefault();
-            },
+            getPay(){
+                console.log('ceshi')
+            }
         }
         
     })

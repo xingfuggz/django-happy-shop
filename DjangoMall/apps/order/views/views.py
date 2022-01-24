@@ -51,7 +51,8 @@ class DJMallPayView(DJMallLoginRequiredMixin, DJMallBaseView, TemplateView):
         if is_type == 'cart' and self.get_carts():
             pay_method = data.get('pay_method')
             order_mark = data.get('order_mark')
-            address = DJMallAddress.objects.get(id=data.get('address')).address
+            # address = DJMallAddress.objects.get(id=data.get('address')).address
+            address = data.get('address')
             # 商品总金额，不含运费
             total_amount = self.get_sku_total_price(json.loads(self.get_carts()))
             # 订单号
@@ -77,6 +78,7 @@ class DJMallPayView(DJMallLoginRequiredMixin, DJMallBaseView, TemplateView):
                     )
                 else:
                     return JsonResponse({'code': 'err', 'message': f'{sku}的库存不足！'})
+                    # return render(request, 'order/pay.html', {'sku': sku})
                 
         return JsonResponse({'message': 'ceshi'})
     
@@ -114,8 +116,7 @@ class DJMallPayView(DJMallLoginRequiredMixin, DJMallBaseView, TemplateView):
     def get_type(self):
         # 获取get请求中携带的类型
         cart = self.request.GET.get('type')
-        if cart:
-            return cart
+        return cart
         
     def del_stock(self, sku, num, time=DEL_STOCK_TIMING):
         # 减库存操作
