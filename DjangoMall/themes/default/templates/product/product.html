@@ -303,6 +303,7 @@ var product = new Vue({
         // 加入购物车
         addShopingCart(){
             // console.log(this.sku_id)
+            console.log(this.stock)
             let sendData = new URLSearchParams();
             sendData.append('sku_id', this.sku_id);
             sendData.append('num', this.num);
@@ -322,9 +323,12 @@ var product = new Vue({
                         message: res.data.message,
                         type: 'is-success'
                     });
-                    this.stock = res.data.stocks;
-                    // 更新购物车数量
-                    nav.cartNum = res.data.cart_num;
+                    if (res.data.code !== 'err'){
+                        this.stock = res.data.stocks;
+                        // 更新购物车数量
+                        nav.cartNum = res.data.cart_num;
+                    }
+                    
                 }
             })
         }

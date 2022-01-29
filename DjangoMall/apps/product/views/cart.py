@@ -44,6 +44,8 @@ class DJMallShopingCartView(DJMallLoginRequiredMixin, DJMallBaseView, TemplateVi
         sku = DJMallProductSKU.objects.get(id=int(sku_id))
         num = request.POST.get('num')
         cart_num = DJMallShopingCart.get_cart_count(request.user)
+        if int(num) > sku.stocks or not sku.stocks:
+            return JsonResponse({'code': 'err', 'message': '库存不足，无法加入购物车！'})
         try:
             DJMallShopingCart.objects.create(owner=request.user, sku=sku, num=int(num))
             cart_num += 1
@@ -69,3 +71,20 @@ class DJMallShopingCartDeleteView(DJMallLoginRequiredMixin, DeleteView):
     
     def get_queryset(self):
         return DJMallShopingCart.objects.filter(owner=self.request.user)
+    
+    def get_carts(self):
+        carts = self.get_queryset().values(
+            'id', 'sku__id', 'sku__main_picture', 'sku__spu__title', 'sku__sell_price', 'num', "sku__stocks",)
+        for index, cart in enumerate(carts):
+            cart['index'] = index + 1
+            cart['sku__sell_price'] = cart['sku__sell_price'].to_eng_string()
+            cart['sku__main_picture'] = '/{}'.format(cart['sku__main_picture'])
+            cart['sku_total_price'] = (Decimal(cart['sku__sell_price']) * cart['num']).to_eng_string()
+            options = list(DJMallProductSKU.objects.get(id=cart['sku__id']).options.values_list('value'))
+            cart['sku_options'] = ' , '.join([op[0] for op in options])
+        carts = json.dumps(list(carts), ensure_ascii=False)
+        return carts
+    
+    def form_valid(self, form):
+        super().form_valid(form)
+        return JsonResponse({'code': 'ok', 'message': '成功', 'carts': self.get_carts()})

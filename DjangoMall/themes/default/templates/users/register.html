@@ -3,10 +3,6 @@
 
 {% block title %}用户注册{% endblock %}
 
-{% block head_style %}{{ block.super }}
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-{% endblock %}
-
 {% block hero %}{% endblock %}
 
 {% block formname %}用户注册{% endblock %}
@@ -68,7 +64,7 @@
         data: {
             labelPosition: 'on-border',
             text: "获取验证码",
-            isdisabled: false,
+            isdisabled: true,
             duration: 5000,
             email: '',
             code: '',
@@ -76,6 +72,16 @@
             password: '',
             password1: '',
             message:''
+        },
+        watch: {
+            email: {
+                handler: function(val, oldval){
+                    if (val != '') {
+                        this.isdisabled = false
+                    }
+                },
+                deep: true,
+            }
         },
         methods: {
             getEmailCode(){
@@ -88,6 +94,7 @@
                     method: 'post',
                     data: sendData
                 }).then(res => {
+                    console.log(res)
                     if (res.status == 200 && res.data.code == 412) {
                         // this.sendCode();
                         this.message = res.data.message
