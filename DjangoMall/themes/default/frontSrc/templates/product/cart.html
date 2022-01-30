@@ -172,6 +172,22 @@
                                 // 购物车数量操作
                                 nav.cartNum -= 1;
                                 this.data = JSON.parse(res.data.carts);
+                                // 遍历选中数据并push id到数组中
+                                row_arr = Array()
+                                this.checkedRows.forEach(element => {
+                                    row_arr.push(element.id)
+                                });
+                                // 遍历返回的data数据是否有数据之前就已经是选中状态
+                                this.data.forEach((element, i, arr) => {
+                                    // 将选中数据全部清空
+                                    this.checkedRows = []
+                                    // 如果之前就在选中数据中，重新push进去
+                                    if (row_arr.indexOf(element.id) !== -1){
+                                        this.checkedRows.push(element)
+                                    }
+                                });
+                                
+                                
                             })
                         }
                     })
