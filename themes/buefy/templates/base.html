@@ -130,11 +130,11 @@
                 <div class=" dropdown-divider"></div>
                 <div class="content has-text-centered">
                     <p style="line-height: 45px;">
-                      <strong>DjangoMall</strong> by <a href="https://www.toutiao.com/c/user/token/MS4wLjABAAAAFV-cysN1jV5BJyuOG8ePvq2wkIcCCyx21nafBCqofig/?source=feed">轻编程</a>. 
+                      {% comment %} <strong>DjangoMall</strong> by <a href="https://www.toutiao.com/c/user/token/MS4wLjABAAAAFV-cysN1jV5BJyuOG8ePvq2wkIcCCyx21nafBCqofig/?source=feed">轻编程</a>. 
                       本站源码全部开源，代码托管在Gitee 
                       <a href='https://gitee.com/xingfugz/django-mall/stargazers'>
                         <img src='https://gitee.com/xingfugz/django-mall/badge/star.svg?theme=dark' alt='star'></img>
-                    </a>. <br>
+                    </a>. <br> {% endcomment %}
                       本程序基于 <a href="https://www.djangoproject.com/">Django 3.2.7</a>开发.
                     </p>
                 </div>
@@ -143,7 +143,7 @@
     {% endblock %}
     {% block extrafoot %}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.9.55/css/materialdesignicons.min.css">
-        <script src="https://unpkg.com/vue"></script>
+        <script src="https://unpkg.com/vue@2"></script>
         <script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
         <script src="{% static 'vue/header.js' %}"></script>
     {% endblock %}
