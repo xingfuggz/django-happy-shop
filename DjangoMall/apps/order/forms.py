@@ -28,6 +28,7 @@ class DJMallOrderProductForm(ModelForm):
         # print(kwargs)
         super().__init__(*args, **kwargs)
         # self.fields['sku'].queryset = D.objects.all()
+        print(kwargs)
     
     # 订单商品表单
     class Meta:

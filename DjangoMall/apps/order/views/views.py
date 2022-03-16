@@ -44,6 +44,7 @@ class DJMallPayView(DJMallLoginRequiredMixin, DJMallBaseView, TemplateView):
         carts = data.get('carts')
         # 缓存时机判断，这里如果不做判断，两次POST会覆盖缓存
         if is_type == 'cache' and carts:
+            print('ceshi')
             cache.set(request.user.id, carts, timeout=None) 
         ######################################################
         
@@ -53,15 +54,12 @@ class DJMallPayView(DJMallLoginRequiredMixin, DJMallBaseView, TemplateView):
             order_mark = data.get('order_mark')
             # address = DJMallAddress.objects.get(id=data.get('address')).address
             address = data.get('address')
+            print(address)
             # 商品总金额，不含运费
             total_amount = self.get_sku_total_price(json.loads(self.get_carts()))
             # 订单号
             order_sn = self.get_order_sn()
-            for cart in json.loads(self.get_carts()):
-                sku = DJMallProductSKU.objects.get(id=int(cart.get('sku__id')))
-                if sku.stocks > int(cart.get('num')):  # 减库存
-                    self.del_stock(sku, int(cart.get('num')))
-                    order = DJMallOrderInfo.objects.create(
+            order = DJMallOrderInfo.objects.create(
                         owner=request.user,
                         order_sn=order_sn,
                         pay_method=pay_method,
@@ -70,6 +68,10 @@ class DJMallPayView(DJMallLoginRequiredMixin, DJMallBaseView, TemplateView):
                         order_mark=order_mark,
                         freight=0
                     )
+            for cart in json.loads(self.get_carts()):
+                sku = DJMallProductSKU.objects.get(id=int(cart.get('sku__id')))
+                if sku.stocks > int(cart.get('num')):  # 减库存
+                    self.del_stock(sku, int(cart.get('num')))
                     DJMallOrderProduct.objects.create(
                         order = order,
                         sku = sku,
@@ -99,6 +101,7 @@ class DJMallPayView(DJMallLoginRequiredMixin, DJMallBaseView, TemplateView):
     def get_order_sn(self):
         # 生成订单号
         order_sn = timezone.now().strftime('%Y%m%d%H%M%S') + '%09d' % self.request.user.id
+        print(order_sn)
         return order_sn
     
     def get_sku_total_price(self, carts):
