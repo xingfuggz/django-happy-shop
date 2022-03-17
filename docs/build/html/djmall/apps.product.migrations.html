@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+
+<html lang="cn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>apps.product.migrations package &#8212; DjangoMall 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="apps-product-migrations-package">
+<h1>apps.product.migrations package<a class="headerlink" href="#apps-product-migrations-package" title="Permalink to this headline">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-apps.product.migrations.0001_initial">
+<span id="apps-product-migrations-0001-initial-module"></span><h2>apps.product.migrations.0001_initial module<a class="headerlink" href="#module-apps.product.migrations.0001_initial" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.product.migrations.0001_initial.Migration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.product.migrations.0001_initial.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/product/migrations/0001_initial.html#Migration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.product.migrations.0001_initial.Migration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.migrations.migration.Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.product.migrations.0001_initial.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#apps.product.migrations.0001_initial.Migration.dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.product.migrations.0001_initial.Migration.initial">
+<span class="sig-name descname"><span class="pre">initial</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#apps.product.migrations.0001_initial.Migration.initial" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.product.migrations.0001_initial.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;CreateModel</span>&#160; <span class="pre">name='DJMallProductBrand',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('add_date',</span> <span class="pre">&lt;django.db.models.fields.DateTimeField&gt;),</span> <span class="pre">('pub_date',</span> <span class="pre">&lt;django.db.models.fields.DateTimeField&gt;),</span> <span class="pre">('is_del',</span> <span class="pre">&lt;django.db.models.fields.BooleanField&gt;),</span> <span class="pre">('name',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('desc',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('logo',</span> <span class="pre">&lt;django.db.models.fields.files.ImageField&gt;),</span> <span class="pre">('sort',</span> <span class="pre">&lt;django.db.models.fields.PositiveIntegerField&gt;)],</span> <span class="pre">options={'verbose_name':</span> <span class="pre">'商品品牌',</span> <span class="pre">'db_table':</span> <span class="pre">'d_product_brand',</span> <span class="pre">'ordering':</span> <span class="pre">['-sort']}&gt;,</span> <span class="pre">&lt;CreateModel</span>&#160; <span class="pre">name='DJMallProductCategory',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('add_date',</span> <span class="pre">&lt;django.db.models.fields.DateTimeField&gt;),</span> <span class="pre">('pub_date',</span> <span class="pre">&lt;django.db.models.fields.DateTimeField&gt;),</span> <span class="pre">('is_del',</span> <span class="pre">&lt;django.db.models.fields.BooleanField&gt;),</span> <span class="pre">('name',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('desc',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('icon',</span> <span class="pre">&lt;django.db.models.fields.files.ImageField&gt;),</span> <span class="pre">('pc_img',</span> <span class="pre">&lt;django.db.models.fields.files.ImageField&gt;),</span> <span class="pre">('is_nav',</span> <span class="pre">&lt;django.db.models.fields.BooleanField&gt;),</span> <span class="pre">('sort',</span> <span class="pre">&lt;django.db.models.fields.PositiveIntegerField&gt;),</span> <span class="pre">('parent',</span> <span class="pre">&lt;django.db.models.fields.related.ForeignKey&gt;)],</span> <span class="pre">options={'verbose_name':</span> <span class="pre">'商品分类',</span> <span class="pre">'db_table':</span> <span class="pre">'d_product_category',</span> <span class="pre">'ordering':</span> <span class="pre">['-sort']}&gt;,</span> <span class="pre">&lt;CreateModel</span>&#160; <span class="pre">name='DJMallProductSPU',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('add_date',</span> <span class="pre">&lt;django.db.models.fields.DateTimeField&gt;),</span> <span class="pre">('pub_date',</span> <span class="pre">&lt;django.db.models.fields.DateTimeField&gt;),</span> <span class="pre">('is_del',</span> <span class="pre">&lt;django.db.models.fields.BooleanField&gt;),</span> <span class="pre">('title',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('sub_title',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('desc',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('main_picture',</span> <span class="pre">&lt;django.db.models.fields.files.ImageField&gt;),</span> <span class="pre">('stocks',</span> <span class="pre">&lt;django.db.models.fields.PositiveIntegerField&gt;),</span> <span class="pre">('sales',</span> <span class="pre">&lt;django.db.models.fields.PositiveIntegerField&gt;),</span> <span class="pre">('content',</span> <span class="pre">&lt;django.db.models.fields.TextField&gt;),</span> <span class="pre">('is_new',</span> <span class="pre">&lt;django.db.models.fields.BooleanField&gt;),</span> <span class="pre">('is_hot',</span> <span class="pre">&lt;django.db.models.fields.BooleanField&gt;),</span> <span class="pre">('is_best',</span> <span class="pre">&lt;django.db.models.fields.BooleanField&gt;),</span> <span class="pre">('is_shelves',</span> <span class="pre">&lt;django.db.models.fields.BooleanField&gt;),</span> <span class="pre">('after_services',</span> <span class="pre">&lt;django.db.models.fields.TextField&gt;),</span> <span class="pre">('sort',</span> <span class="pre">&lt;django.db.models.fields.PositiveIntegerField&gt;),</span> <span class="pre">('brand',</span> <span class="pre">&lt;django.db.models.fields.related.ForeignKey&gt;),</span> <span class="pre">('category',</span> <span class="pre">&lt;django.db.models.fields.related.ManyToManyField&gt;)],</span> <span class="pre">options={'verbose_name':</span> <span class="pre">'商品SPU',</span> <span class="pre">'db_table':</span> <span class="pre">'d_product_spu',</span> <span class="pre">'ordering':</span> <span class="pre">['-sort']}&gt;,</span> <span class="pre">&lt;CreateModel</span>&#160; <span class="pre">name='DJMallProductSPUSpec',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('add_date',</span> <span class="pre">&lt;django.db.models.fields.DateTimeField&gt;),</span> <span class="pre">('pub_date',</span> <span class="pre">&lt;django.db.models.fields.DateTimeField&gt;),</span> <span class="pre">('is_del',</span> <span class="pre">&lt;django.db.models.fields.BooleanField&gt;),</span> <span class="pre">('name',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('spu',</span> <span class="pre">&lt;django.db.models.fields.related.ForeignKey&gt;)],</span> <span class="pre">options={'verbose_name':</span> <span class="pre">'商品规格',</span> <span class="pre">'db_table':</span> <span class="pre">'d_product_spu_spec',</span> <span class="pre">'ordering':</span> <span class="pre">['-add_date']}&gt;,</span> <span class="pre">&lt;CreateModel</span>&#160; <span class="pre">name='DJMallProductSPUSpecOption',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('add_date',</span> <span class="pre">&lt;django.db.models.fields.DateTimeField&gt;),</span> <span class="pre">('pub_date',</span> <span class="pre">&lt;django.db.models.fields.DateTimeField&gt;),</span> <span class="pre">('is_del',</span> <span class="pre">&lt;django.db.models.fields.BooleanField&gt;),</span> <span class="pre">('value',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('spec',</span> <span class="pre">&lt;django.db.models.fields.related.ForeignKey&gt;)],</span> <span class="pre">options={'verbose_name':</span> <span class="pre">'商品规格值',</span> <span class="pre">'db_table':</span> <span class="pre">'d_product_spu_spec_option',</span> <span class="pre">'ordering':</span> <span class="pre">['-add_date']}&gt;,</span> <span class="pre">&lt;CreateModel</span>&#160; <span class="pre">name='DJMallProductSKU',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('add_date',</span> <span class="pre">&lt;django.db.models.fields.DateTimeField&gt;),</span> <span class="pre">('pub_date',</span> <span class="pre">&lt;django.db.models.fields.DateTimeField&gt;),</span> <span class="pre">('is_del',</span> <span class="pre">&lt;django.db.models.fields.BooleanField&gt;),</span> <span class="pre">('main_picture',</span> <span class="pre">&lt;django.db.models.fields.files.ImageField&gt;),</span> <span class="pre">('bar_code',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('sell_price',</span> <span class="pre">&lt;django.db.models.fields.DecimalField&gt;),</span> <span class="pre">('market_price',</span> <span class="pre">&lt;django.db.models.fields.DecimalField&gt;),</span> <span class="pre">('cost_price',</span> <span class="pre">&lt;django.db.models.fields.DecimalField&gt;),</span> <span class="pre">('stocks',</span> <span class="pre">&lt;django.db.models.fields.PositiveIntegerField&gt;),</span> <span class="pre">('sales',</span> <span class="pre">&lt;django.db.models.fields.PositiveIntegerField&gt;),</span> <span class="pre">('sort',</span> <span class="pre">&lt;django.db.models.fields.PositiveIntegerField&gt;),</span> <span class="pre">('options',</span> <span class="pre">&lt;django.db.models.fields.related.ManyToManyField&gt;),</span> <span class="pre">('spu',</span> <span class="pre">&lt;django.db.models.fields.related.ForeignKey&gt;)],</span> <span class="pre">options={'verbose_name':</span> <span class="pre">'商品SKU',</span> <span class="pre">'db_table':</span> <span class="pre">'d_product_sku',</span> <span class="pre">'ordering':</span> <span class="pre">['-sort']}&gt;,</span> <span class="pre">&lt;CreateModel</span>&#160; <span class="pre">name='DJMallProductCarouse',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('add_date',</span> <span class="pre">&lt;django.db.models.fields.DateTimeField&gt;),</span> <span class="pre">('pub_date',</span> <span class="pre">&lt;django.db.models.fields.DateTimeField&gt;),</span> <span class="pre">('is_del',</span> <span class="pre">&lt;django.db.models.fields.BooleanField&gt;),</span> <span class="pre">('img',</span> <span class="pre">&lt;django.db.models.fields.files.ImageField&gt;),</span> <span class="pre">('img_url',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('sort',</span> <span class="pre">&lt;django.db.models.fields.PositiveIntegerField&gt;),</span> <span class="pre">('spu',</span> <span class="pre">&lt;django.db.models.fields.related.ForeignKey&gt;)],</span> <span class="pre">options={'verbose_name':</span> <span class="pre">'商品轮播图',</span> <span class="pre">'db_table':</span> <span class="pre">'d_product_carouse',</span> <span class="pre">'ordering':</span> <span class="pre">['-sort']}&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='djmallproductbrand',</span> <span class="pre">name='category',</span> <span class="pre">field=&lt;django.db.models.fields.related.ForeignKey&gt;&gt;]</span></em><a class="headerlink" href="#apps.product.migrations.0001_initial.Migration.operations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-apps.product.migrations.0002_auto_20211130_1753">
+<span id="apps-product-migrations-0002-auto-20211130-1753-module"></span><h2>apps.product.migrations.0002_auto_20211130_1753 module<a class="headerlink" href="#module-apps.product.migrations.0002_auto_20211130_1753" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.product.migrations.0002_auto_20211130_1753.Migration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.product.migrations.0002_auto_20211130_1753.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/product/migrations/0002_auto_20211130_1753.html#Migration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.product.migrations.0002_auto_20211130_1753.Migration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.migrations.migration.Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.product.migrations.0002_auto_20211130_1753.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('product',</span> <span class="pre">'0001_initial')]</span></em><a class="headerlink" href="#apps.product.migrations.0002_auto_20211130_1753.Migration.dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.product.migrations.0002_auto_20211130_1753.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;AlterField</span>&#160; <span class="pre">model_name='djmallproductcategory',</span> <span class="pre">name='icon',</span> <span class="pre">field=&lt;django.db.models.fields.files.ImageField&gt;&gt;,</span> <span class="pre">&lt;AlterField</span>&#160; <span class="pre">model_name='djmallproductcategory',</span> <span class="pre">name='pc_img',</span> <span class="pre">field=&lt;django.db.models.fields.files.ImageField&gt;&gt;]</span></em><a class="headerlink" href="#apps.product.migrations.0002_auto_20211130_1753.Migration.operations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-apps.product.migrations.0003_auto_20211201_0904">
+<span id="apps-product-migrations-0003-auto-20211201-0904-module"></span><h2>apps.product.migrations.0003_auto_20211201_0904 module<a class="headerlink" href="#module-apps.product.migrations.0003_auto_20211201_0904" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.product.migrations.0003_auto_20211201_0904.Migration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.product.migrations.0003_auto_20211201_0904.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/product/migrations/0003_auto_20211201_0904.html#Migration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.product.migrations.0003_auto_20211201_0904.Migration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.migrations.migration.Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.product.migrations.0003_auto_20211201_0904.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('product',</span> <span class="pre">'0002_auto_20211130_1753')]</span></em><a class="headerlink" href="#apps.product.migrations.0003_auto_20211201_0904.Migration.dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.product.migrations.0003_auto_20211201_0904.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;AlterField</span>&#160; <span class="pre">model_name='djmallproductcategory',</span> <span class="pre">name='icon',</span> <span class="pre">field=&lt;django.db.models.fields.files.ImageField&gt;,</span> <span class="pre">preserve_default=False&gt;,</span> <span class="pre">&lt;AlterField</span>&#160; <span class="pre">model_name='djmallproductcategory',</span> <span class="pre">name='pc_img',</span> <span class="pre">field=&lt;django.db.models.fields.files.ImageField&gt;,</span> <span class="pre">preserve_default=False&gt;]</span></em><a class="headerlink" href="#apps.product.migrations.0003_auto_20211201_0904.Migration.operations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-apps.product.migrations.0004_auto_20211206_0959">
+<span id="apps-product-migrations-0004-auto-20211206-0959-module"></span><h2>apps.product.migrations.0004_auto_20211206_0959 module<a class="headerlink" href="#module-apps.product.migrations.0004_auto_20211206_0959" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.product.migrations.0004_auto_20211206_0959.Migration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.product.migrations.0004_auto_20211206_0959.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/product/migrations/0004_auto_20211206_0959.html#Migration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.product.migrations.0004_auto_20211206_0959.Migration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.migrations.migration.Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.product.migrations.0004_auto_20211206_0959.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('product',</span> <span class="pre">'0003_auto_20211201_0904')]</span></em><a class="headerlink" href="#apps.product.migrations.0004_auto_20211206_0959.Migration.dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.product.migrations.0004_auto_20211206_0959.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;AlterModelOptions</span>&#160; <span class="pre">name='djmallproductbrand',</span> <span class="pre">options={'ordering':</span> <span class="pre">['-sort'],</span> <span class="pre">'verbose_name':</span> <span class="pre">'商品品牌',</span> <span class="pre">'verbose_name_plural':</span> <span class="pre">'商品品牌'}&gt;,</span> <span class="pre">&lt;AlterModelOptions</span>&#160; <span class="pre">name='djmallproductcarouse',</span> <span class="pre">options={'ordering':</span> <span class="pre">['-sort'],</span> <span class="pre">'verbose_name':</span> <span class="pre">'商品轮播图',</span> <span class="pre">'verbose_name_plural':</span> <span class="pre">'商品轮播图'}&gt;,</span> <span class="pre">&lt;AlterModelOptions</span>&#160; <span class="pre">name='djmallproductcategory',</span> <span class="pre">options={'ordering':</span> <span class="pre">['-sort'],</span> <span class="pre">'verbose_name':</span> <span class="pre">'商品分类',</span> <span class="pre">'verbose_name_plural':</span> <span class="pre">'商品分类'}&gt;,</span> <span class="pre">&lt;AlterModelOptions</span>&#160; <span class="pre">name='djmallproductsku',</span> <span class="pre">options={'ordering':</span> <span class="pre">['-sort'],</span> <span class="pre">'verbose_name':</span> <span class="pre">'商品SKU',</span> <span class="pre">'verbose_name_plural':</span> <span class="pre">'商品SKU'}&gt;,</span> <span class="pre">&lt;AlterModelOptions</span>&#160; <span class="pre">name='djmallproductspu',</span> <span class="pre">options={'ordering':</span> <span class="pre">['-sort'],</span> <span class="pre">'verbose_name':</span> <span class="pre">'商品SPU',</span> <span class="pre">'verbose_name_plural':</span> <span class="pre">'商品SPU'}&gt;,</span> <span class="pre">&lt;AlterModelOptions</span>&#160; <span class="pre">name='djmallproductspuspec',</span> <span class="pre">options={'ordering':</span> <span class="pre">['-add_date'],</span> <span class="pre">'verbose_name':</span> <span class="pre">'商品规格',</span> <span class="pre">'verbose_name_plural':</span> <span class="pre">'商品规格'}&gt;,</span> <span class="pre">&lt;AlterModelOptions</span>&#160; <span class="pre">name='djmallproductspuspecoption',</span> <span class="pre">options={'ordering':</span> <span class="pre">['-add_date'],</span> <span class="pre">'verbose_name':</span> <span class="pre">'商品规格值',</span> <span class="pre">'verbose_name_plural':</span> <span class="pre">'商品规格值'}&gt;,</span> <span class="pre">&lt;AlterField</span>&#160; <span class="pre">model_name='djmallproductbrand',</span> <span class="pre">name='category',</span> <span class="pre">field=&lt;django.db.models.fields.related.ForeignKey&gt;&gt;,</span> <span class="pre">&lt;AlterField</span>&#160; <span class="pre">model_name='djmallproductbrand',</span> <span class="pre">name='desc',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AlterField</span>&#160; <span class="pre">model_name='djmallproductbrand',</span> <span class="pre">name='name',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AlterField</span>&#160; <span class="pre">model_name='djmallproductcategory',</span> <span class="pre">name='icon',</span> <span class="pre">field=&lt;django.db.models.fields.files.ImageField&gt;&gt;,</span> <span class="pre">&lt;AlterField</span>&#160; <span class="pre">model_name='djmallproductcategory',</span> <span class="pre">name='pc_img',</span> <span class="pre">field=&lt;django.db.models.fields.files.ImageField&gt;&gt;,</span> <span class="pre">&lt;AlterField</span>&#160; <span class="pre">model_name='djmallproductsku',</span> <span class="pre">name='options',</span> <span class="pre">field=&lt;django.db.models.fields.related.ManyToManyField&gt;&gt;,</span> <span class="pre">&lt;AlterField</span>&#160; <span class="pre">model_name='djmallproductspuspecoption',</span> <span class="pre">name='spec',</span> <span class="pre">field=&lt;django.db.models.fields.related.ForeignKey&gt;&gt;]</span></em><a class="headerlink" href="#apps.product.migrations.0004_auto_20211206_0959.Migration.operations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-apps.product.migrations.0005_alter_djmallproductcategory_icon">
+<span id="apps-product-migrations-0005-alter-djmallproductcategory-icon-module"></span><h2>apps.product.migrations.0005_alter_djmallproductcategory_icon module<a class="headerlink" href="#module-apps.product.migrations.0005_alter_djmallproductcategory_icon" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.product.migrations.0005_alter_djmallproductcategory_icon.Migration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.product.migrations.0005_alter_djmallproductcategory_icon.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/product/migrations/0005_alter_djmallproductcategory_icon.html#Migration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.product.migrations.0005_alter_djmallproductcategory_icon.Migration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.migrations.migration.Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.product.migrations.0005_alter_djmallproductcategory_icon.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('product',</span> <span class="pre">'0004_auto_20211206_0959')]</span></em><a class="headerlink" href="#apps.product.migrations.0005_alter_djmallproductcategory_icon.Migration.dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.product.migrations.0005_alter_djmallproductcategory_icon.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;AlterField</span>&#160; <span class="pre">model_name='djmallproductcategory',</span> <span class="pre">name='icon',</span> <span class="pre">field=&lt;django.db.models.fields.files.ImageField&gt;&gt;]</span></em><a class="headerlink" href="#apps.product.migrations.0005_alter_djmallproductcategory_icon.Migration.operations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-apps.product.migrations.0006_djmallshopingcart">
+<span id="apps-product-migrations-0006-djmallshopingcart-module"></span><h2>apps.product.migrations.0006_djmallshopingcart module<a class="headerlink" href="#module-apps.product.migrations.0006_djmallshopingcart" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.product.migrations.0006_djmallshopingcart.Migration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.product.migrations.0006_djmallshopingcart.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/product/migrations/0006_djmallshopingcart.html#Migration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.product.migrations.0006_djmallshopingcart.Migration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.migrations.migration.Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.product.migrations.0006_djmallshopingcart.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('users',</span> <span class="pre">'0008_djmalluser_avatar'),</span> <span class="pre">('product',</span> <span class="pre">'0005_alter_djmallproductcategory_icon')]</span></em><a class="headerlink" href="#apps.product.migrations.0006_djmallshopingcart.Migration.dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.product.migrations.0006_djmallshopingcart.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;CreateModel</span>&#160; <span class="pre">name='DJMallShopingCart',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('add_date',</span> <span class="pre">&lt;django.db.models.fields.DateTimeField&gt;),</span> <span class="pre">('pub_date',</span> <span class="pre">&lt;django.db.models.fields.DateTimeField&gt;),</span> <span class="pre">('is_del',</span> <span class="pre">&lt;django.db.models.fields.BooleanField&gt;),</span> <span class="pre">('num',</span> <span class="pre">&lt;django.db.models.fields.PositiveIntegerField&gt;),</span> <span class="pre">('owner',</span> <span class="pre">&lt;django.db.models.fields.related.ForeignKey&gt;),</span> <span class="pre">('sku',</span> <span class="pre">&lt;django.db.models.fields.related.ForeignKey&gt;)],</span> <span class="pre">options={'verbose_name':</span> <span class="pre">'购物车',</span> <span class="pre">'verbose_name_plural':</span> <span class="pre">'购物车'}&gt;]</span></em><a class="headerlink" href="#apps.product.migrations.0006_djmallshopingcart.Migration.operations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-apps.product.migrations.0007_djmallshopingcart_unique_owner_sku">
+<span id="apps-product-migrations-0007-djmallshopingcart-unique-owner-sku-module"></span><h2>apps.product.migrations.0007_djmallshopingcart_unique_owner_sku module<a class="headerlink" href="#module-apps.product.migrations.0007_djmallshopingcart_unique_owner_sku" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.product.migrations.0007_djmallshopingcart_unique_owner_sku.Migration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.product.migrations.0007_djmallshopingcart_unique_owner_sku.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/product/migrations/0007_djmallshopingcart_unique_owner_sku.html#Migration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.product.migrations.0007_djmallshopingcart_unique_owner_sku.Migration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.migrations.migration.Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.product.migrations.0007_djmallshopingcart_unique_owner_sku.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('product',</span> <span class="pre">'0006_djmallshopingcart')]</span></em><a class="headerlink" href="#apps.product.migrations.0007_djmallshopingcart_unique_owner_sku.Migration.dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.product.migrations.0007_djmallshopingcart_unique_owner_sku.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;AddConstraint</span>&#160; <span class="pre">model_name='djmallshopingcart',</span> <span class="pre">constraint=&lt;UniqueConstraint:</span> <span class="pre">fields=('owner',</span> <span class="pre">'sku')</span> <span class="pre">name='unique_owner_sku'&gt;&gt;]</span></em><a class="headerlink" href="#apps.product.migrations.0007_djmallshopingcart_unique_owner_sku.Migration.operations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-apps.product.migrations">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-apps.product.migrations" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">DjangoMall</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, 幸福关中.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/djmall/apps.product.migrations.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

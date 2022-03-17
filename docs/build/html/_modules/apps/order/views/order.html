@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+
+<html lang="cn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>apps.order.views.order &#8212; DjangoMall 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for apps.order.views.order</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+<span class="kn">from</span> <span class="nn">django.views.generic</span> <span class="kn">import</span> <span class="n">CreateView</span><span class="p">,</span> <span class="n">View</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">reverse_lazy</span>
+<span class="kn">from</span> <span class="nn">django.core.cache</span> <span class="kn">import</span> <span class="n">cache</span>
+<span class="kn">from</span> <span class="nn">django.utils</span> <span class="kn">import</span> <span class="n">timezone</span>
+
+<span class="kn">from</span> <span class="nn">order.models</span> <span class="kn">import</span> <span class="n">DJMallOrderInfo</span>
+<span class="kn">from</span> <span class="nn">personal.views</span> <span class="kn">import</span> <span class="n">DJMallLoginRequiredMixin</span>
+<span class="kn">from</span> <span class="nn">DJMall.utils.views</span> <span class="kn">import</span> <span class="n">DJMallBaseView</span>
+<span class="kn">from</span> <span class="nn">users.models</span> <span class="kn">import</span> <span class="n">DJMallAddress</span>
+<span class="kn">from</span> <span class="nn">order.forms</span> <span class="kn">import</span> <span class="n">DJMallOrderInfoForm</span><span class="p">,</span> <span class="n">DJMallOrderProductForm</span>
+
+
+<span class="c1"># class DJMallOrderInfoView(DJMallLoginRequiredMixin, DJMallBaseView, CreateView):</span>
+    
+<span class="c1">#     model = DJMallOrderInfo</span>
+<span class="c1">#     # template_name = &#39;order/orderinfo.html&#39;</span>
+<span class="c1">#     template_name = &#39;order/pay.html&#39;</span>
+<span class="c1">#     form_class = DJMallOrderInfoForm</span>
+<span class="c1">#     success_url = reverse_lazy(&#39;author-list&#39;)</span>
+    
+<span class="c1">#     def get_context_data(self, **kwargs):</span>
+<span class="c1">#         context = super().get_context_data(**kwargs)</span>
+<span class="c1">#         context[&#39;pay_method&#39;] = DJMallOrderInfo.get_pay_method()</span>
+<span class="c1">#         context[&#39;pay_default&#39;] = DJMallOrderInfo.get_pay_default()</span>
+<span class="c1">#         context[&#39;address_list&#39;] = DJMallAddress.objects.filter(owner=self.request.user)</span>
+<span class="c1">#         context[&#39;product_form&#39;] = DJMallOrderProductForm()</span>
+<span class="c1">#         context[&#39;carts&#39;] = cache.get(self.request.user.id)</span>
+<span class="c1">#         print(context[&#39;carts&#39;])       </span>
+<span class="c1">#         return context</span>
+    
+<span class="c1">#     def form_valid(self, form):</span>
+<span class="c1">#         form.instance.owner = self.request.user</span>
+<span class="c1">#         form.instance.order_sn = self.get_order_sn()</span>
+<span class="c1">#         address = form.cleaned_data[&#39;address&#39;]</span>
+<span class="c1">#         print(self.request.POST.get(&#39;address&#39;))</span>
+<span class="c1">#         # form.instance.address = form.cleaned_data[&#39;address&#39;]</span>
+<span class="c1">#         # return super().form_valid(form)</span>
+<span class="c1">#         return HttpResponse(&#39;ceshi&#39;)</span>
+    
+<span class="c1">#     def get_order_sn(self):</span>
+<span class="c1">#         # 生成订单号</span>
+<span class="c1">#         order_sn = timezone.now().strftime(&#39;%Y%m%d%H%M%S&#39;) + &#39;%09d&#39; % self.request.user.id</span>
+<span class="c1">#         return order_sn</span>
+
+<span class="c1">#     def get_form_kwargs(self):</span>
+<span class="c1">#         # 向表单中传递数据</span>
+<span class="c1">#         kwargs = super().get_form_kwargs()</span>
+<span class="c1">#         kwargs[&#39;user&#39;] = self.request.user</span>
+<span class="c1">#         return kwargs</span>
+
+
+<div class="viewcode-block" id="DJMallOrderInfoView"><a class="viewcode-back" href="../../../../djmall/apps.order.views.html#apps.order.views.order.DJMallOrderInfoView">[docs]</a><span class="k">class</span> <span class="nc">DJMallOrderInfoView</span><span class="p">(</span><span class="n">DJMallLoginRequiredMixin</span><span class="p">,</span> <span class="n">DJMallBaseView</span><span class="p">,</span> <span class="n">View</span><span class="p">):</span>
+    <span class="k">pass</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../index.html">DjangoMall</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, 幸福关中.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

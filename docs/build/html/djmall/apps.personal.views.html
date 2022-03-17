@@ -1,0 +1,420 @@
+
+<!DOCTYPE html>
+
+<html lang="cn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>apps.personal.views package &#8212; DjangoMall 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="apps-personal-views-package">
+<h1>apps.personal.views package<a class="headerlink" href="#apps-personal-views-package" title="Permalink to this headline">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-apps.personal.views.actions">
+<span id="apps-personal-views-actions-module"></span><h2>apps.personal.views.actions module<a class="headerlink" href="#module-apps.personal.views.actions" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallAddressCreateView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.personal.views.actions.</span></span><span class="sig-name descname"><span class="pre">DJMallAddressCreateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/personal/views/actions.html#DJMallAddressCreateView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.personal.views.actions.DJMallAddressCreateView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#apps.personal.views.views.DJMallLoginRequiredMixin" title="apps.personal.views.views.DJMallLoginRequiredMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">apps.personal.views.views.DJMallLoginRequiredMixin</span></code></a>, <a class="reference internal" href="DJMall.utils.html#DJMall.utils.views.DJMallBaseView" title="DJMall.utils.views.DJMallBaseView"><code class="xref py py-class docutils literal notranslate"><span class="pre">DJMall.utils.views.DJMallBaseView</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.edit.CreateView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallAddressCreateView.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['name',</span> <span class="pre">'phone',</span> <span class="pre">'email',</span> <span class="pre">'address',</span> <span class="pre">'is_default']</span></em><a class="headerlink" href="#apps.personal.views.actions.DJMallAddressCreateView.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallAddressCreateView.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/personal/views/actions.html#DJMallAddressCreateView.form_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.personal.views.actions.DJMallAddressCreateView.form_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the form is valid, save the associated model.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallAddressCreateView.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/personal/views/actions.html#DJMallAddressCreateView.get_queryset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.personal.views.actions.DJMallAddressCreateView.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the <cite>QuerySet</cite> that will be used to look up the object.</p>
+<p>This method is called by the default implementation of get_object() and
+may not be called if get_object() is overridden.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallAddressCreateView.success_url">
+<span class="sig-name descname"><span class="pre">success_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/personal/address/list/'</span></em><a class="headerlink" href="#apps.personal.views.actions.DJMallAddressCreateView.success_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallAddressCreateView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'personal/create_address.html'</span></em><a class="headerlink" href="#apps.personal.views.actions.DJMallAddressCreateView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallAddressDefaultUpdateView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.personal.views.actions.</span></span><span class="sig-name descname"><span class="pre">DJMallAddressDefaultUpdateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/personal/views/actions.html#DJMallAddressDefaultUpdateView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.personal.views.actions.DJMallAddressDefaultUpdateView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#apps.personal.views.actions.DJMallAddressUpdateView" title="apps.personal.views.actions.DJMallAddressUpdateView"><code class="xref py py-class docutils literal notranslate"><span class="pre">apps.personal.views.actions.DJMallAddressUpdateView</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallAddressDefaultUpdateView.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['is_default']</span></em><a class="headerlink" href="#apps.personal.views.actions.DJMallAddressDefaultUpdateView.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallAddressDefaultUpdateView.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/personal/views/actions.html#DJMallAddressDefaultUpdateView.form_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.personal.views.actions.DJMallAddressDefaultUpdateView.form_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the form is valid, save the associated model.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallAddressDefaultUpdateView.success_url">
+<span class="sig-name descname"><span class="pre">success_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/personal/address/list/'</span></em><a class="headerlink" href="#apps.personal.views.actions.DJMallAddressDefaultUpdateView.success_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallAddressDefaultUpdateView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'personal/update_address.html'</span></em><a class="headerlink" href="#apps.personal.views.actions.DJMallAddressDefaultUpdateView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallAddressDeleteView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.personal.views.actions.</span></span><span class="sig-name descname"><span class="pre">DJMallAddressDeleteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/personal/views/actions.html#DJMallAddressDeleteView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.personal.views.actions.DJMallAddressDeleteView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#apps.personal.views.views.DJMallLoginRequiredMixin" title="apps.personal.views.views.DJMallLoginRequiredMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">apps.personal.views.views.DJMallLoginRequiredMixin</span></code></a>, <a class="reference internal" href="DJMall.utils.html#DJMall.utils.views.DJMallBaseView" title="DJMall.utils.views.DJMallBaseView"><code class="xref py py-class docutils literal notranslate"><span class="pre">DJMall.utils.views.DJMallBaseView</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.edit.DeleteView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallAddressDeleteView.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/personal/views/actions.html#DJMallAddressDeleteView.get_queryset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.personal.views.actions.DJMallAddressDeleteView.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the <cite>QuerySet</cite> that will be used to look up the object.</p>
+<p>This method is called by the default implementation of get_object() and
+may not be called if get_object() is overridden.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallAddressDeleteView.success_url">
+<span class="sig-name descname"><span class="pre">success_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/personal/address/list/'</span></em><a class="headerlink" href="#apps.personal.views.actions.DJMallAddressDeleteView.success_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallAddressDeleteView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'personal/delete.html'</span></em><a class="headerlink" href="#apps.personal.views.actions.DJMallAddressDeleteView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallAddressListView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.personal.views.actions.</span></span><span class="sig-name descname"><span class="pre">DJMallAddressListView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/personal/views/actions.html#DJMallAddressListView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.personal.views.actions.DJMallAddressListView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#apps.personal.views.views.DJMallLoginRequiredMixin" title="apps.personal.views.views.DJMallLoginRequiredMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">apps.personal.views.views.DJMallLoginRequiredMixin</span></code></a>, <a class="reference internal" href="DJMall.utils.html#DJMall.utils.views.DJMallBaseView" title="DJMall.utils.views.DJMallBaseView"><code class="xref py py-class docutils literal notranslate"><span class="pre">DJMall.utils.views.DJMallBaseView</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.list.ListView</span></code></p>
+<p>地址列表</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>DJMallLoginRequiredMixin ([type]): [登录权限验证]
+DJMallBaseView ([type]): [全局继承基类]
+ListView ([type]): [列表类视图]</p>
+</dd>
+<dt>Returns:</dt><dd><p>[type]: [description]</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallAddressListView.context_object_name">
+<span class="sig-name descname"><span class="pre">context_object_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'address_list'</span></em><a class="headerlink" href="#apps.personal.views.actions.DJMallAddressListView.context_object_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallAddressListView.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/personal/views/actions.html#DJMallAddressListView.get_queryset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.personal.views.actions.DJMallAddressListView.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the list of items for this view.</p>
+<p>The return value must be an iterable and may be an instance of
+<cite>QuerySet</cite> in which case <cite>QuerySet</cite> specific behavior will be enabled.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallAddressListView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'personal/list_address.html'</span></em><a class="headerlink" href="#apps.personal.views.actions.DJMallAddressListView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallAddressUpdateView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.personal.views.actions.</span></span><span class="sig-name descname"><span class="pre">DJMallAddressUpdateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/personal/views/actions.html#DJMallAddressUpdateView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.personal.views.actions.DJMallAddressUpdateView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#apps.personal.views.views.DJMallLoginRequiredMixin" title="apps.personal.views.views.DJMallLoginRequiredMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">apps.personal.views.views.DJMallLoginRequiredMixin</span></code></a>, <a class="reference internal" href="DJMall.utils.html#DJMall.utils.views.DJMallBaseView" title="DJMall.utils.views.DJMallBaseView"><code class="xref py py-class docutils literal notranslate"><span class="pre">DJMall.utils.views.DJMallBaseView</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.edit.UpdateView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallAddressUpdateView.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['name',</span> <span class="pre">'phone',</span> <span class="pre">'email',</span> <span class="pre">'address',</span> <span class="pre">'is_default']</span></em><a class="headerlink" href="#apps.personal.views.actions.DJMallAddressUpdateView.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallAddressUpdateView.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/personal/views/actions.html#DJMallAddressUpdateView.form_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.personal.views.actions.DJMallAddressUpdateView.form_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the form is valid, save the associated model.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallAddressUpdateView.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/personal/views/actions.html#DJMallAddressUpdateView.get_queryset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.personal.views.actions.DJMallAddressUpdateView.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the <cite>QuerySet</cite> that will be used to look up the object.</p>
+<p>This method is called by the default implementation of get_object() and
+may not be called if get_object() is overridden.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallAddressUpdateView.success_url">
+<span class="sig-name descname"><span class="pre">success_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/personal/address/list/'</span></em><a class="headerlink" href="#apps.personal.views.actions.DJMallAddressUpdateView.success_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallAddressUpdateView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'personal/update_address.html'</span></em><a class="headerlink" href="#apps.personal.views.actions.DJMallAddressUpdateView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallFavoriteDeleteView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.personal.views.actions.</span></span><span class="sig-name descname"><span class="pre">DJMallFavoriteDeleteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/personal/views/actions.html#DJMallFavoriteDeleteView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.personal.views.actions.DJMallFavoriteDeleteView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#apps.personal.views.views.DJMallLoginRequiredMixin" title="apps.personal.views.views.DJMallLoginRequiredMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">apps.personal.views.views.DJMallLoginRequiredMixin</span></code></a>, <a class="reference internal" href="DJMall.utils.html#DJMall.utils.views.DJMallBaseView" title="DJMall.utils.views.DJMallBaseView"><code class="xref py py-class docutils literal notranslate"><span class="pre">DJMall.utils.views.DJMallBaseView</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.edit.DeleteView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallFavoriteDeleteView.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/personal/views/actions.html#DJMallFavoriteDeleteView.get_queryset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.personal.views.actions.DJMallFavoriteDeleteView.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the <cite>QuerySet</cite> that will be used to look up the object.</p>
+<p>This method is called by the default implementation of get_object() and
+may not be called if get_object() is overridden.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallFavoriteDeleteView.success_url">
+<span class="sig-name descname"><span class="pre">success_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/personal/fav_list/'</span></em><a class="headerlink" href="#apps.personal.views.actions.DJMallFavoriteDeleteView.success_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallFavoriteDeleteView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'personal/delete.html'</span></em><a class="headerlink" href="#apps.personal.views.actions.DJMallFavoriteDeleteView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallFavoriteListView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.personal.views.actions.</span></span><span class="sig-name descname"><span class="pre">DJMallFavoriteListView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/personal/views/actions.html#DJMallFavoriteListView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.personal.views.actions.DJMallFavoriteListView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#apps.personal.views.views.DJMallLoginRequiredMixin" title="apps.personal.views.views.DJMallLoginRequiredMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">apps.personal.views.views.DJMallLoginRequiredMixin</span></code></a>, <a class="reference internal" href="DJMall.utils.html#DJMall.utils.views.DJMallBaseView" title="DJMall.utils.views.DJMallBaseView"><code class="xref py py-class docutils literal notranslate"><span class="pre">DJMall.utils.views.DJMallBaseView</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.list.ListView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallFavoriteListView.context_object_name">
+<span class="sig-name descname"><span class="pre">context_object_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'fav_list'</span></em><a class="headerlink" href="#apps.personal.views.actions.DJMallFavoriteListView.context_object_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallFavoriteListView.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/personal/views/actions.html#DJMallFavoriteListView.get_context_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.personal.views.actions.DJMallFavoriteListView.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the context for this view.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallFavoriteListView.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/personal/views/actions.html#DJMallFavoriteListView.get_queryset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.personal.views.actions.DJMallFavoriteListView.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the list of items for this view.</p>
+<p>The return value must be an iterable and may be an instance of
+<cite>QuerySet</cite> in which case <cite>QuerySet</cite> specific behavior will be enabled.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallFavoriteListView.paginate_by">
+<span class="sig-name descname"><span class="pre">paginate_by</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em><a class="headerlink" href="#apps.personal.views.actions.DJMallFavoriteListView.paginate_by" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.actions.DJMallFavoriteListView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'personal/fav_list.html'</span></em><a class="headerlink" href="#apps.personal.views.actions.DJMallFavoriteListView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-apps.personal.views.views">
+<span id="apps-personal-views-views-module"></span><h2>apps.personal.views.views module<a class="headerlink" href="#module-apps.personal.views.views" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.personal.views.views.DJMallLoginRequiredMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.personal.views.views.</span></span><span class="sig-name descname"><span class="pre">DJMallLoginRequiredMixin</span></span><a class="reference internal" href="../_modules/apps/personal/views/views.html#DJMallLoginRequiredMixin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.personal.views.views.DJMallLoginRequiredMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.mixins.LoginRequiredMixin</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.views.DJMallLoginRequiredMixin.login_url">
+<span class="sig-name descname"><span class="pre">login_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/users/login/'</span></em><a class="headerlink" href="#apps.personal.views.views.DJMallLoginRequiredMixin.login_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.views.DJMallLoginRequiredMixin.redirect_field_name">
+<span class="sig-name descname"><span class="pre">redirect_field_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'redirect_to'</span></em><a class="headerlink" href="#apps.personal.views.views.DJMallLoginRequiredMixin.redirect_field_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.personal.views.views.DJMallUserPersonalView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.personal.views.views.</span></span><span class="sig-name descname"><span class="pre">DJMallUserPersonalView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/personal/views/views.html#DJMallUserPersonalView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.personal.views.views.DJMallUserPersonalView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#apps.personal.views.views.DJMallLoginRequiredMixin" title="apps.personal.views.views.DJMallLoginRequiredMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">apps.personal.views.views.DJMallLoginRequiredMixin</span></code></a>, <a class="reference internal" href="DJMall.utils.html#DJMall.utils.views.DJMallBaseView" title="DJMall.utils.views.DJMallBaseView"><code class="xref py py-class docutils literal notranslate"><span class="pre">DJMall.utils.views.DJMallBaseView</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.base.TemplateView</span></code></p>
+<p>用户中心首页</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>DJMallLoginRequiredMixin ([type]): [description]
+DJMallBaseView ([type]): [description]
+TemplateView ([type]): [description]</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.views.DJMallUserPersonalView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'personal/index.html'</span></em><a class="headerlink" href="#apps.personal.views.views.DJMallUserPersonalView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.personal.views.views.DJMallUserUpdateEmailView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.personal.views.views.</span></span><span class="sig-name descname"><span class="pre">DJMallUserUpdateEmailView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/personal/views/views.html#DJMallUserUpdateEmailView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.personal.views.views.DJMallUserUpdateEmailView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#apps.personal.views.views.DJMallUserUpdateView" title="apps.personal.views.views.DJMallUserUpdateView"><code class="xref py py-class docutils literal notranslate"><span class="pre">apps.personal.views.views.DJMallUserUpdateView</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.views.DJMallUserUpdateEmailView.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#apps.personal.views.views.DJMallUserUpdateEmailView.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.views.DJMallUserUpdateEmailView.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#apps.personal.views.views.DJMallUserUpdateEmailView.form_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">personal.forms.DJMallUserEmailForm</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.views.DJMallUserUpdateEmailView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#apps.personal.views.views.DJMallUserUpdateEmailView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">users.models.models.DJMallUser</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.views.DJMallUserUpdateEmailView.success_url">
+<span class="sig-name descname"><span class="pre">success_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/personal/home/'</span></em><a class="headerlink" href="#apps.personal.views.views.DJMallUserUpdateEmailView.success_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.views.DJMallUserUpdateEmailView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'personal/update_email.html'</span></em><a class="headerlink" href="#apps.personal.views.views.DJMallUserUpdateEmailView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.personal.views.views.DJMallUserUpdateView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.personal.views.views.</span></span><span class="sig-name descname"><span class="pre">DJMallUserUpdateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/personal/views/views.html#DJMallUserUpdateView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.personal.views.views.DJMallUserUpdateView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#apps.personal.views.views.DJMallLoginRequiredMixin" title="apps.personal.views.views.DJMallLoginRequiredMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">apps.personal.views.views.DJMallLoginRequiredMixin</span></code></a>, <a class="reference internal" href="DJMall.utils.html#DJMall.utils.views.DJMallBaseView" title="DJMall.utils.views.DJMallBaseView"><code class="xref py py-class docutils literal notranslate"><span class="pre">DJMall.utils.views.DJMallBaseView</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.edit.UpdateView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.views.DJMallUserUpdateView.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['username']</span></em><a class="headerlink" href="#apps.personal.views.views.DJMallUserUpdateView.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.views.DJMallUserUpdateView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#apps.personal.views.views.DJMallUserUpdateView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">users.models.models.DJMallUser</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.views.DJMallUserUpdateView.success_url">
+<span class="sig-name descname"><span class="pre">success_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/personal/home/'</span></em><a class="headerlink" href="#apps.personal.views.views.DJMallUserUpdateView.success_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.personal.views.views.DJMallUserUpdateView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'personal/update_username.html'</span></em><a class="headerlink" href="#apps.personal.views.views.DJMallUserUpdateView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-apps.personal.views">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-apps.personal.views" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">DjangoMall</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, 幸福关中.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/djmall/apps.personal.views.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

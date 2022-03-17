@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+
+<html lang="cn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>apps.dadmin.admin &#8212; DjangoMall 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for apps.dadmin.admin</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">django.contrib.admin</span> <span class="kn">import</span> <span class="n">AdminSite</span>
+<span class="c1"># Register your models here.</span>
+<span class="kn">from</span> <span class="nn">.forms</span> <span class="kn">import</span> <span class="n">DJMallAuthenticationForm</span>
+
+
+<div class="viewcode-block" id="DJMallAdminSite"><a class="viewcode-back" href="../../../djmall/apps.dadmin.html#apps.dadmin.admin.DJMallAdminSite">[docs]</a><span class="k">class</span> <span class="nc">DJMallAdminSite</span><span class="p">(</span><span class="n">AdminSite</span><span class="p">):</span>
+    <span class="c1"># 自定义登录后台</span>
+    <span class="n">site_header</span> <span class="o">=</span> <span class="s1">&#39;DJMall商城系统&#39;</span>
+    <span class="n">site_title</span> <span class="o">=</span> <span class="s1">&#39;商城系统&#39;</span>
+    <span class="n">login_form</span> <span class="o">=</span> <span class="n">DJMallAuthenticationForm</span>
+    <span class="n">login_template</span> <span class="o">=</span> <span class="s1">&#39;dadmin/login.html&#39;</span></div>
+
+
+<span class="n">admin_site</span> <span class="o">=</span> <span class="n">DJMallAdminSite</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;dadmin&#39;</span><span class="p">)</span>
+
+
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">DjangoMall</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, 幸福关中.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

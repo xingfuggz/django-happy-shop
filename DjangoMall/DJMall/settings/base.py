@@ -130,3 +130,7 @@ AUTH_USER_MODEL = 'users.DJMallUser'
 AUTHENTICATION_BACKENDS = (
     'users.views.DJMallAuthBackend',
 )
+
+# 集成文档
+DOCS_URL = 'docs'  # url
+DOCS_ROOT = BASE_DIR.parent / 'docs/build/html'   # 文档路径

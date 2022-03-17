@@ -1,0 +1,258 @@
+
+<!DOCTYPE html>
+
+<html lang="cn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>apps.product.views.product_detail &#8212; DjangoMall 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for apps.product.views.product_detail</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">django.core</span> <span class="kn">import</span> <span class="n">serializers</span>
+<span class="kn">from</span> <span class="nn">django.http.response</span> <span class="kn">import</span> <span class="n">JsonResponse</span>
+<span class="kn">from</span> <span class="nn">django.views.generic</span> <span class="kn">import</span> <span class="n">DetailView</span>
+<span class="kn">from</span> <span class="nn">django.views.generic.edit</span> <span class="kn">import</span> <span class="n">FormMixin</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">reverse</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponseForbidden</span>
+<span class="kn">from</span> <span class="nn">DJMall.utils.views</span> <span class="kn">import</span> <span class="n">DJMallBaseView</span>
+<span class="kn">from</span> <span class="nn">product.models</span> <span class="kn">import</span> <span class="n">category</span>
+<span class="kn">from</span> <span class="nn">product.models.product</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">DJMallProductSKU</span><span class="p">,</span> <span class="n">DJMallProductSPU</span><span class="p">,</span> <span class="n">DJMallProductCarouse</span><span class="p">,</span> 
+    <span class="n">DJMallProductSPUSpec</span><span class="p">,</span> <span class="n">DJMallProductSPUSpecOption</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">users.forms</span> <span class="kn">import</span> <span class="n">DJMallFavoriteForm</span>
+<span class="kn">from</span> <span class="nn">users.models</span> <span class="kn">import</span> <span class="n">DJMallFavorite</span>
+
+
+<div class="viewcode-block" id="ProductDetailView"><a class="viewcode-back" href="../../../../djmall/apps.product.views.html#apps.product.views.product_detail.ProductDetailView">[docs]</a><span class="k">class</span> <span class="nc">ProductDetailView</span><span class="p">(</span><span class="n">DJMallBaseView</span><span class="p">,</span> <span class="n">FormMixin</span><span class="p">,</span> <span class="n">DetailView</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; 商品详情 &quot;&quot;&quot;</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s2">&quot;product/product.html&quot;</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">DJMallProductSPU</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">is_del</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">context_object_name</span> <span class="o">=</span> <span class="s1">&#39;product&#39;</span>
+    <span class="n">pk_url_kwarg</span> <span class="o">=</span> <span class="s1">&#39;product_id&#39;</span>
+    <span class="n">form_class</span> <span class="o">=</span> <span class="n">DJMallFavoriteForm</span>
+
+<div class="viewcode-block" id="ProductDetailView.get_context_data"><a class="viewcode-back" href="../../../../djmall/apps.product.views.html#apps.product.views.product_detail.ProductDetailView.get_context_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;slider_image&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ge_slider_image</span><span class="p">()</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;spec_json&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_spec_json</span><span class="p">()</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;spec_sku_json&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_sku_json</span><span class="p">()</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;current_options&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_current_sku</span><span class="p">()</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;product_news&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_product_news</span><span class="p">()</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;has_fav&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_fav</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">context</span></div>
+    
+<div class="viewcode-block" id="ProductDetailView.get_success_url"><a class="viewcode-back" href="../../../../djmall/apps.product.views.html#apps.product.views.product_detail.ProductDetailView.get_success_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;product:product_goods_detail&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;product_id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">pk</span><span class="p">})</span></div>
+
+<div class="viewcode-block" id="ProductDetailView.get_product_dict"><a class="viewcode-back" href="../../../../djmall/apps.product.views.html#apps.product.views.product_detail.ProductDetailView.get_product_dict">[docs]</a>    <span class="k">def</span> <span class="nf">get_product_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;商品的所有数据</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            [dict]: [返回类型为一个字典数据]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">product_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="c1"># 1. 处理当前spu的数据，并包装包product_dict中</span>
+        <span class="n">spu_queryset</span> <span class="o">=</span> <span class="n">DJMallProductSPU</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="n">spu_json</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="n">spu_queryset</span><span class="p">)</span>
+        <span class="n">spu_list</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">spu_json</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">spu</span> <span class="ow">in</span> <span class="n">spu_list</span><span class="p">:</span>
+            <span class="n">product_dict</span><span class="p">[</span><span class="s1">&#39;storeInfo&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">spu</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;fields&#39;</span><span class="p">)</span>
+
+        <span class="c1"># 2. 遍历出spu关联的轮播图</span>
+        <span class="n">product_dict</span><span class="p">[</span><span class="s1">&#39;storeInfo&#39;</span><span class="p">][</span><span class="s1">&#39;slider_image&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span> <span class="n">image</span><span class="o">.</span><span class="n">img</span><span class="o">.</span><span class="n">url</span> <span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">DJMallProductCarouse</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">spu</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">())</span> <span class="p">]</span>
+
+        <span class="c1"># 3. 规格数据</span>
+        <span class="n">specs</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span><span class="o">.</span><span class="n">djmallproductspuspec_set</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
+        <span class="n">specs</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">specs</span><span class="p">)</span>
+        <span class="n">productAttr</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">specs</span><span class="p">:</span>
+            <span class="n">productAttr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;fields&#39;</span><span class="p">))</span>
+            <span class="n">options</span> <span class="o">=</span> <span class="n">DJMallProductSPUSpecOption</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;pk&#39;</span><span class="p">))</span>
+            <span class="n">spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;fields&#39;</span><span class="p">)[</span><span class="s1">&#39;attr_values&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span> <span class="n">option</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">option</span> <span class="ow">in</span> <span class="n">options</span> <span class="p">]</span>
+
+        <span class="n">product_dict</span><span class="p">[</span><span class="s1">&#39;productAttr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">productAttr</span>
+
+        <span class="c1"># 4. spu下的sku关联数据</span>
+        <span class="c1"># {&#39;规格&#39;：&#39;sku&#39;}前端匹配规格下的数据</span>
+        <span class="n">spec_sku_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">sku_queryset</span> <span class="o">=</span> <span class="n">DJMallProductSKU</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">spu</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">temp_sku</span> <span class="ow">in</span> <span class="n">sku_queryset</span><span class="p">:</span>
+            <span class="n">temp_sku_queryset</span> <span class="o">=</span> <span class="n">temp_sku</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="p">[</span> <span class="n">temp_sku_option</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">temp_sku_option</span> <span class="ow">in</span> <span class="n">temp_sku_queryset</span><span class="p">]</span>
+            <span class="n">options_str</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+            <span class="n">spec_sku_dict</span><span class="p">[</span><span class="n">options_str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;spu_id&#39;</span><span class="p">:</span> <span class="n">temp_sku</span><span class="o">.</span><span class="n">spu</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                <span class="s1">&#39;sku_id&#39;</span><span class="p">:</span> <span class="n">temp_sku</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                <span class="s1">&#39;sku_sell_price&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">temp_sku</span><span class="o">.</span><span class="n">sell_price</span><span class="p">,</span>
+                <span class="s1">&#39;sku_image&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;/</span><span class="si">{</span><span class="n">temp_sku</span><span class="o">.</span><span class="n">main_picture</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;sku_bar_code&#39;</span><span class="p">:</span> <span class="n">temp_sku</span><span class="o">.</span><span class="n">bar_code</span><span class="p">,</span>
+                <span class="s1">&#39;sku_market_price&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">temp_sku</span><span class="o">.</span><span class="n">market_price</span><span class="p">,</span>
+                <span class="s1">&#39;sku_cost_price&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">temp_sku</span><span class="o">.</span><span class="n">cost_price</span><span class="p">,</span>
+                <span class="s1">&#39;sku_sales&#39;</span><span class="p">:</span> <span class="n">temp_sku</span><span class="o">.</span><span class="n">sales</span><span class="p">,</span>
+                <span class="s1">&#39;sku_stocks&#39;</span><span class="p">:</span> <span class="n">temp_sku</span><span class="o">.</span><span class="n">stocks</span>
+            <span class="p">}</span>
+        
+        <span class="n">product_dict</span><span class="p">[</span><span class="s1">&#39;productValue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">spec_sku_dict</span>
+        <span class="k">return</span> <span class="n">product_dict</span></div>
+
+<div class="viewcode-block" id="ProductDetailView.ge_slider_image"><a class="viewcode-back" href="../../../../djmall/apps.product.views.html#apps.product.views.product_detail.ProductDetailView.ge_slider_image">[docs]</a>    <span class="k">def</span> <span class="nf">ge_slider_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># 轮播图</span>
+        <span class="n">slider_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_product_dict</span><span class="p">()[</span><span class="s1">&#39;storeInfo&#39;</span><span class="p">][</span><span class="s1">&#39;slider_image&#39;</span><span class="p">]</span>
+        <span class="n">slider_image</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;/</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_product_dict</span><span class="p">()[</span><span class="s1">&#39;storeInfo&#39;</span><span class="p">][</span><span class="s1">&#39;main_picture&#39;</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">slider_image</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ProductDetailView.get_spec_json"><a class="viewcode-back" href="../../../../djmall/apps.product.views.html#apps.product.views.product_detail.ProductDetailView.get_spec_json">[docs]</a>    <span class="k">def</span> <span class="nf">get_spec_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># 规格选项</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_product_dict</span><span class="p">()[</span><span class="s1">&#39;productAttr&#39;</span><span class="p">],</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ProductDetailView.get_sku_json"><a class="viewcode-back" href="../../../../djmall/apps.product.views.html#apps.product.views.product_detail.ProductDetailView.get_sku_json">[docs]</a>    <span class="k">def</span> <span class="nf">get_sku_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># 规格对应的sku数据</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_product_dict</span><span class="p">()[</span><span class="s1">&#39;productValue&#39;</span><span class="p">],</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ProductDetailView.get_current_sku"><a class="viewcode-back" href="../../../../djmall/apps.product.views.html#apps.product.views.product_detail.ProductDetailView.get_current_sku">[docs]</a>    <span class="k">def</span> <span class="nf">get_current_sku</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># 获取存在对应sku的规格值</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_product_dict</span><span class="p">()[</span><span class="s1">&#39;productValue&#39;</span><span class="p">]:</span>
+            <span class="n">keys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_product_dict</span><span class="p">()[</span><span class="s1">&#39;productValue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+            <span class="n">key_list</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="nb">list</span><span class="p">(</span><span class="n">keys</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">key_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">keys</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+                <span class="c1"># [10斤装/礼盒, 70#]  </span>
+                <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">key_list</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="ProductDetailView.get_product_news"><a class="viewcode-back" href="../../../../djmall/apps.product.views.html#apps.product.views.product_detail.ProductDetailView.get_product_news">[docs]</a>    <span class="k">def</span> <span class="nf">get_product_news</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># 新品推荐</span>
+        <span class="c1"># [{&#39;spu&#39;: &#39;sku&#39;}, {&#39;spu&#39;: &#39;sku&#39;}]</span>
+        <span class="n">category</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span><span class="o">.</span><span class="n">category</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+        <span class="n">spu_queryset</span> <span class="o">=</span> <span class="n">DJMallProductSPU</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="n">category</span><span class="p">,</span> <span class="n">is_new</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span>
+        <span class="n">product_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">spu</span> <span class="ow">in</span> <span class="n">spu_queryset</span><span class="p">:</span>
+            <span class="n">prduct_dict</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">prduct_dict</span><span class="p">[</span><span class="n">spu</span><span class="p">]</span> <span class="o">=</span> <span class="n">spu</span><span class="o">.</span><span class="n">djmallproductsku_set</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+            <span class="n">product_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prduct_dict</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">product_list</span></div>
+    
+<div class="viewcode-block" id="ProductDetailView.post"><a class="viewcode-back" href="../../../../djmall/apps.product.views.html#apps.product.views.product_detail.ProductDetailView.post">[docs]</a>    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
+            <span class="c1"># return HttpResponseForbidden()</span>
+            <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span>
+                <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;err&#39;</span><span class="p">,</span> <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;未登录，请登录后操作！&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;redirect_to&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">path_info</span>
+            <span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">object</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_form</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">form_valid</span><span class="p">(</span><span class="n">form</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">form_invalid</span><span class="p">(</span><span class="n">form</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ProductDetailView.form_valid"><a class="viewcode-back" href="../../../../djmall/apps.product.views.html#apps.product.views.product_detail.ProductDetailView.form_valid">[docs]</a>    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
+        <span class="c1"># Here, we would record the user&#39;s interest using the message</span>
+        <span class="c1"># passed in form.cleaned_data[&#39;message&#39;]</span>
+        <span class="n">object_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;object_id&#39;</span><span class="p">)</span>  <span class="c1"># 获取要收藏的对象</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">DJMallFavorite</span><span class="p">(</span><span class="n">content_object</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">(),</span> <span class="n">object_id</span><span class="o">=</span><span class="n">object_id</span><span class="p">,</span> <span class="n">owner</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="c1"># return super().form_valid(form)</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;code&#39;</span><span class="p">:</span><span class="s1">&#39;ok&#39;</span> <span class="p">,</span><span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;收藏成功&#39;</span><span class="p">})</span> </div>
+    
+<div class="viewcode-block" id="ProductDetailView.has_fav"><a class="viewcode-back" href="../../../../djmall/apps.product.views.html#apps.product.views.product_detail.ProductDetailView.has_fav">[docs]</a>    <span class="k">def</span> <span class="nf">has_fav</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># 判断该商品是否已经收藏</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">django.contrib.contenttypes.models</span> <span class="kn">import</span> <span class="n">ContentType</span>
+            <span class="n">content_type</span> <span class="o">=</span> <span class="n">ContentType</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get_for_model</span><span class="p">(</span><span class="n">DJMallProductSPU</span><span class="p">)</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">DJMallFavorite</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+                <span class="n">content_type</span><span class="o">=</span><span class="n">content_type</span><span class="p">,</span> <span class="n">object_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">owner</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">t</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../index.html">DjangoMall</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, 幸福关中.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

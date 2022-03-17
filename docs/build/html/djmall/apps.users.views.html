@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+
+<html lang="cn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>apps.users.views package &#8212; DjangoMall 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="apps-users-views-package">
+<h1>apps.users.views package<a class="headerlink" href="#apps-users-views-package" title="Permalink to this headline">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-apps.users.views.email">
+<span id="apps-users-views-email-module"></span><h2>apps.users.views.email module<a class="headerlink" href="#module-apps.users.views.email" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.users.views.email.DJMallEmailVerifyRecordCreateView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.users.views.email.</span></span><span class="sig-name descname"><span class="pre">DJMallEmailVerifyRecordCreateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/users/views/email.html#DJMallEmailVerifyRecordCreateView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.users.views.email.DJMallEmailVerifyRecordCreateView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="DJMall.utils.html#DJMall.utils.views.JsonableResponseMixin" title="DJMall.utils.views.JsonableResponseMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">DJMall.utils.views.JsonableResponseMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.edit.CreateView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.users.views.email.DJMallEmailVerifyRecordCreateView.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['email',</span> <span class="pre">'send_type']</span></em><a class="headerlink" href="#apps.users.views.email.DJMallEmailVerifyRecordCreateView.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="apps.users.views.email.DJMallEmailVerifyRecordCreateView.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/users/views/email.html#DJMallEmailVerifyRecordCreateView.form_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.users.views.email.DJMallEmailVerifyRecordCreateView.form_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the form is valid, save the associated model.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="apps.users.views.email.DJMallEmailVerifyRecordCreateView.get_email_code">
+<span class="sig-name descname"><span class="pre">get_email_code</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/users/views/email.html#DJMallEmailVerifyRecordCreateView.get_email_code"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.users.views.email.DJMallEmailVerifyRecordCreateView.get_email_code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.users.views.email.DJMallEmailVerifyRecordCreateView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#apps.users.views.email.DJMallEmailVerifyRecordCreateView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">users.models.email.DJMallEmailVerifyRecord</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.users.views.email.DJMallEmailVerifyRecordCreateView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'users/code.html'</span></em><a class="headerlink" href="#apps.users.views.email.DJMallEmailVerifyRecordCreateView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="apps.users.views.email.DJMallEmailVerifyRecordCreateView.verify_email">
+<span class="sig-name descname"><span class="pre">verify_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/users/views/email.html#DJMallEmailVerifyRecordCreateView.verify_email"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.users.views.email.DJMallEmailVerifyRecordCreateView.verify_email" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-apps.users.views.views">
+<span id="apps-users-views-views-module"></span><h2>apps.users.views.views module<a class="headerlink" href="#module-apps.users.views.views" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.users.views.views.DJMallAuthBackend">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.users.views.views.</span></span><span class="sig-name descname"><span class="pre">DJMallAuthBackend</span></span><a class="reference internal" href="../_modules/apps/users/views/views.html#DJMallAuthBackend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.users.views.views.DJMallAuthBackend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.backends.ModelBackend</span></code></p>
+<p>自定义用户验证，继承ModelBackend, 重写authenticate方法
+ModelBackend 类实际是django继承BaseBackend实现的验证登录后端，
+我们这里使用的是django自带的验证后端，那最好的做法就是扩展重写该类</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="apps.users.views.views.DJMallAuthBackend.authenticate">
+<span class="sig-name descname"><span class="pre">authenticate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/users/views/views.html#DJMallAuthBackend.authenticate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.users.views.views.DJMallAuthBackend.authenticate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.users.views.views.DJMallLoginView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.users.views.views.</span></span><span class="sig-name descname"><span class="pre">DJMallLoginView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/users/views/views.html#DJMallLoginView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.users.views.views.DJMallLoginView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="DJMall.utils.html#DJMall.utils.views.DJMallBaseView" title="DJMall.utils.views.DJMallBaseView"><code class="xref py py-class docutils literal notranslate"><span class="pre">DJMall.utils.views.DJMallBaseView</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.views.LoginView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.users.views.views.DJMallLoginView.extra_context">
+<span class="sig-name descname"><span class="pre">extra_context</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'sub_title':</span> <span class="pre">'DJMall商城系统！',</span> <span class="pre">'title':</span> <span class="pre">'登录'}</span></em><a class="headerlink" href="#apps.users.views.views.DJMallLoginView.extra_context" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.users.views.views.DJMallLoginView.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#apps.users.views.views.DJMallLoginView.form_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">users.forms.DJMallLoginAuthenticationForm</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="apps.users.views.views.DJMallLoginView.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/apps/users/views/views.html#DJMallLoginView.get_success_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.users.views.views.DJMallLoginView.get_success_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the URL to redirect to after processing a valid form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.users.views.views.DJMallLoginView.success_url">
+<span class="sig-name descname"><span class="pre">success_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/'</span></em><a class="headerlink" href="#apps.users.views.views.DJMallLoginView.success_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.users.views.views.DJMallLoginView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'users/login.html'</span></em><a class="headerlink" href="#apps.users.views.views.DJMallLoginView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.users.views.views.DJMallLogoutView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.users.views.views.</span></span><span class="sig-name descname"><span class="pre">DJMallLogoutView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/users/views/views.html#DJMallLogoutView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.users.views.views.DJMallLogoutView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.views.LogoutView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.users.views.views.DJMallLogoutView.redirect_authenticated_user">
+<span class="sig-name descname"><span class="pre">redirect_authenticated_user</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#apps.users.views.views.DJMallLogoutView.redirect_authenticated_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.users.views.views.DJMallLogoutView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'users/logout.html'</span></em><a class="headerlink" href="#apps.users.views.views.DJMallLogoutView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.users.views.views.DJMallRegisterView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.users.views.views.</span></span><span class="sig-name descname"><span class="pre">DJMallRegisterView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/users/views/views.html#DJMallRegisterView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.users.views.views.DJMallRegisterView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="DJMall.utils.html#DJMall.utils.views.DJMallBaseView" title="DJMall.utils.views.DJMallBaseView"><code class="xref py py-class docutils literal notranslate"><span class="pre">DJMall.utils.views.DJMallBaseView</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.edit.CreateView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.users.views.views.DJMallRegisterView.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#apps.users.views.views.DJMallRegisterView.form_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">users.forms.DJMallRegisterForm</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.users.views.views.DJMallRegisterView.success_url">
+<span class="sig-name descname"><span class="pre">success_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/users/login/'</span></em><a class="headerlink" href="#apps.users.views.views.DJMallRegisterView.success_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.users.views.views.DJMallRegisterView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'users/register.html'</span></em><a class="headerlink" href="#apps.users.views.views.DJMallRegisterView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-apps.users.views">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-apps.users.views" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">DjangoMall</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, 幸福关中.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/djmall/apps.users.views.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

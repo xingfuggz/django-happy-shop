@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+
+<html lang="cn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>apps.order package &#8212; DjangoMall 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="apps-order-package">
+<h1>apps.order package<a class="headerlink" href="#apps-order-package" title="Permalink to this headline">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="apps.order.migrations.html">apps.order.migrations package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="apps.order.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apps.order.migrations.html#module-apps.order.migrations.0001_initial">apps.order.migrations.0001_initial module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apps.order.migrations.html#module-apps.order.migrations.0002_djmallorderinfo_owner">apps.order.migrations.0002_djmallorderinfo_owner module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apps.order.migrations.html#module-apps.order.migrations">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="apps.order.views.html">apps.order.views package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="apps.order.views.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apps.order.views.html#module-apps.order.views.order">apps.order.views.order module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apps.order.views.html#module-apps.order.views.views">apps.order.views.views module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apps.order.views.html#module-apps.order.views">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-apps.order.apps">
+<span id="apps-order-apps-module"></span><h2>apps.order.apps module<a class="headerlink" href="#module-apps.order.apps" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.order.apps.OrderConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.order.apps.</span></span><span class="sig-name descname"><span class="pre">OrderConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/order/apps.html#OrderConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.order.apps.OrderConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.apps.config.AppConfig</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.order.apps.OrderConfig.default_auto_field">
+<span class="sig-name descname"><span class="pre">default_auto_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'django.db.models.BigAutoField'</span></em><a class="headerlink" href="#apps.order.apps.OrderConfig.default_auto_field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.order.apps.OrderConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'order'</span></em><a class="headerlink" href="#apps.order.apps.OrderConfig.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="apps-order-dadmin-module">
+<h2>apps.order.dadmin module<a class="headerlink" href="#apps-order-dadmin-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-apps.order.forms">
+<span id="apps-order-forms-module"></span><h2>apps.order.forms module<a class="headerlink" href="#module-apps.order.forms" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.order.forms.DJMallOrderInfoForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.order.forms.</span></span><span class="sig-name descname"><span class="pre">DJMallOrderInfoForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/order/forms.html#DJMallOrderInfoForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.order.forms.DJMallOrderInfoForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.forms.models.ModelForm</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.order.forms.DJMallOrderInfoForm.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="../_modules/apps/order/forms.html#DJMallOrderInfoForm.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.order.forms.DJMallOrderInfoForm.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.order.forms.DJMallOrderInfoForm.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['pay_method',</span> <span class="pre">'order_mark',</span> <span class="pre">'address']</span></em><a class="headerlink" href="#apps.order.forms.DJMallOrderInfoForm.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.order.forms.DJMallOrderInfoForm.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#apps.order.forms.DJMallOrderInfoForm.Meta.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">order.models.DJMallOrderInfo</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.order.forms.DJMallOrderInfoForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'address':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'order_mark':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'pay_method':</span> <span class="pre">&lt;django.forms.fields.TypedChoiceField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#apps.order.forms.DJMallOrderInfoForm.base_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.order.forms.DJMallOrderInfoForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#apps.order.forms.DJMallOrderInfoForm.declared_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="apps.order.forms.DJMallOrderInfoForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#apps.order.forms.DJMallOrderInfoForm.media" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.order.forms.DJMallOrderProductForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.order.forms.</span></span><span class="sig-name descname"><span class="pre">DJMallOrderProductForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/apps/order/forms.html#DJMallOrderProductForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.order.forms.DJMallOrderProductForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.forms.models.ModelForm</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.order.forms.DJMallOrderProductForm.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="../_modules/apps/order/forms.html#DJMallOrderProductForm.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.order.forms.DJMallOrderProductForm.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.order.forms.DJMallOrderProductForm.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['order',</span> <span class="pre">'sku']</span></em><a class="headerlink" href="#apps.order.forms.DJMallOrderProductForm.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.order.forms.DJMallOrderProductForm.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#apps.order.forms.DJMallOrderProductForm.Meta.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">order.models.DJMallOrderProduct</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.order.forms.DJMallOrderProductForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'order':</span> <span class="pre">&lt;django.forms.models.ModelChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'sku':</span> <span class="pre">&lt;django.forms.models.ModelChoiceField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#apps.order.forms.DJMallOrderProductForm.base_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.order.forms.DJMallOrderProductForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#apps.order.forms.DJMallOrderProductForm.declared_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="apps.order.forms.DJMallOrderProductForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#apps.order.forms.DJMallOrderProductForm.media" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="apps-order-models-module">
+<h2>apps.order.models module<a class="headerlink" href="#apps-order-models-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-apps.order.tests">
+<span id="apps-order-tests-module"></span><h2>apps.order.tests module<a class="headerlink" href="#module-apps.order.tests" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-apps.order.urls">
+<span id="apps-order-urls-module"></span><h2>apps.order.urls module<a class="headerlink" href="#module-apps.order.urls" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-apps.order">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-apps.order" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">DjangoMall</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, 幸福关中.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/djmall/apps.order.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

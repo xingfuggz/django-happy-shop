@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+
+<html lang="cn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>DJMall.utils package &#8212; DjangoMall 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="djmall-utils-package">
+<h1>DJMall.utils package<a class="headerlink" href="#djmall-utils-package" title="Permalink to this headline">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-DJMall.utils.models">
+<span id="djmall-utils-models-module"></span><h2>DJMall.utils.models module<a class="headerlink" href="#module-DJMall.utils.models" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="DJMall.utils.models.DJMallBaseModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DJMall.utils.models.</span></span><span class="sig-name descname"><span class="pre">DJMallBaseModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DJMall/utils/models.html#DJMallBaseModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DJMall.utils.models.DJMallBaseModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>全局继承基类</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="DJMall.utils.models.DJMallBaseModel.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="../_modules/DJMall/utils/models.html#DJMallBaseModel.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DJMall.utils.models.DJMallBaseModel.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DJMall.utils.models.DJMallBaseModel.Meta.abstract">
+<span class="sig-name descname"><span class="pre">abstract</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#DJMall.utils.models.DJMallBaseModel.Meta.abstract" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DJMall.utils.models.DJMallBaseModel.add_date">
+<span class="sig-name descname"><span class="pre">add_date</span></span><a class="headerlink" href="#DJMall.utils.models.DJMallBaseModel.add_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DJMall.utils.models.DJMallBaseModel.get_next_by_add_date">
+<span class="sig-name descname"><span class="pre">get_next_by_add_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">add_date&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#DJMall.utils.models.DJMallBaseModel.get_next_by_add_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DJMall.utils.models.DJMallBaseModel.get_next_by_pub_date">
+<span class="sig-name descname"><span class="pre">get_next_by_pub_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">pub_date&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#DJMall.utils.models.DJMallBaseModel.get_next_by_pub_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DJMall.utils.models.DJMallBaseModel.get_previous_by_add_date">
+<span class="sig-name descname"><span class="pre">get_previous_by_add_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">add_date&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#DJMall.utils.models.DJMallBaseModel.get_previous_by_add_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DJMall.utils.models.DJMallBaseModel.get_previous_by_pub_date">
+<span class="sig-name descname"><span class="pre">get_previous_by_pub_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">pub_date&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#DJMall.utils.models.DJMallBaseModel.get_previous_by_pub_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DJMall.utils.models.DJMallBaseModel.is_del">
+<span class="sig-name descname"><span class="pre">is_del</span></span><a class="headerlink" href="#DJMall.utils.models.DJMallBaseModel.is_del" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DJMall.utils.models.DJMallBaseModel.pub_date">
+<span class="sig-name descname"><span class="pre">pub_date</span></span><a class="headerlink" href="#DJMall.utils.models.DJMallBaseModel.pub_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-DJMall.utils.utils">
+<span id="djmall-utils-utils-module"></span><h2>DJMall.utils.utils module<a class="headerlink" href="#module-DJMall.utils.utils" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="DJMall.utils.utils.random_str">
+<span class="sig-prename descclassname"><span class="pre">DJMall.utils.utils.</span></span><span class="sig-name descname"><span class="pre">random_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">randomlength</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DJMall/utils/utils.html#random_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DJMall.utils.utils.random_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>生成4位数的随机字符串方法</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="DJMall.utils.utils.send_email">
+<span class="sig-prename descclassname"><span class="pre">DJMall.utils.utils.</span></span><span class="sig-name descname"><span class="pre">send_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_emial</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_email</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'1158920674&#64;qq.com'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DJMall/utils/utils.html#send_email"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DJMall.utils.utils.send_email" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-DJMall.utils.views">
+<span id="djmall-utils-views-module"></span><h2>DJMall.utils.views module<a class="headerlink" href="#module-DJMall.utils.views" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="DJMall.utils.views.DJMallBaseView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DJMall.utils.views.</span></span><span class="sig-name descname"><span class="pre">DJMallBaseView</span></span><a class="reference internal" href="../_modules/DJMall/utils/views.html#DJMallBaseView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DJMall.utils.views.DJMallBaseView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>全局继承基类视图</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="DJMall.utils.views.DJMallBaseView.get_category_dict">
+<span class="sig-name descname"><span class="pre">get_category_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DJMall/utils/views.html#DJMallBaseView.get_category_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DJMall.utils.views.DJMallBaseView.get_category_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DJMall.utils.views.DJMallBaseView.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DJMall/utils/views.html#DJMallBaseView.get_context_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DJMall.utils.views.DJMallBaseView.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="DJMall.utils.views.IndexTemplateView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DJMall.utils.views.</span></span><span class="sig-name descname"><span class="pre">IndexTemplateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DJMall/utils/views.html#IndexTemplateView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DJMall.utils.views.IndexTemplateView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#DJMall.utils.views.DJMallBaseView" title="DJMall.utils.views.DJMallBaseView"><code class="xref py py-class docutils literal notranslate"><span class="pre">DJMall.utils.views.DJMallBaseView</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.base.TemplateView</span></code></p>
+<p>首页视图</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DJMall.utils.views.IndexTemplateView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'index.html'</span></em><a class="headerlink" href="#DJMall.utils.views.IndexTemplateView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="DJMall.utils.views.JsonableResponseMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DJMall.utils.views.</span></span><span class="sig-name descname"><span class="pre">JsonableResponseMixin</span></span><a class="reference internal" href="../_modules/DJMall/utils/views.html#JsonableResponseMixin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DJMall.utils.views.JsonableResponseMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Mixin to add JSON support to a form.
+Must be used with an object-based FormView (e.g. CreateView)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="DJMall.utils.views.JsonableResponseMixin.form_invalid">
+<span class="sig-name descname"><span class="pre">form_invalid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DJMall/utils/views.html#JsonableResponseMixin.form_invalid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DJMall.utils.views.JsonableResponseMixin.form_invalid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DJMall.utils.views.JsonableResponseMixin.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DJMall/utils/views.html#JsonableResponseMixin.form_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DJMall.utils.views.JsonableResponseMixin.form_valid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-DJMall.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-DJMall.utils" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">DjangoMall</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, 幸福关中.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/djmall/DJMall.utils.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -31,8 +31,8 @@ urlpatterns = [
     path('personal/', include('personal.urls')),
     path("order/", include('order.urls')),
     # path('accounts/', include('django.contrib.auth.urls')),
-    path('', IndexTemplateView.as_view(), name="index")
-]
+    path('', IndexTemplateView.as_view(), name="index"),
+] + static(settings.DOCS_URL , document_root=settings.DOCS_ROOT)
 
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
