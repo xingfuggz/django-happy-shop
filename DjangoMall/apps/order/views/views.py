@@ -32,6 +32,16 @@ class DJMallPayView(DJMallLoginRequiredMixin, DJMallBaseView, TemplateView):
         return context
     
     def post(self, request, *args, **kwargs):
+        """获取到购物车数据并存入缓存，不过期，待支付完成后清除缓存
+        # is_type 拥有两个值
+        -- cache 为缓存标识，第一次post将缓存
+        -- cart  为支付标识， 代表支付的商品数据来自购物车
+        
+        缓存购物车数据时机为，当post过来的is_type带有cache标识和购物车数据存在时则缓存
+        
+        支付时机为，当post传过来的is_type的类型为cart并且缓存中有购物车商品数据时则创建订单支付
+    
+        """
         # 获取到购物车数据放入缓存，永不过期，支付完成后主动清除缓存
         data = request.POST
         
@@ -44,7 +54,6 @@ class DJMallPayView(DJMallLoginRequiredMixin, DJMallBaseView, TemplateView):
         carts = data.get('carts')
         # 缓存时机判断，这里如果不做判断，两次POST会覆盖缓存
         if is_type == 'cache' and carts:
-            print('ceshi')
             cache.set(request.user.id, carts, timeout=None) 
         ######################################################
         
@@ -128,4 +137,4 @@ class DJMallPayView(DJMallLoginRequiredMixin, DJMallBaseView, TemplateView):
             sku.stocks = F('stocks') - int(num)
             sku.save()
             
-                                
+                          
