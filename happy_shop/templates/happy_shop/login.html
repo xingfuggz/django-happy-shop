@@ -1,0 +1,54 @@
+{% extends 'happy_shop/base.html' %}
+
+{% block title %}{{ site_title }}-{{ title }}{% endblock %}
+    
+{% block breadcrumb %}{% endblock %}
+{% block banner %}{% endblock %}
+
+{% block main %}
+<div class="hero is-fullheight1" id="simpleShopLogin">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-5-desktop is-4-fullhd">
+                    <div class="box mt-6">
+                        <h1 class="title is-size-3 has-text-centered">{{ title }}</h1>
+                        {% block form %} 
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <!-- {{ form.as_p }} -->
+                            <b-field label="用户名"
+                                :label-position="labelPosition"
+                                message="{{ form.username.errors }}">
+                                {{ form.username }}
+                            </b-field>
+                            <b-field label="密码"
+                                :label-position="labelPosition"
+                                message="{{ form.password.errors }}">
+                                {{ form.password }}
+                            </b-field>
+                            <input type="hidden" name="next" value="{{ next }}">
+                            <input type="submit" class=" button is-fullwidth is-primary" value="登录">
+                        </form>
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block vue %}
+<script>
+    var simpleShopLogin = new Vue({
+        el: "#simpleShopLogin",
+        delimiters: ['{$', '$}'],
+        data: {
+            labelPosition: 'on-border'
+        }
+    })
+</script>
+{% endblock %}
+    

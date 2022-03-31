@@ -1,0 +1,24 @@
+include LICENSE
+include README.rst
+recursive-include happy_shop *
+recursive-include happy_shop/static *
+recursive-include happy_shop/templates *
+recursive-include happy_shop/api *
+recursive-include happy_shop/pay *
+recursive-include happy_shop/conf *
+recursive-include happy_shop/templatetags *
+recursive-exclude happy_shop/__pycache__ *
+recursive-exclude happy_shop/api/__pycache__ *
+recursive-exclude happy_shop/api/serializers/__pycache__ *
+recursive-exclude happy_shop/api/views/__pycache__ *
+recursive-exclude happy_shop/conf/__pycache__ *
+recursive-exclude happy_shop/migrations/__pycache__ *
+recursive-exclude happy_shop/models/__pycache__ *
+recursive-exclude happy_shop/pay/__pycache__ *
+recursive-exclude happy_shop/pay/alipay/__pycache__ *
+recursive-exclude happy_shop/templatetags/__pycache__ *
+recursive-exclude happy_shop/views/__pycache__ *
+recursive-exclude djangoMallProject *
+recursive-exclude deploy *
+recursive-exclude manage.py
+recursive-exclude requirements.txt

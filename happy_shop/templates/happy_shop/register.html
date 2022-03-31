@@ -1,0 +1,23 @@
+{% extends 'happy_shop/login.html' %}
+
+
+{% block title %}注册-{{ title }}{% endblock %}
+
+
+{% block form %}
+    <form action="" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <b-field label="{{ field.label }}"
+            :label-position="labelPosition">
+            {{ field }}
+            <template #message>
+                <div>{{ field.errors }}</div>
+            </template>
+        </b-field>
+        {% endfor %}
+        <input type="hidden" name="next" value="{{ next }}">
+        <input type="submit" class=" button is-fullwidth is-primary" value="注册">
+    </form>
+{% endblock %}
+    
