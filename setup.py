@@ -1,11 +1,11 @@
 from setuptools import setup, find_packages
 
-with open("/home/qbc/web/django-happy-shop/README.md", "r", encoding="utf-8") as fh:
+with open("/www/wwwroot/mall.lotdoc.cn/django-happy-shop/README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
     name="django-happy-shop",
-    version="1.0.3",
+    version="1.0.4",
     author="幸福关中",
     author_email="1158920674@qq.com",
     description="一个简单的django商城系统.",

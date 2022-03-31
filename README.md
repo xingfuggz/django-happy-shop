@@ -55,10 +55,11 @@ path('api-auth/', include('rest_framework.urls')),
     HAPPY_SHOP = {
         'ALIPAY':{
             'APPID': appid
-            'RETURN_URL': 'http://127.0.0.1:8000/shop/api/alipay/',
-            'NOTIFY_URL': 'http://127.0.0.1:8000/shop/api/alipay/',
-            'PRIVATE_KEY':BASE_DIR / 'app_private_key.pem',           # 应用私钥
-            'PUBLIC_KEY':BASE_DIR / 'alipay_public_key',              # 支付宝公钥，不是应用公钥
+            'RETURN_URL': 'http://127.0.0.1:8000/happy/api/alipay/',
+            'NOTIFY_URL': 'http://127.0.0.1:8000/happy/api/alipay/',
+            'DEBUG': DEBUG, 
+            'PRIVATE_KEY':BASE_DIR / 'app_private_key.pem',    # 应用私钥
+            'PUBLIC_KEY':BASE_DIR / 'alipay_public_key.pem',   # 支付宝公钥，不是应用公钥
         },
     }
 ```   
