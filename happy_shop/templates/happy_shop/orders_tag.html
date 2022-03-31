@@ -2,7 +2,7 @@
 {% for order in orders %}
 <div class="box">
     <p class="pb-3">订单日期：{{ order.add_date }}</p>
-    {% for goods in order.simpleshopordersku_set.all %}
+    {% for goods in order.happyshopordersku_set.all %}
     <article class="media">
         <figure class="media-left">
             <p class="image is-96x96">

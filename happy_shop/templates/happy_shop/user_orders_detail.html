@@ -45,7 +45,7 @@
     <div class="dropdown-divider"></div>
     <div class="box">
         <p class="pb-3">订单日期：{{ order.add_date }}</p>
-        {% for goods in order.simpleshopordersku_set.all %}
+        {% for goods in order.happyshopordersku_set.all %}
         <article class="media">
             <figure class="media-left">
                 <p class="image is-96x96">
@@ -61,7 +61,7 @@
                 <p class="has-text-grey-light pt-1 pb-1">规格: {{ goods.sku.options.all|join:"," }} </p>
                 <p class="has-text-grey-light">
                     <span class="pr-4">数量: {{ goods.count }}</span>
-                    <span>实付: {{ goods.price }}</span>
+                    <span>单价: {{ goods.price }}</span>
                 </p>
     
             </div>
@@ -72,7 +72,7 @@
         {% endfor %}
         <div class="is-block has-background-light p-3">
             <div class="is-pulled-left">
-                <button class="button is-narrow is-small is-warning is-light has-text-weight-bold">总金额：¥{{ order.total_amount }}</button> 
+                <button class="button is-narrow is-small is-warning is-light has-text-weight-bold">实付：¥{{ order.total_amount }}</button> 
             </div>
             <div class="is-pulled-right">
                 {% if order.pay_status == 1 %}

@@ -22,3 +22,4 @@ recursive-exclude djangoMallProject *
 recursive-exclude deploy *
 recursive-exclude manage.py
 recursive-exclude requirements.txt
+recursive-exclude RELEASE.sh
