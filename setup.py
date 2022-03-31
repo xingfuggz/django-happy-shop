@@ -5,7 +5,7 @@ with open("/www/wwwroot/mall.lotdoc.cn/django-happy-shop/README.md", "r", encodi
 
 setup(
     name="django-happy-shop",
-    version="1.0.4",
+    version="1.0.5",
     author="幸福关中",
     author_email="1158920674@qq.com",
     description="一个简单的django商城系统.",
