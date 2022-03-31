@@ -222,7 +222,7 @@
 						cancelText: '取消',
 						confirmText: '确认',
 						onConfirm: () => {
-							axios.get("/shop/logout/").then(() => {
+							axios.get("{% url 'happy_shop:logout' %}").then(() => {
 								this.$buefy.toast.open('退出成功!')
 								setTimeout("window.location.reload()", 1500)
 								// window.location.href = '/users/login/';
