@@ -1,0 +1,9 @@
+include LICENSE
+include README.rst
+recursive-include happy_shop *
+recursive-include happy_shop/static *
+recursive-include happy_shop/templates *
+recursive-include happy_shop/api *
+recursive-include happy_shop/pay *
+recursive-include happy_shop/conf *
+recursive-include happy_shop/templatetags *
