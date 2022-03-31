@@ -47,12 +47,11 @@ class HappyShopCategory(BaseModelMixin):
         navs = cache.get('navs')
         if navs:
             return navs
-
         queryset = cls.objects.filter(is_del=False).values(
             'id', 'name', 'parent', 'is_nav', 'icon', 'sort')
         from happy_shop.utils import generate_tree
         navs_tree = generate_tree(list(queryset), None)
-        cache.set('navs', navs_tree, 7200)
+        cache.set('navs', navs_tree, 60)
         navs = cache.get('navs')
         return navs
 
@@ -123,9 +122,9 @@ class HappyShopSKU(BaseModelMixin):
     main_picture = models.ImageField(
         "商品主图", upload_to="happyshop/sku/", max_length=200)
     bar_code = models.CharField("商品条码", max_length=50, default="", blank=True)
-    sell_price = models.DecimalField("商品售价", max_digits=8, decimal_places=2)
-    market_price = models.DecimalField("市场价/划线价", max_digits=8, decimal_places=2)
-    cost_price = models.DecimalField("成本价", max_digits=8, decimal_places=2)
+    sell_price = models.DecimalField("商品售价", max_digits=12, decimal_places=2)
+    market_price = models.DecimalField("市场价/划线价", max_digits=12, decimal_places=2)
+    cost_price = models.DecimalField("成本价", max_digits=12, decimal_places=2)
     stocks = models.PositiveIntegerField("库存", default=0)
     sales = models.PositiveIntegerField("销量", default=0)
     sort = models.PositiveIntegerField("排序", default=0)

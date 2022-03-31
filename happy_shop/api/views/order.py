@@ -142,6 +142,7 @@ class HappyShopOrderInfoViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, 
         # 思考：这里的商品数量应该获取购物车对应的数量，那这里依然应该以购物车为基准
         for cart in self.get_carts(team_datas['carts']):
             sku = HappyShopSKU.objects.get(id=cart['sku'])
+            print(sku.sell_price)
             HappyShopOrderSKU.objects.create(order=order_info, sku=sku, count=cart['num'], price=sku.sell_price)
         # 删除已经流转到订单的购物车数据
         HappyShopingCart.objects.filter(id__in=carts_ids).delete()

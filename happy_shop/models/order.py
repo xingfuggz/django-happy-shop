@@ -39,11 +39,11 @@ class HappyShopOrderInfo(BaseModelMixin):
     pay_method = models.IntegerField(
         choices=PayMethodChoices.choices, default=2, verbose_name="支付方式", help_text="支付方式")
     total_amount = models.DecimalField(
-        max_digits=10, decimal_places=2, verbose_name="商品总金额")
+        max_digits=12, decimal_places=2, verbose_name="商品总金额")
     order_mark = models.CharField(
         blank=True, default="", max_length=100, verbose_name="订单备注", help_text="订单备注")
     freight = models.DecimalField(
-        max_digits=10, decimal_places=2, verbose_name="运费")
+        max_digits=12, decimal_places=2, verbose_name="运费")
     name = models.CharField("签收人", max_length=50, default="")
     phone = models.CharField("手机号", max_length=11, default="")
     email = models.EmailField("邮箱", blank=True, default="", max_length=50)
@@ -74,7 +74,7 @@ class HappyShopOrderSKU(BaseModelMixin):
     order = models.ForeignKey(HappyShopOrderInfo, on_delete = models.PROTECT, verbose_name="订单")
     sku = models.ForeignKey(HappyShopSKU, on_delete = models.PROTECT, blank=True, null=True, verbose_name="订单商品")
     count = models.IntegerField(default=1, verbose_name="数量")
-    price = models.DecimalField('单价', max_digits=5, decimal_places=2)
+    price = models.DecimalField('单价', max_digits=18, decimal_places=2)
     is_commented = models.BooleanField(default=False, verbose_name="是否已评价")
 
     class Meta:
