@@ -5,7 +5,7 @@ with open("/home/qbc/web/django-happy-shop/README.md", "r", encoding="utf-8") as
 
 setup(
     name="django-happy-shop",
-    version="1.0.1",
+    version="1.0.3",
     author="幸福关中",
     author_email="1158920674@qq.com",
     description="一个简单的django商城系统.",

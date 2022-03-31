@@ -13,6 +13,7 @@ media/
 develop-eggs/
 dist/
 django_happy_shop.egg-info/
+djangoMallProject/
 downloads/
 eggs/
 .eggs/
@@ -37,7 +38,7 @@ MANIFEST
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
-
+manage.py
 # Unit test / coverage reports
 htmlcov/
 .tox/

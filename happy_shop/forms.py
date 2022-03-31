@@ -9,12 +9,12 @@ User = get_user_model()
 
 class HappyShopTextInput(TextInput):
     input_type = "text"
-    template_name = "simple_shop/widgets/text.html"
+    template_name = "happy_shop/widgets/text.html"
 
 
 class HappyShopPasswordInput(PasswordInput):
     input_type = "password"
-    template_name = "simple_shop/widgets/text.html"
+    template_name = "happy_shop/widgets/text.html"
 
 
 class HappyShopLoginForm(AuthenticationForm):
