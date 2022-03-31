@@ -27,37 +27,33 @@
 {% block main %}
 <section class="section">
     <div class="container">
-        <div class="columns is-multiline">
-            
-            {% for key, values in cate_skus_dict.items %}
-            <div class="box">
-                <h1 class=" is-size-3">{{ key }}</h1>
-                <div class=" dropdown-divider"></div>
-                <div class="columns is-multiline mt-3">
-                    {% for sku in values %}
-                    <div class="column is-3">
-                        <a href="{% url 'happy_shop:goods_detail' sku.spu.id %}" class="box">
-                            <figure class="image is-square">
-                                <img src="{{ MEDIA_URL }}{{ sku.main_picture }}" alt="{{ sku.spu.title }}">
-                            </figure>
-                            <h1 class="pt-3 pb-1 has-text-weight-medium is-size-4 has-text-danger-dark is-family-primary">
-                                ¥{{ sku.sell_price }}</h1>
-                            <h2 class="is-family-secondary is-size-14">
-                                {{ sku.spu.title }} {{ sku.get_options }}
-                            </h2>
-                            <div class="mt-2 foot">
-                                <div class="is-pulled-left is-size-7 has-text-grey-light">{{ sku.sales }}人付款</div>
-                                <div class="is-pulled-right is-size-7 has-text-grey-light">5.0分</div>
-                                <div class="is-clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                    {% endfor %}
+        {% for key, values in cate_skus_dict.items %}
+        <div class="box">
+            <h1 class=" is-size-3">{{ key }}</h1>
+            <div class=" dropdown-divider"></div>
+            <div class="columns is-multiline mt-3">
+                {% for sku in values %}
+                <div class="column is-3">
+                    <a href="{% url 'happy_shop:goods_detail' sku.spu.id %}" class="box">
+                        <figure class="image is-square">
+                            <img src="{{ MEDIA_URL }}{{ sku.main_picture }}" alt="{{ sku.spu.title }}">
+                        </figure>
+                        <h1 class="pt-3 pb-1 has-text-weight-medium is-size-4 has-text-danger-dark is-family-primary">
+                            ¥{{ sku.sell_price }}</h1>
+                        <h2 class="is-family-secondary is-size-14">
+                            {{ sku.spu.title }} {{ sku.get_options }}
+                        </h2>
+                        <div class="mt-2 foot">
+                            <div class="is-pulled-left is-size-7 has-text-grey-light">{{ sku.sales }}人付款</div>
+                            <div class="is-pulled-right is-size-7 has-text-grey-light">5.0分</div>
+                            <div class="is-clearfix"></div>
+                        </div>
+                    </a>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-            
         </div>
+        {% endfor %}
     </div>
 </section>
 {% endblock %}

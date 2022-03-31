@@ -24,6 +24,7 @@ class IndexView(BaseView, TemplateView):
         for cate in parent_cates:
             sub_cates = cate.sub_cates.filter(is_del=False, is_nav=True).values_list('id', flat=True)
             skus = HappyShopSKU.objects.filter(spu__category__id__in=list(sub_cates)).distinct()
+            print(skus)
             cate_skus_dict[cate.name] = skus[:happy_shop_settings.FLOOR_NUM]
         return cate_skus_dict
 

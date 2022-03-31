@@ -16,7 +16,7 @@ from ..pagination import HappyShopSKUPagination
 from ..filters import (
     HappyShopSKUFilter, HappyShopSPUFilter, HappyShopCategoryFilter
 )
-class HappyShopCategoryViewsets(CacheResponseMixin, mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class HappyShopCategoryViewsets(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
 
     """
     分类列表视图，返回所有的商品列表数据
@@ -59,7 +59,7 @@ class HappyShopBrandViewsets(mixins.ListModelMixin, mixins.RetrieveModelMixin, v
     serializer_class = HappyShopBrandSerializer
 
 
-class HappyShopSPUViewsets(CacheResponseMixin, mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class HappyShopSPUViewsets(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     """ SPU  
     spu可以全局缓存，因为不影响库存
     """
@@ -71,7 +71,7 @@ class HappyShopSPUViewsets(CacheResponseMixin, mixins.ListModelMixin, mixins.Ret
     ordering_fields = ('skus__sell_price',)
 
 
-class HappyShopSKUViewsets(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class HappyShopSKUViewsets(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     """ SKU  
     sku则不能全局缓存，因为库存会实时变动，需要更精细化控制
     """
