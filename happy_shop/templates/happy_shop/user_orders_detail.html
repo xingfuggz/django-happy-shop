@@ -1,5 +1,7 @@
 {% extends 'happy_shop/user_profile.html' %}
 
+{% load tpl_tags %}
+
 {% block menmber %}
 <div class="box is-shadowless has-background-light">
     <h1 class="is-size-5">订单状态：{{ order.get_pay_status_display }}</h1>
@@ -76,7 +78,7 @@
             </div>
             <div class="is-pulled-right">
                 {% if order.pay_status == 1 %}
-                <a class="button is-small is-info is-outlined" href="" target="_blank">
+                <a class="button is-small is-info is-outlined" href="{% alipay_url order.order_sn %}" target="_blank">
                     <span class="pr-3 pt-1 pl-2">
                         <svg t="1632459990510" class="icon" viewBox="0 0 1024 1024" version="1.1"
                             xmlns="http://www.w3.org/2000/svg" p-id="2407" width="32" height="32">
